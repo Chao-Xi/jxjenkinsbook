@@ -8,7 +8,10 @@ plugins:
   - awesome-pages
 nav:
   - 'Welcome': "index.md"
-  # - 'Jenkins 运维管理':
+  - 'Jenkins 运维管理':
+    - '第一章 Jenkins 运维管理' : 'jk_chapter1.md'
+    - '第二章 分布式构建与并行构建' : 'jk_chapter1_2.md'
+    - '第三章 可视化构建试图' : 'jk_chapter1_3.md'
  
 
 repo_url: https://github.com/Chao-Xi/jxjenkinsbook.git
