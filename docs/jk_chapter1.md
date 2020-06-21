@@ -61,7 +61,7 @@ service jenkins status
 ps aux | grep java
 ```
 
-**2-5 基于Docker的安装部署**
+### 基于Docker的安装部署
 
 安装的详细步骤可以查看我原来的文章 [Quick Start Jenkins on Docker](https://github.com/Chao-Xi/JacobTechBlog/blob/master/jenkins/1Quick_Start_Docker.md#quick-start-jenkins-on-docker)
 
@@ -97,7 +97,7 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 1119ddfd13e6        jenkins:v20200531   "/sbin/tini -- /usr/…"   34 hours ago        Up 34 hours         0.0.0.0:8080->8080/tcp, 0.0.0.0:50000->50000/tcp   elegant_varahamihira
 ```
 
-**2-6 基于`Jenkins-operator`的安装部署**
+### 基于`Jenkins-operator`的安装部署
 
 https://jenkinsci.github.io/kubernetes-operator/docs/installation/
 
