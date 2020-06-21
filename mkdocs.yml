@@ -12,6 +12,12 @@ nav:
     - '第一章 Jenkins 运维管理' : 'jk_chapter1.md'
     - '第二章 分布式构建与并行构建' : 'jk_chapter1_2.md'
     - '第三章 可视化构建试图' : 'jk_chapter1_3.md'
+  - 'Jenkins 流水线基础':
+    - '第一节 编写 Jenkinsfile 运行流水线' : 'chap2/1chap2_Jenkinsfile.md'
+    - '第二节 声明式流水线语法' : 'chap2/2chap2_declarative_pipeline.md'
+    - '第三节 脚本化Pipeline' : 'chap2/3chap2_script_pipeline.md'
+    - '第四节 Pipeline 扩展——共享库' : 'chap2/4chap2_sharedlib.md'
+    - '第五节 如何快速上手`Jenkinsfile`编写' : 'chap2/5chap2_quick_jenkinsfile.md'
  
 
 repo_url: https://github.com/Chao-Xi/jxjenkinsbook.git
