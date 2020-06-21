@@ -85,7 +85,11 @@ drwxr-xr-x  2 root    root    4096 Jan 21 03:13 jenkins
 $ sudo chown 1000 jenkins/
 ```
 
-* 启动`docker container` : `docker run -d -p 8080:8080 -p 50000:50000 --env=JAVA_OPTS=-Djenkins.install.runSetupWizard=false -v /var/lib/jenkins:/var/jenkins_home jenkins:v20200630`
+* 启动`docker container`:  
+
+```
+docker run -d -p 8080:8080 -p 50000:50000 --env=JAVA_OPTS=-Djenkins.install.runSetupWizard=false -v /var/lib/jenkins:/var/jenkins_home jenkins:v20200630
+```
 
 ```
 $ docker ps
