@@ -18,6 +18,9 @@ nav:
     - '第三节 脚本化Pipeline' : 'chap2/3chap2_script_pipeline.md'
     - '第四节 Pipeline 扩展——共享库' : 'chap2/4chap2_sharedlib.md'
     - '第五节 如何快速上手Jenkinsfile编写' : 'chap2/5chap2_quick_jenkinsfile.md'
+  - 'Groovy 基础':
+    - '第一节 Groovy 简明教程' : 'chap3/1chap3_groovy_basic.md'
+    - '第二节 Groovy 基础' : 'chap3/2chap3_groovy_basic2.md'
   - '知识扩展':
     - 'GitHub+Travis+Mkdocs自动化构建文档库' : 'Mkdocs_github_travis.md'
  
