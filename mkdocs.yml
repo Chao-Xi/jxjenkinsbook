@@ -21,6 +21,11 @@ nav:
   - 'Groovy 基础':
     - '第一节 Groovy 简明教程' : 'chap3/1chap3_groovy_basic.md'
     - '第二节 Groovy 基础' : 'chap3/2chap3_groovy_basic2.md'
+  - '构建工具集成':
+    - '第一节 构建工具集成' : 'chap4/1chp4_tools1.md'
+    - '第二节 集成 SaltStack 部署工具': 'chap4/2chp4_tools2.md'
+    - '第三节 Jenkins集成Ansibe实现自动化部署' : 'chap4/3chp4_tools3.md'
+    - '第四节 Jenkins集成Ansibe实战手册 - BB Mobile（2018）' : 'chap4/4chp4_tools4.md'
   - '知识扩展':
     - 'GitHub+Travis+Mkdocs自动化构建文档库' : 'Mkdocs_github_travis.md'
  
