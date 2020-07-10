@@ -8,26 +8,27 @@ plugins:
   - awesome-pages
 nav:
   - 'Welcome': "index.md"
-  - 'Jenkins 运维管理':
+  - '一、Jenkins 运维管理':
     - '第一节 Jenkins 运维管理' : 'jk_chapter1.md'
     - '第二节 分布式构建与并行构建' : 'jk_chapter1_2.md'
     - '第三节 可视化构建试图' : 'jk_chapter1_3.md'
-  - 'Jenkins 流水线基础':
+  - '二、Jenkins 流水线基础':
     - '第一节 编写 Jenkinsfile 运行流水线' : 'chap2/1chap2_Jenkinsfile.md'
     - '第二节 声明式流水线语法' : 'chap2/2chap2_declarative_pipeline.md'
     - '第三节 脚本化Pipeline' : 'chap2/3chap2_script_pipeline.md'
     - '第四节 Pipeline 扩展——共享库' : 'chap2/4chap2_sharedlib.md'
     - '第五节 如何快速上手Jenkinsfile编写' : 'chap2/5chap2_quick_jenkinsfile.md'
     - '第六节 脚本式管道与声明式管道-四个实际差异' : 'chap2/6chap2_pipe_vs_dec.md'
-  - 'Groovy 基础':
+    - '第七节 使用Jenkins Git参数实现分支标签动态选择' : 'chap2/7chap2_jenkins_git.md'
+  - '三、Groovy 基础':
     - '第一节 Groovy 简明教程' : 'chap3/1chap3_groovy_basic.md'
     - '第二节 Groovy 基础' : 'chap3/2chap3_groovy_basic2.md'
-  - '构建工具集成':
+  - '四、构建工具集成':
     - '第一节 构建工具集成' : 'chap4/1chp4_tools1.md'
     - '第二节 集成 SaltStack 部署工具': 'chap4/2chp4_tools2.md'
     - '第三节 Jenkins集成Ansibe实现自动化部署' : 'chap4/3chp4_tools3.md'
     - '第四节 Jenkins集成Ansibe实战手册 - BB Mobile（2018）' : 'chap4/4chp4_tools4.md'
-  - '知识扩展':
+  - 'Extra 知识扩展':
     - 'GitHub+Travis+Mkdocs自动化构建文档库' : 'Mkdocs_github_travis.md'
  
 
