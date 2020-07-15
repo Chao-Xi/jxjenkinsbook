@@ -33,6 +33,10 @@ nav:
     - '第二节 凭证管理使用HashiCorp Vault' : 'chap5/2chap5_vault.md'
     - '第二节(Extra) - Store Secrets using Hashicorp Vault with Docker' : 'chap5/3docker_valut.md'
     - '第三节 在Jenkins日志中隐藏敏感信息' : 'chap5/4docker_mask.md'
+  - '六、用户认证集成':
+    - '第一节 Ldap 用户认证集成' : 'chap6/1chap6_ldap.md'
+    - '第二节 Jenkins集成`Gitlab SSO`单点登录' : 'chap6/2chap6_gitlab.md'
+    - '第三节 Jenkins集成`Github SSO`单点登录' : 'chap6/3chap6_github.md'
   - 'Extra 知识扩展':
     - 'GitHub+Travis+Mkdocs自动化构建文档库' : 'Mkdocs_github_travis.md'
  
