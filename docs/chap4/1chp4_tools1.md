@@ -14,6 +14,10 @@ $  java -version
 openjdk version "1.8.0_252"
 OpenJDK Runtime Environment (build 1.8.0_252-b09)
 OpenJDK 64-Bit Server VM (build 25.252-b09, mixed mode)
+
+$ sudo yum install java-1.8.0-openjdk-devel
+$ javac -version
+javac 1.8.0_252
 ```
 
 ```
