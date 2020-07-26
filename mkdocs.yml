@@ -37,6 +37,10 @@ nav:
     - '第一节 Ldap 用户认证集成' : 'chap6/1chap6_ldap.md'
     - '第二节 Jenkins集成 Gitlab SSO 单点登录' : 'chap6/2chap6_gitlab.md'
     - '第三节 Jenkins集成 Github SSO 单点登录' : 'chap6/3chap6_github.md'
+  - '七、Gitlab 版本控制系统集成':
+    - '第一节 Gitlab – Jenkins Integration' : 'chap7/1chap7_gitlab_connect.md'
+    - '第二节 Gitlab-Jenkins 版本控制' : 'chap7/2chap7_gitlab_pipeline.md'
+    - '第三节 Gitlab-Jenkins 版本控制（补充）' : 'chap7/3chap7_gitlab_pipeline_extra.md'
   - 'Extra 知识扩展':
     - 'GitHub+Travis+Mkdocs自动化构建文档库' : 'Mkdocs_github_travis.md'
  
