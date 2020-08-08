@@ -41,6 +41,11 @@ nav:
     - '第一节 Gitlab – Jenkins Integration' : 'chap7/1chap7_gitlab_connect.md'
     - '第二节 Gitlab-Jenkins 版本控制' : 'chap7/2chap7_gitlab_pipeline.md'
     - '第三节 Gitlab-Jenkins 版本控制（补充）' : 'chap7/3chap7_gitlab_pipeline_extra.md'
+  - '八、代码质量平台集成': 
+    - '第一节 代码质量' : 'chap8/1chap8_code_quality.md'
+    - '第二节 SonarQube：持续代码质量检查' : 'chap8/2chap8_code_quality_sonarqube.md'
+    - '第三节 Allure测试报告：更美观的测试报告' : 'chap8/3chap8_code_quality_allure.md'
+    - '第四季 代码质量平台集成(SonarQube Final Edition)' : 'chap8/4chap8_code_quality_integration.md'
   - 'Extra 知识扩展':
     - 'GitHub+Travis+Mkdocs自动化构建文档库' : 'Mkdocs_github_travis.md'
  
