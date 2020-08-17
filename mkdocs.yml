@@ -46,6 +46,11 @@ nav:
     - '第二节 SonarQube：持续代码质量检查' : 'chap8/2chap8_code_quality_sonarqube.md'
     - '第三节 Allure测试报告：更美观的测试报告' : 'chap8/3chap8_code_quality_allure.md'
     - '第四季 代码质量平台集成(SonarQube Final Edition)' : 'chap8/4chap8_code_quality_integration.md'
+  - '九、制品库集成': 
+    - '第一节 Sonatype Nexus 基本介绍与安装' : 'chap9/chap9_artifact0.md'
+    - '第二节 制品管理' : 'chap9/chap9_artifact1.md'
+    - '第三节 Nexus 制品上传' : 'chap9/chap9_artifact2.md'
+    - '第四节 Jenkins & Jfrog Artifactory' : 'chap9/chap9_artifact3.md'
   - 'Extra 知识扩展':
     - 'GitHub+Travis+Mkdocs自动化构建文档库' : 'Mkdocs_github_travis.md'
  
