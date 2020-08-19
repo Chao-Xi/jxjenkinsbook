@@ -51,6 +51,9 @@ nav:
     - '第二节 制品管理' : 'chap9/chap9_artifact1.md'
     - '第三节 Nexus 制品上传' : 'chap9/chap9_artifact2.md'
     - '第四节 Jenkins & Jfrog Artifactory' : 'chap9/chap9_artifact3.md'
+  - '十、需求管理工具集成': 
+    - '第一节 k8s 安装本地 Jira 服务' : 'chap10/1chap10_jira_install.md'
+    - '第二节、Jenkins 配置端到端流水线（Jira和Gitlab的集成）' : 'chap10/2chap10_jira_gilab.md'
   - 'Extra 知识扩展':
     - 'GitHub+Travis+Mkdocs自动化构建文档库' : 'Mkdocs_github_travis.md'
  
