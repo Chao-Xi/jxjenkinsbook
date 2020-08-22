@@ -54,6 +54,11 @@ nav:
   - '十、需求管理工具集成': 
     - '第一节 k8s 安装本地 Jira 服务' : 'chap10/1chap10_jira_install.md'
     - '第二节 Jenkins 配置端到端流水线（Jira和Gitlab的集成）' : 'chap10/2chap10_jira_gilab.md'
+  - '十一、Docker 集成':
+    - '第一节 基于 Docker 配置构建资源池' : 'chap11/1Docker_agents.md'
+    - '第二节 基于Docker的pipeline流水线' : 'chap11/2Docker_pipeline.md'
+    - '第三节 构建应用镜像到镜像仓库管理' : 'chap11/3Docker_registry.md'
+    - '第四节 使用Groovy代码初始化Docker配置' : 'chap11/4Docker_groovy.md'
   - 'Extra 知识扩展':
     - 'GitHub+Travis+Mkdocs自动化构建文档库' : 'Mkdocs_github_travis.md'
  
