@@ -59,6 +59,8 @@ nav:
     - '第二节 基于Docker的pipeline流水线' : 'chap11/2Docker_pipeline.md'
     - '第三节 构建应用镜像到镜像仓库管理' : 'chap11/3Docker_registry.md'
     - '第四节 使用Groovy代码初始化Docker配置' : 'chap11/4Docker_groovy.md'
+  - '十二、K8S 平台集成':
+    - 'K8S 平台集成(全)' : 'chap12/1k8s_install.md'
   - 'Extra 知识扩展':
     - 'GitHub+Travis+Mkdocs自动化构建文档库' : 'Mkdocs_github_travis.md'
  
