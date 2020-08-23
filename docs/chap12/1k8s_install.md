@@ -309,7 +309,7 @@ spec:
 
 ![Alt Image Text](../images/chp12_1_7.png "body image")
 
-### 4-2p外部集群 动态 Slave 节点
+### 4-2 外部集群 动态 Slave 节点
 
 * 进入集群服务器`.kube/config`
 * `config`文件中的`certificate-authority-data`内容，生成`base64`文件 `ca.crt` 
