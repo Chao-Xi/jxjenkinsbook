@@ -210,7 +210,7 @@ cd /home/vagrant/tools/script/jmetertest-master
 sudo cp jmeter.results.shanhe.me.xsl  /opt/apache-jmeter-5.3/extras/
 ```
 
-我们可以使用ant与Jmeter集成build.xml部分内容  [`build.xml`地址 ](./jmetertest/build.xml)
+我们可以使用ant与Jmeter集成build.xml部分内容  [`build.xml`地址 ](https://github.com/Chao-Xi/jmetertest/tree/master/scripts/blog.jmx)
 
 ```
 <?xml version="1.0" encoding="utf8"?>
