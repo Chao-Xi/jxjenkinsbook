@@ -65,7 +65,7 @@ jmeter
 
 ![Alt Image Text](../images/chp13_1_1.png "body image")
 
-倒入[`blog.jmx`](jmetertest/scripts/blog.jmx)
+导入[`blog.jmx`](https://github.com/Chao-Xi/jmetertest/tree/master/scripts/blog.jmx)
 
 **Run the script: 测试百度**
 

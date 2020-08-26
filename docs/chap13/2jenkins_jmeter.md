@@ -10,7 +10,7 @@
 
 ![Alt Image Text](../images/chp13_2_1.png "body image")
 
-[demo-interfacetest-service](jmetertest)
+[demo-interfacetest-service](https://github.com/Chao-Xi/jmetertest)
 
 ### 1-2 创建`ant-jmeter.pipeline`
 
