@@ -61,6 +61,9 @@ nav:
     - '第四节 使用Groovy代码初始化Docker配置' : 'chap11/4Docker_groovy.md'
   - '十二、K8S 平台集成':
     - 'K8S 平台集成(全)' : 'chap12/1k8s_install.md'
+  - '十三、自动化接口测试':
+    - '第一节 Jmeter & Ant 自动化测试' : 'chap13/1jmeter.md'
+    - '第二节 Jenkins、Ant、Jmeter 自动化测试' : 'chap13/2jenkins_jmeter.md'
   - 'Extra 知识扩展':
     - 'GitHub+Travis+Mkdocs自动化构建文档库' : 'Mkdocs_github_travis.md'
  
