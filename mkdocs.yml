@@ -64,6 +64,12 @@ nav:
   - '十三、自动化接口测试':
     - '第一节 Jmeter & Ant 自动化测试' : 'chap13/1jmeter.md'
     - '第二节 Jenkins、Ant、Jmeter 自动化测试' : 'chap13/2jenkins_jmeter.md'
+  - '十四、流水线最佳实践':
+    - '第一节 基于Jira端到端流水线的最佳实践': 'chap14/1JIRA_JEN_K8S.md'
+    - '第二节 Jenkins K8S Gitlab 集成': 'chap14/2JEN_K8S_API.md'
+    - '第三节 Jenkins + K8S + Gitlab 构建 RLEASE 打包发布更新流水线到K8S集群': 'chap14/3Jen_k8s_pipeline.md'
+    - '第四节 版本晋级及发布流水线' : 'chap14/4Jen_update_deploy_pip.md'
+    - '第五节 前端后端项目发布流水线（Java+Nodejs)' : 'chap14/5back_front_pipeline.md'
   - 'Extra 知识扩展':
     - 'GitHub+Travis+Mkdocs自动化构建文档库' : 'Mkdocs_github_travis.md'
  
