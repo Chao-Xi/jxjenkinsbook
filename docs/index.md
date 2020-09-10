@@ -75,8 +75,16 @@
 	* [第三节 Jenkins Python API 实践](https://chao-xi.github.io/jxjenkinsbook/chap15/3Jenkins_python_API/)
 	* [第四节 Jenkins REST API 使用实践](https://chao-xi.github.io/jxjenkinsbook/chap15/4Jenkins_REST_API/)
 	* [第五节 Jenkins Core Api & Job DSL创建项目](https://chao-xi.github.io/jxjenkinsbook/chap15/5Jenkins_DSL/)
+* **Extra 知识扩展**
+	* [GitHub+Travis+Mkdocs自动化构建文档库] (https://chao-xi.github.io/jxjenkinsbook/Mkdocs_github_travis/)
 
 ## Salut! C'est Moi
+
+Hello, this is me, Jacob. Currently, I'm working as DevOps and Cloud Engineer in SAP, and I'm Certified AWS Solution Architect and Certified Azure Administor, Kubernetes Specialist and CI/CD enthusiast. 
+
+I was working as Backend Engineer in New York City and achieved my CS master degree in SIT, America. Believe or not, I'll keep writing, more and more books will come out this year. 
+
+If you have anything want to talk to me directly, you can reach out for via email xichao2015@outlook.com。
 
 
 ## To be continue
