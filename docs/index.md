@@ -75,8 +75,6 @@
 	* [第三节 Jenkins Python API 实践](https://chao-xi.github.io/jxjenkinsbook/chap15/3Jenkins_python_API/)
 	* [第四节 Jenkins REST API 使用实践](https://chao-xi.github.io/jxjenkinsbook/chap15/4Jenkins_REST_API/)
 	* [第五节 Jenkins Core Api & Job DSL创建项目](https://chao-xi.github.io/jxjenkinsbook/chap15/5Jenkins_DSL/)
-* **Extra 知识扩展**
-	* [`GitHub+Travis+Mkdocs`自动化构建文档库] (https://chao-xi.github.io/jxjenkinsbook/Mkdocs_github_travis/)
 
 ### Reference Code:
 
