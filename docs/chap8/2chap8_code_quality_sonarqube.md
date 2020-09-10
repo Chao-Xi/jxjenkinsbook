@@ -1,4 +1,4 @@
-# 第二节、 SonarQube：持续代码质量检查 
+# 第二节 SonarQube：持续代码质量检查 
 
 `SonarQube`是一个代码质量管理工具，能对20多种编程语言源码进行代码味道（Code Smells)、Bugs 、安全漏洞方面的静态分析。SonarQube有4个版本：开源版、开发者版、企业版、数据中心版（Data Center Edition）。  
 

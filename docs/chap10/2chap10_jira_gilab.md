@@ -1,4 +1,4 @@
-# 第二节、Jenkins 配置端到端流水线 （Jira 和 Gitlab的集成）
+# 第二节 Jenkins 配置端到端流水线 （Jira 和 Gitlab的集成）
 
 ## 1、基于 Jira 流水线的方案
 
