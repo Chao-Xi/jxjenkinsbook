@@ -1,4 +1,4 @@
-# 第五节 Jenkins Core Api & Job DSL创建项目
+# **第五节 Jenkins Core Api & Job DSL创建项目**
 
 在大规模的Jenkins实践中创建项目也是一个问题，如何通过模板自动化的创建Jenkins项目呢？ 可以通过安装Job Dsl插件后，通过 Dsl直接创建项目。也可以通过工具将dsl转换为xml，然后再通过Jenkins API创建项目。相对比较第一种方式更加直接一些，由于时间问题今天暂时分享第二种创建项目的方式。
 

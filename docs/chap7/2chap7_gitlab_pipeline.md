@@ -1,4 +1,4 @@
-# 第二节 Gitlab-Jenkins 版本控制
+# **第二节 Gitlab-Jenkins 版本控制**
 
 ## 1、项目准备与流水线调试
 

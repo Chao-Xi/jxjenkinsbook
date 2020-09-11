@@ -1,4 +1,4 @@
-# 第三节 Jenkins + K8S + Gitlab 构建 RLEASE 打包发布更新流水线到K8S集群
+# **第三节 Jenkins + K8S + Gitlab 构建 RLEASE 打包发布更新流水线到K8S集群**
 
 **获取运行中deploy的yaml -> 上传到gitlab -> 更新Container Image （打包jar包 -> 创建新的Image -> 上传Image到Docker Hub） -> 上传到gitlab (yaml)  -> 将新的yaml apply 到集群中**
 

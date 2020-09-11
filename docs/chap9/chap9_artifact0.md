@@ -1,4 +1,4 @@
-# 第一节 Sonatype Nexus 基本介绍与安装
+# **第一节 Sonatype Nexus 基本介绍与安装**
 
 
 ## 1、Nexus 基本概念与仓库管理

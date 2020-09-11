@@ -1,4 +1,4 @@
-# 第二节 Jenkins+InfluxDB+Grafana 收集构建数据
+# **第二节 Jenkins+InfluxDB+Grafana 收集构建数据**
 
 ## 1、步骤与方案
 

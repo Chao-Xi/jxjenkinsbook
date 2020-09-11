@@ -1,4 +1,4 @@
-# 第三节 在Jenkins日志中隐藏敏感信息 
+# **第三节 在Jenkins日志中隐藏敏感信息** 
 
 如果使用的是`credentials helper`方法或者`withCredentials`。步骤为变量赋值的，那么这个变量的值是不会被明文打印到`Jenkins`日志中的。除非使用以下方法： 
 

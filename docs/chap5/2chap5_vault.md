@@ -1,4 +1,4 @@
-# 第二节 凭证管理使用HashiCorp Vault 
+# **第二节 凭证管理使用HashiCorp Vault** 
 
 如果觉得`Jenkins` 的凭证管理功能太弱无法满足你的需求则可以考虑使用`HashCorp Vault` 
 

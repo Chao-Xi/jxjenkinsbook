@@ -1,4 +1,4 @@
-# 第四季 代码质量平台集成(SonarQube Final Edition)
+# **第四季 代码质量平台集成(SonarQube Final Edition)**
 
 ## 1、 SonarQube 平台简介与配置
 

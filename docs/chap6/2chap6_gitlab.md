@@ -1,4 +1,4 @@
-# 第二节 Jenkins集成`Gitlab SSO`单点登录
+# **第二节 Jenkins集成`Gitlab SSO`单点登录**
 
 
 ## 1、Gitlab安装
