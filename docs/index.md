@@ -25,6 +25,21 @@
 *  流水线最佳实践: K8S, Gitlab, Maven, Java, Nodejs CI/CD 流水线
 *  监控与API调用: Prometheus, InfluxDB, Grafana, Python, REST, CORE API
 
+## Salut! C'est Moi
+
+> The man is not old as long as he is seeking something, A man is not old until regrets take the place of dreams.
+
+Hello, this is me, Jacob. Currently, I'm working as DevOps and Cloud Engineer in SAP, and I'm the certified AWS Solution Architect and Certified Azure Administrator, Kubernetes Specialist and CI/CD enthusiast. 
+
+I was working as Backend Engineer in New York City and achieved my CS master degree in SIT, America. Believe it or not, I'll keep writing, more and more books will come out this year. 
+
+If you have anything want to talk to me directly, you can reach out for via email xichao2015@outlook.com。
+
+
+Salute, c'est moi, Jacob. Actuellement, je travaille en tant qu'ingénieur DevOps et Cloud dans SAP, et je suis architecte de solution AWS certifié et administrateur Azure certifié, spécialiste Kubernetes et passionné de CI/CD.
+
+Je travaillais en tant qu'ingénieur backend à New York et j'ai obtenu mon master CS à SIT, en Amérique. Croyez-le ou non, je continuerai à écrire, de plus en plus de livres sortiront cette année.
+
 ## 目录大纲
 
 * **第一章 Jenkins 运维管理**
@@ -103,21 +118,6 @@
 * [jenkins-maven-service(Gitlab: demo-maven-service)](https://github.com/Chao-Xi/jenkins-maven-service)
 * [jmetertest(Gitlab: demo-interfacetest)](https://github.com/Chao-Xi/jmetertest)
 
-
-## Salut! C'est Moi
-
-> The man is not old as long as he is seeking something, A man is not old until regrets take the place of dreams.
-
-Hello, this is me, Jacob. Currently, I'm working as DevOps and Cloud Engineer in SAP, and I'm the certified AWS Solution Architect and Certified Azure Administrator, Kubernetes Specialist and CI/CD enthusiast. 
-
-I was working as Backend Engineer in New York City and achieved my CS master degree in SIT, America. Believe it or not, I'll keep writing, more and more books will come out this year. 
-
-If you have anything want to talk to me directly, you can reach out for via email xichao2015@outlook.com。
-
-
-Salute, c'est moi, Jacob. Actuellement, je travaille en tant qu'ingénieur DevOps et Cloud dans SAP, et je suis architecte de solution AWS certifié et administrateur Azure certifié, spécialiste Kubernetes et passionné de CI/CD.
-
-Je travaillais en tant qu'ingénieur backend à New York et j'ai obtenu mon master CS à SIT, en Amérique. Croyez-le ou non, je continuerai à écrire, de plus en plus de livres sortiront cette année.
 
 ## To be continue
 
