@@ -1,9 +1,29 @@
 # 手摸手 Jenkins 战术教程 (大师版）
 
-> Started at June 2020 By Jacob Xi
+> Started at June 2020 By Jacob Xi 
+
+![Alt Image Text](images/indx1_0.jpg "Body image")
 
 ## 内容简介
 
+本书是本人的“手摸手战术教程”系列的第一本，历经三个月的时间，终于在本人30岁之前顺利完工，感谢家人，朋友，同事们的支持与理解，也感谢所在team同事们的帮助与指导。
+
+本书着重介绍了Jenkins 2.x 在实际生产工作中的各种用法与流水线的开发，运维，以及与各个常用生产工具的整合。
+
+本书共15章，主要内容包括：
+
+*  Jenkins的日常运维管理
+*  Jenkins流水线的编写与Groovy语法
+*  构建工具集成: **Maven, Gradle, Ant, NPM, Ansible, SaltStack**
+*  凭证管理: **HashiCorp Vault**
+*  用户认证集成: **LADP, Gitlab, Github**
+*  代码质量平台集成:  JUnit, JaCoCo, Taurus, **SonarQube**, Allure
+*  制品库集成: **Sonatype Nexus, Jfrog Artifactory**
+*  需求管理工具集成: Jira, Gitlab
+*  容器集成: Docker, Kubernetes
+*  自动化接口测试: Jmeter
+*  流水线最佳实践: K8S, Gitlab, Maven, Java, Nodejs CI/CD 流水线
+*  监控与API调用: Prometheus, InfluxDB, Grafana, Python, REST, CORE API
 
 ## 目录大纲
 
@@ -78,19 +98,29 @@
 
 ### Reference Code:
 
+* [JenkinslibTest(Shared Library functions)](https://github.com/Chao-Xi/JenkinslibTest)
+* [Jenkinsfiles for the book](https://github.com/Chao-Xi/JenkinslibTest/tree/master/Jenkinsfiles)
+* [jenkins-maven-service(Gitlab: demo-maven-service)](https://github.com/Chao-Xi/jenkins-maven-service)
+* [jmetertest(Gitlab: demo-interfacetest)](https://github.com/Chao-Xi/jmetertest)
 
 
 ## Salut! C'est Moi
 
-Hello, this is me, Jacob. Currently, I'm working as DevOps and Cloud Engineer in SAP, and I'm Certified AWS Solution Architect and Certified Azure Administor, Kubernetes Specialist and CI/CD enthusiast. 
+> The man is not old as long as he is seeking something, A man is not old until regrets take the place of dreams.
 
-I was working as Backend Engineer in New York City and achieved my CS master degree in SIT, America. Believe or not, I'll keep writing, more and more books will come out this year. 
+Hello, this is me, Jacob. Currently, I'm working as DevOps and Cloud Engineer in SAP, and I'm the certified AWS Solution Architect and Certified Azure Administrator, Kubernetes Specialist and CI/CD enthusiast. 
+
+I was working as Backend Engineer in New York City and achieved my CS master degree in SIT, America. Believe it or not, I'll keep writing, more and more books will come out this year. 
 
 If you have anything want to talk to me directly, you can reach out for via email xichao2015@outlook.com。
 
 
+Salute, c'est moi, Jacob. Actuellement, je travaille en tant qu'ingénieur DevOps et Cloud dans SAP, et je suis architecte de solution AWS certifié et administrateur Azure certifié, spécialiste Kubernetes et passionné de CI/CD.
+
+Je travaillais en tant qu'ingénieur backend à New York et j'ai obtenu mon master CS à SIT, en Amérique. Croyez-le ou non, je continuerai à écrire, de plus en plus de livres sortiront cette année.
+
 ## To be continue
 
-
+本人将带来手摸手战术教程更多的内容和文章， 接下来的将在ES7, Chef, Azure900, Azure103, AWS Solution Arcitect, AWS Big Data Speciality, Istio, Python带来更多更全面的电子书，敬请期待。(PS: 下面的图片单纯为了好玩)
 
 ![Alt Image Text](images/indx1_1.png "Body image")
