@@ -74,7 +74,7 @@ Je travaillais en tant qu'ingénieur backend à New York et j'ai obtenu mon mast
 * **第七章 Gitlab 版本控制系统集成**
 	* [第一节 Gitlab – Jenkins Integration](https://chao-xi.github.io/jxjenkinsbook/chap7/1chap7_gitlab_connect/)
 	* [第二节 Gitlab-Jenkins 版本控制](https://chao-xi.github.io/jxjenkinsbook/chap7/2chap7_gitlab_pipeline/)
-	* [第三节 第三节 Gitlab-Jenkins 版本控制（补充）](https://chao-xi.github.io/jxjenkinsbook/chap7/3chap7_gitlab_pipeline_extra/)
+	* [第三节 Gitlab-Jenkins 版本控制（补充）](https://chao-xi.github.io/jxjenkinsbook/chap7/3chap7_gitlab_pipeline_extra/)
 * **第八章 代码质量平台集成**
 	* [第一节 代码质量](https://chao-xi.github.io/jxjenkinsbook/chap8/1chap8_code_quality/)
 	* [第二节 SonarQube：持续代码质量检查](https://chao-xi.github.io/jxjenkinsbook/chap8/2chap8_code_quality_sonarqube/)
