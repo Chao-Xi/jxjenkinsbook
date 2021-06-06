@@ -1,0 +1,1900 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Jacob's 手摸手Jenkins实用教程">
+      
+      
+      
+        <meta name="author" content="Jacob Xi">
+      
+      
+      <link rel="icon" href="../../images/logo.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.6">
+    
+    
+      
+        <title>第一节 Jmeter & Ant 自动化测试 - Jacob Jenkins Books</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.875de78c.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.f1a3b89f.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#7e56c2">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#jmeter-ant" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Jacob Jenkins Books" class="md-header__button md-logo" aria-label="Jacob Jenkins Books" data-md-component="logo">
+      
+  <img src="../../images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Jacob Jenkins Books
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第一节 Jmeter & Ant 自动化测试
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/Chao-Xi/jxjenkinsbook.git/" title="前往 GitHub 仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    jxjenkinsbook
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Jacob Jenkins Books" class="md-nav__button md-logo" aria-label="Jacob Jenkins Books" data-md-component="logo">
+      
+  <img src="../../images/logo.png" alt="logo">
+
+    </a>
+    Jacob Jenkins Books
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/Chao-Xi/jxjenkinsbook.git/" title="前往 GitHub 仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    jxjenkinsbook
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Welcome
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      <label class="md-nav__link" for="__nav_2">
+        一、Jenkins 运维管理
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="一、Jenkins 运维管理" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          一、Jenkins 运维管理
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jk_chapter1/" class="md-nav__link">
+        第一节 Jenkins 运维管理
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jk_chapter1_2/" class="md-nav__link">
+        第二节 分布式构建与并行构建
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jk_chapter1_3/" class="md-nav__link">
+        第三节 可视化构建试图
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        二、Jenkins 流水线基础
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="二、Jenkins 流水线基础" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          二、Jenkins 流水线基础
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap2/1chap2_Jenkinsfile/" class="md-nav__link">
+        第一节 编写 Jenkinsfile 运行流水线
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap2/2chap2_declarative_pipeline/" class="md-nav__link">
+        第二节 声明式流水线语法
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap2/3chap2_script_pipeline/" class="md-nav__link">
+        第三节 脚本化Pipeline
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap2/4chap2_sharedlib/" class="md-nav__link">
+        第四节 Pipeline 扩展——共享库
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap2/5chap2_quick_jenkinsfile/" class="md-nav__link">
+        第五节 如何快速上手Jenkinsfile编写
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap2/6chap2_pipe_vs_dec/" class="md-nav__link">
+        第六节 脚本式管道与声明式管道-四个实际差异
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap2/7chap2_jenkins_git/" class="md-nav__link">
+        第七节 使用Jenkins Git参数实现分支标签动态选择
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      <label class="md-nav__link" for="__nav_4">
+        三、Groovy 基础
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="三、Groovy 基础" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          三、Groovy 基础
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap3/1chap3_groovy_basic/" class="md-nav__link">
+        第一节 Groovy 简明教程
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap3/2chap3_groovy_basic2/" class="md-nav__link">
+        第二节 Groovy 基础
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      <label class="md-nav__link" for="__nav_5">
+        四、构建工具集成
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="四、构建工具集成" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          四、构建工具集成
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap4/1chp4_tools1/" class="md-nav__link">
+        第一节 构建工具集成
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap4/2chp4_tools2/" class="md-nav__link">
+        第二节 集成 SaltStack 部署工具
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap4/3chp4_tools3/" class="md-nav__link">
+        第三节 Jenkins集成Ansibe实现自动化部署
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap4/4chp4_tools4/" class="md-nav__link">
+        第四节 Jenkins集成Ansibe实战手册 - BB Mobile（2018）
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      <label class="md-nav__link" for="__nav_6">
+        五、凭证管理
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="五、凭证管理" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          五、凭证管理
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap5/1chap5_cred1/" class="md-nav__link">
+        第一节 凭证管理
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap5/2chap5_vault/" class="md-nav__link">
+        第二节 凭证管理使用HashiCorp Vault
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap5/3docker_valut/" class="md-nav__link">
+        第二节(Extra) - Store Secrets using Hashicorp Vault with Docker
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap5/4docker_mask/" class="md-nav__link">
+        第三节 在Jenkins日志中隐藏敏感信息
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      <label class="md-nav__link" for="__nav_7">
+        六、用户认证集成
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="六、用户认证集成" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          六、用户认证集成
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap6/1chap6_ldap/" class="md-nav__link">
+        第一节 Ldap 用户认证集成
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap6/2chap6_gitlab/" class="md-nav__link">
+        第二节 Jenkins集成 Gitlab SSO 单点登录
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap6/3chap6_github/" class="md-nav__link">
+        第三节 Jenkins集成 Github SSO 单点登录
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      <label class="md-nav__link" for="__nav_8">
+        七、Gitlab 版本控制系统集成
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="七、Gitlab 版本控制系统集成" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          七、Gitlab 版本控制系统集成
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap7/1chap7_gitlab_connect/" class="md-nav__link">
+        第一节 Gitlab – Jenkins Integration
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap7/2chap7_gitlab_pipeline/" class="md-nav__link">
+        第二节 Gitlab-Jenkins 版本控制
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap7/3chap7_gitlab_pipeline_extra/" class="md-nav__link">
+        第三节 Gitlab-Jenkins 版本控制（补充）
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" >
+      
+      <label class="md-nav__link" for="__nav_9">
+        八、代码质量平台集成
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="八、代码质量平台集成" data-md-level="1">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          八、代码质量平台集成
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap8/1chap8_code_quality/" class="md-nav__link">
+        第一节 代码质量
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap8/2chap8_code_quality_sonarqube/" class="md-nav__link">
+        第二节 SonarQube：持续代码质量检查
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap8/3chap8_code_quality_allure/" class="md-nav__link">
+        第三节 Allure测试报告：更美观的测试报告
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap8/4chap8_code_quality_integration/" class="md-nav__link">
+        第四季 代码质量平台集成(SonarQube Final Edition)
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10" type="checkbox" id="__nav_10" >
+      
+      <label class="md-nav__link" for="__nav_10">
+        九、制品库集成
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="九、制品库集成" data-md-level="1">
+        <label class="md-nav__title" for="__nav_10">
+          <span class="md-nav__icon md-icon"></span>
+          九、制品库集成
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap9/chap9_artifact0/" class="md-nav__link">
+        第一节 Sonatype Nexus 基本介绍与安装
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap9/chap9_artifact1/" class="md-nav__link">
+        第二节 制品管理
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap9/chap9_artifact2/" class="md-nav__link">
+        第三节 Nexus 制品上传
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap9/chap9_artifact3/" class="md-nav__link">
+        第四节 Jenkins & Jfrog Artifactory
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_11" type="checkbox" id="__nav_11" >
+      
+      <label class="md-nav__link" for="__nav_11">
+        十、需求管理工具集成
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="十、需求管理工具集成" data-md-level="1">
+        <label class="md-nav__title" for="__nav_11">
+          <span class="md-nav__icon md-icon"></span>
+          十、需求管理工具集成
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap10/1chap10_jira_install/" class="md-nav__link">
+        第一节 k8s 安装本地 Jira 服务
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap10/2chap10_jira_gilab/" class="md-nav__link">
+        第二节 Jenkins 配置端到端流水线（Jira和Gitlab的集成）
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_12" type="checkbox" id="__nav_12" >
+      
+      <label class="md-nav__link" for="__nav_12">
+        十一、Docker 集成
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="十一、Docker 集成" data-md-level="1">
+        <label class="md-nav__title" for="__nav_12">
+          <span class="md-nav__icon md-icon"></span>
+          十一、Docker 集成
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap11/1Docker_agents/" class="md-nav__link">
+        第一节 基于 Docker 配置构建资源池
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap11/2Docker_pipeline/" class="md-nav__link">
+        第二节 基于Docker的pipeline流水线
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap11/3Docker_registry/" class="md-nav__link">
+        第三节 构建应用镜像到镜像仓库管理
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap11/4Docker_groovy/" class="md-nav__link">
+        第四节 使用Groovy代码初始化Docker配置
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_13" type="checkbox" id="__nav_13" >
+      
+      <label class="md-nav__link" for="__nav_13">
+        十二、K8S 平台集成
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="十二、K8S 平台集成" data-md-level="1">
+        <label class="md-nav__title" for="__nav_13">
+          <span class="md-nav__icon md-icon"></span>
+          十二、K8S 平台集成
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap12/1k8s_install/" class="md-nav__link">
+        K8S 平台集成(全)
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap12/2K8s_pipeline/" class="md-nav__link">
+        使用 Jenkins Pipeline 流水线部署 Kubernetes 应用
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_14" type="checkbox" id="__nav_14" checked>
+      
+      <label class="md-nav__link" for="__nav_14">
+        十三、自动化接口测试
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="十三、自动化接口测试" data-md-level="1">
+        <label class="md-nav__title" for="__nav_14">
+          <span class="md-nav__icon md-icon"></span>
+          十三、自动化接口测试
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          第一节 Jmeter & Ant 自动化测试
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        第一节 Jmeter & Ant 自动化测试
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1jmeter" class="md-nav__link">
+    1、Jmeter 接口测试生成报告
+  </a>
+  
+    <nav class="md-nav" aria-label="1、Jmeter 接口测试生成报告">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-1" class="md-nav__link">
+    1-1 接口
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-2-jmeter" class="md-nav__link">
+    1-2 安装 jmeter
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-2" class="md-nav__link">
+    1-2 运行测试用例
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-antjmeter" class="md-nav__link">
+    2、使用 Ant、Jmeter 自动化测试
+  </a>
+  
+    <nav class="md-nav" aria-label="2、使用 Ant、Jmeter 自动化测试">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2-1-ant-jmeter-111jar" class="md-nav__link">
+    2-1 复制ant-jmeter-1.1.1.jar
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-2-antjmeter" class="md-nav__link">
+    2-2 ant构建jmeter 测试
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2jenkins_jmeter/" class="md-nav__link">
+        第二节 Jenkins、Ant、Jmeter 自动化测试
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_15" type="checkbox" id="__nav_15" >
+      
+      <label class="md-nav__link" for="__nav_15">
+        十四、流水线最佳实践
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="十四、流水线最佳实践" data-md-level="1">
+        <label class="md-nav__title" for="__nav_15">
+          <span class="md-nav__icon md-icon"></span>
+          十四、流水线最佳实践
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap14/1JIRA_JEN_K8S/" class="md-nav__link">
+        第一节 基于Jira端到端流水线的最佳实践
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap14/2JEN_K8S_API/" class="md-nav__link">
+        第二节 Jenkins K8S Gitlab 集成
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap14/3Jen_k8s_pipeline/" class="md-nav__link">
+        第三节 Jenkins + K8S + Gitlab 构建 RLEASE 打包发布更新流水线到K8S集群
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap14/4Jen_update_deploy_pip/" class="md-nav__link">
+        第四节 版本晋级及发布流水线
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap14/5back_front_pipeline/" class="md-nav__link">
+        第五节 前端后端项目发布流水线（Java+Nodejs)
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_16" type="checkbox" id="__nav_16" >
+      
+      <label class="md-nav__link" for="__nav_16">
+        十五、监控与API调用
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="十五、监控与API调用" data-md-level="1">
+        <label class="md-nav__title" for="__nav_16">
+          <span class="md-nav__icon md-icon"></span>
+          十五、监控与API调用
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap15/1Jenkins_Prometheus/" class="md-nav__link">
+        第一节 使用 Prometheus 监控 Jenkins
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap15/2Jenkins_InfluxDB_Grafana/" class="md-nav__link">
+        第二节 Jenkins+InfluxDB+Grafana 收集构建数据
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap15/3Jenkins_python_API/" class="md-nav__link">
+        第三节 Jenkins Python API 实践
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap15/4Jenkins_REST_API/" class="md-nav__link">
+        第四节 Jenkins REST API 使用实践
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap15/5Jenkins_DSL/" class="md-nav__link">
+        第五节 Jenkins Core Api & Job DSL创建项目
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_17" type="checkbox" id="__nav_17" >
+      
+      <label class="md-nav__link" for="__nav_17">
+        Extra 知识扩展
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Extra 知识扩展" data-md-level="1">
+        <label class="md-nav__title" for="__nav_17">
+          <span class="md-nav__icon md-icon"></span>
+          Extra 知识扩展
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Mkdocs_github_travis/" class="md-nav__link">
+        GitHub+Travis+Mkdocs自动化构建文档库
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1jmeter" class="md-nav__link">
+    1、Jmeter 接口测试生成报告
+  </a>
+  
+    <nav class="md-nav" aria-label="1、Jmeter 接口测试生成报告">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-1" class="md-nav__link">
+    1-1 接口
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-2-jmeter" class="md-nav__link">
+    1-2 安装 jmeter
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-2" class="md-nav__link">
+    1-2 运行测试用例
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-antjmeter" class="md-nav__link">
+    2、使用 Ant、Jmeter 自动化测试
+  </a>
+  
+    <nav class="md-nav" aria-label="2、使用 Ant、Jmeter 自动化测试">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2-1-ant-jmeter-111jar" class="md-nav__link">
+    2-1 复制ant-jmeter-1.1.1.jar
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-2-antjmeter" class="md-nav__link">
+    2-2 ant构建jmeter 测试
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/Chao-Xi/jxjenkinsbook.git/edit/master/docs/chap13/1jmeter.md" title="编辑此页" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="jmeter-ant"><strong>第一节 Jmeter &amp; Ant 自动化测试</strong></h1>
+<h2 id="1jmeter">1、Jmeter 接口测试生成报告</h2>
+<h3 id="1-1">1-1 接口</h3>
+<ul>
+<li>接口测试定义为一种软件测试类型，用于验证两个不同软件系统之间的通信是否正确完成。 </li>
+<li>集成两个组件的连接称为接口。计算机世界中的此接口可以是API，Web服务等之类的东西。这些连接服务或接口的测试称为接口测试。 </li>
+<li>接口实际上是由一组命令，消息和其他允许设备与用户之间进行通信的属性组成的软件。 </li>
+</ul>
+<h3 id="1-2-jmeter">1-2 安装 jmeter</h3>
+<ul>
+<li>wget</li>
+<li>tar zxf</li>
+<li>export</li>
+<li>source</li>
+</ul>
+<p><strong>Mac 安装</strong></p>
+<pre><code>brew install jmeter
+
+brew upgrade jmeter
+</code></pre>
+<p><strong>Intall Java11 on mac</strong></p>
+<pre><code>brew tap homebrew/cask-versions
+brew cask install java11
+
+ brew cask install java11
+Updating Homebrew...
+==&gt; Downloading https://download.oracle.com/java/GA/jdk11/9/GPL/openjdk-11.0.2_osx-x64_bin.tar.gz
+######################################################################## 100.0%
+==&gt; Verifying SHA-256 checksum for Cask 'java11'.
+==&gt; Installing Cask java11
+==&gt; Moving Generic Artifact 'jdk-11.0.2.jdk' to '/Library/Java/JavaVirtualMachines/openjdk-11.0.2.jdk'.
+Password:
+🍺  java11 was successfully installed!
+</code></pre>
+<pre><code>$ sudo vim .bash_profile
+
+export JAVA_11_HOME=$(/usr/libexec/java_home -v11)
+alias java11='export JAVA_HOME=$JAVA_11_HOME'
+
+java11
+</code></pre>
+<pre><code>source .bash_profile
+
+$ java -version
+openjdk version &quot;11.0.2&quot; 2019-01-15
+OpenJDK Runtime Environment 18.9 (build 11.0.2+9)
+OpenJDK 64-Bit Server VM 18.9 (build 11.0.2+9, mixed mode)
+</code></pre>
+<pre><code>jmeter
+</code></pre>
+<p><img alt="Alt Image Text" src="../../images/chp13_1_1.png" title="body image" /></p>
+<p>导入<a href="https://github.com/Chao-Xi/jmetertest/tree/master/scripts/blog.jmx"><code>blog.jmx</code></a></p>
+<p><strong>Run the script: 测试百度</strong></p>
+<p><img alt="Alt Image Text" src="../../images/chp13_1_2.png" title="body image" /></p>
+<p><strong>Run the script: 测试接口</strong></p>
+<p><img alt="Alt Image Text" src="../../images/chp13_1_3.png" title="body image" /></p>
+<p><strong>Centos 安装</strong></p>
+<pre><code>$ wget https://downloads.apache.org//jmeter/binaries/apache-jmeter-5.3.tgz
+
+$ sudo tar zxf apache-jmeter-5.3.tgz -C /opt/
+$ sudo vim /etc/profile.d/jmeter.sh
+
+export JMETER_HOME=/opt/apache-jmeter-5.3
+export PATH=$JMETER_HOME/bin:$PATH
+
+$ sudo chmod +x /etc/profile.d/jmeter.sh
+
+source /etc/profile.d/jmeter.sh
+
+$ jmeter --help
+OpenJDK 64-Bit Server VM warning: If the number of processors is expected to increase from one, then you should configure the number of parallel GC threads appropriately using -XX:ParallelGCThreads=N
+    _    ____   _    ____ _   _ _____       _ __  __ _____ _____ _____ ____
+   / \  |  _ \ / \  / ___| | | | ____|     | |  \/  | ____|_   _| ____|  _ \
+  / _ \ | |_) / _ \| |   | |_| |  _|    _  | | |\/| |  _|   | | |  _| | |_) |
+ / ___ \|  __/ ___ \ |___|  _  | |___  | |_| | |  | | |___  | | | |___|  _ &lt;
+/_/   \_\_| /_/   \_\____|_| |_|_____|  \___/|_|  |_|_____| |_| |_____|_| \_\ 5.3
+
+Copyright (c) 1999-2020 The Apache Software Foundation
+
+
+To list all command line options, open a command prompt and type:
+
+jmeter.bat(Windows)/jmeter.sh(Linux) -?
+
+--------------------------------------------------
+
+To run Apache JMeter in GUI mode, open a command prompt and type:
+
+jmeter.bat(Windows)/jmeter.sh(Linux) [-p property-file]
+
+--------------------------------------------------
+
+To run Apache JMeter in NON_GUI mode:
+Open a command prompt (or Unix shell) and type:
+
+jmeter.bat(Windows)/jmeter.sh(Linux) -n -t test-file [-p property-file] [-l results-file] [-j log-file]
+
+--------------------------------------------------
+
+To run Apache JMeter in NON_GUI mode and generate a report at end :
+Open a command prompt (or Unix shell) and type:
+
+jmeter.bat(Windows)/jmeter.sh(Linux) -n -t test-file [-p property-file] [-l results-file] [-j log-file] -e -o [Path to output folder]
+
+--------------------------------------------------
+To generate a Report from existing CSV file:
+Open a command prompt (or Unix shell) and type:
+
+jmeter.bat(Windows)/jmeter.sh(Linux) -g [csv results file] -o [path to output folder (empty or not existing)]
+
+--------------------------------------------------
+
+To tell Apache JMeter to use a proxy server:
+Open a command prompt and type:
+
+jmeter.bat(Windows)/jmeter.sh(Linux) -H [your.proxy.server] -P [your proxy server port]
+
+---------------------------------------------------
+
+To run Apache JMeter in server mode:
+Open a command prompt and type:
+
+jmeter-server.bat(Windows)/jmeter-server(Linux)
+
+---------------------------------------------------
+</code></pre>
+<h3 id="1-2">1-2 运行测试用例</h3>
+<pre><code>jmeter -n -t scripts/blog.jmx  -l report.jtl -e -o report -Jjmeter.save.saveservice.output_format=csv
+</code></pre>
+<p>参数说明:</p>
+<ul>
+<li>-n: 非GUI模式执行JMeter</li>
+<li>-t: 执行测试文件所在的位置</li>
+<li>-l: 指定生成测试结果的保存文件，jtl文件格式</li>
+<li>-e: 测试结束后，生成测试报告</li>
+<li>-o: 指定测试报告的存放位置</li>
+</ul>
+<p>看下运行的效果：测试报告已生成是HTML文件，可直接打开。</p>
+<pre><code>$ jmeter -n -t scripts/blog.jmx  -l report.jtl -e -o report -Jjmeter.save.saveservice.output_format=csv
+WARNING: package sun.awt.X11 not in java.desktop
+Creating summariser &lt;summary&gt;
+Created the tree successfully using scripts/blog.jmx
+Starting standalone test @ Mon Aug 24 17:54:51 CST 2020 (1598262891834)
+Waiting for possible Shutdown/StopTestNow/HeapDump/ThreadDump message on port 4445
+Warning: Nashorn engine is planned to be removed from a future JDK release
+summary =      3 in 00:00:01 =    4.7/s Avg:   363 Min:   286 Max:   512 Err:     0 (0.00%)
+Tidying up ...    @ Mon Aug 24 17:54:52 CST 2020 (1598262892778)
+... end of run
+</code></pre>
+<pre><code>$ tree report -L 1
+report
+├── content
+├── index.html
+├── sbadmin2-1.0.7
+└── statistics.json
+
+2 directories, 2 files
+</code></pre>
+<p><img alt="Alt Image Text" src="../../images/chp13_1_4.png" title="body image" /></p>
+<h2 id="2-antjmeter">2、使用 Ant、Jmeter 自动化测试</h2>
+<h3 id="2-1-ant-jmeter-111jar">2-1 复制<code>ant-jmeter-1.1.1.jar</code></h3>
+<pre><code>cp /opt/apache-jmeter-5.3/extras/ant-jmeter-1.1.1.jar /opt/ant/lib
+</code></pre>
+<p>将 <code>${apache-jmeter}/extras</code> 文件夹下的<code>‘ant-jmeter-1.1.1.jar’</code>文件复制到<code>${apache-ant-}\lib</code> 文件夹下</p>
+<pre><code>cd /home/vagrant/tools/script/jmetertest-master
+sudo cp jmeter.results.shanhe.me.xsl  /opt/apache-jmeter-5.3/extras/
+</code></pre>
+<p>我们可以使用ant与Jmeter集成build.xml部分内容  <a href="https://github.com/Chao-Xi/jmetertest/tree/master/scripts/blog.jmx"><code>build.xml</code>地址 </a></p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf8&quot;?&gt;
+&lt;!-- 拷贝报告所需的图片资源至目标目录 --&gt;
+&lt;project name=&quot;ant-jmeter-test&quot; default=&quot;run&quot; basedir=&quot;.&quot;&gt;
+    &lt;tstamp&gt;
+        &lt;format property=&quot;time&quot; pattern=&quot;yyyyMMddHHmm&quot; /&gt;
+    &lt;/tstamp&gt;
+    &lt;!-- 需要改成自己本地的jmeter目录--&gt;  
+    &lt;property name=&quot;jmeter.home&quot; value=&quot;/opt/apache-jmeter-5.3&quot; /&gt;
+    &lt;!-- jmeter生成的jtl格式的结果报告的路径--&gt; 
+    &lt;property name=&quot;jmeter.result.jtl.dir&quot; value=&quot;./result/jtlfile&quot; /&gt;
+    &lt;!-- jmeter生成的html格式的结果报告的路径--&gt;
+    &lt;property name=&quot;jmeter.result.html.dir&quot; value=&quot;./result/htmlfile&quot; /&gt;
+    &lt;!-- ʺ生成的报告的前缀--&gt;  
+    &lt;property name=&quot;ReportName&quot; value=&quot;TestReport_&quot; /&gt;
+    &lt;property name=&quot;jmeter.result.jtlName&quot; value=&quot;${jmeter.result.jtl.dir}/${ReportName}${time}.jtl&quot; /&gt;
+    &lt;property name=&quot;jmeter.result.htmlName&quot; value=&quot;${jmeter.result.html.dir}/SummaryReport.html&quot; /&gt;
+    &lt;property name=&quot;jmeter.detail.result.jtlName&quot; value=&quot;${jmeter.result.jtl.dir}/${ReportName}${time}.jtl&quot; /&gt;
+    &lt;property name=&quot;jmeter.detail.result.htmlName&quot; value=&quot;${jmeter.result.html.dir}/DetailReport.html&quot; /&gt;
+    &lt;target name=&quot;run&quot;&gt;
+        &lt;antcall target=&quot;test&quot; /&gt;
+        &lt;antcall target=&quot;report&quot; /&gt;
+    &lt;/target&gt;
+
+    &lt;target name=&quot;test&quot;&gt;
+        &lt;taskdef name=&quot;jmeter&quot; classname=&quot;org.programmerplanet.ant.taskdefs.jmeter.JMeterTask&quot; /&gt;
+        &lt;jmeter jmeterhome=&quot;${jmeter.home}&quot; resultlog=&quot;${jmeter.result.jtlName}&quot;&gt;
+             &lt;!-- 声明要运行的脚本“*.jmx”指包含此目录下的所有jmeter脚本--&gt;
+            &lt;testplans dir=&quot;./scripts&quot; includes=&quot;*.jmx&quot; /&gt;
+           &lt;property name=&quot;jmeter.save.saveservice.output_format&quot; value=&quot;xml&quot;/&gt;
+
+        &lt;/jmeter&gt;
+    &lt;/target&gt;
+    &lt;path id=&quot;xslt.classpath&quot;&gt;
+            &lt;fileset dir=&quot;${jmeter.home}/lib&quot; includes=&quot;xalan*.jar&quot;/&gt;
+            &lt;fileset dir=&quot;${jmeter.home}/lib&quot; includes=&quot;serializer*.jar&quot;/&gt;
+    &lt;/path&gt;
+
+    &lt;target name=&quot;report&quot;&gt;
+        &lt;tstamp&gt; 
+                &lt;format property=&quot;report.datestamp&quot; pattern=&quot;yyyy/MM/dd HH:mm&quot; /&gt;
+        &lt;/tstamp&gt;
+        &lt;xslt 
+            classpathref=&quot;xslt.classpath&quot;
+            force=&quot;true&quot;
+            in=&quot;${jmeter.detail.result.jtlName}&quot;
+            out=&quot;${jmeter.detail.result.htmlName}&quot;
+            style=&quot;./jmeter.results.shanhe.me.xsl&quot;&gt;
+            &lt;param name=&quot;dateReport&quot; expression=&quot;${report.datestamp}&quot;/&gt;
+        &lt;/xslt&gt;
+        &lt;xslt 
+            classpathref=&quot;xslt.classpath&quot;
+            force=&quot;true&quot;
+            in=&quot;${jmeter.result.jtlName}&quot;
+            out=&quot;${jmeter.result.htmlName}&quot;
+            style=&quot;./jmeter-results-detail-report_21.xsl&quot;&gt;
+            &lt;param name=&quot;dateReport&quot; expression=&quot;${report.datestamp}&quot;/&gt;
+        &lt;/xslt&gt;
+        &lt;!-- 拷贝报告所需的图片资源至目标目录 --&gt; 
+        &lt;copy todir=&quot;${jmeter.result.html.dir}&quot;&gt;
+            &lt;fileset dir=&quot;${jmeter.home}/extras&quot;&gt;
+                &lt;include name=&quot;collapse.png&quot; /&gt;
+                &lt;include name=&quot;expand.png&quot; /&gt;
+            &lt;/fileset&gt;
+        &lt;/copy&gt;
+    &lt;/target&gt;
+&lt;/project&gt;
+</code></pre>
+<h3 id="2-2-antjmeter">2-2 ant构建jmeter 测试</h3>
+<p>运行用例</p>
+<pre><code>$ sudo ant -f build.xml
+Buildfile: /home/vagrant/tools/script/jmetertest-master/build.xml
+
+run:
+
+test:
+   [jmeter] Executing test plan: /home/vagrant/tools/script/jmetertest-master/scripts/blog.jmx ==&gt; /home/vagrant/tools/script/jmetertest-master/result/jtlfile/TestReport_202008210635.jtl
+   [jmeter] Creating summariser &lt;summary&gt;
+   [jmeter] Created the tree successfully using /home/vagrant/tools/script/jmetertest-master/scripts/blog.jmx
+   [jmeter] Starting standalone test @ Fri Aug 21 06:35:38 UTC 2020 (1597991738273)
+   [jmeter] Waiting for possible Shutdown/StopTestNow/HeapDump/ThreadDump message on port 4445
+   [jmeter] summary =      3 in 00:00:01 =    3.0/s Avg:   518 Min:   338 Max:   752 Err:     0 (0.00%)
+   [jmeter] Tidying up ...    @ Fri Aug 21 06:35:39 UTC 2020 (1597991739806)
+   [jmeter] ... end of run
+
+report:
+     [xslt] Processing /home/vagrant/tools/script/jmetertest-master/result/jtlfile/TestReport_202008210635.jtl to /home/vagrant/tools/script/jmetertest-master/result/htmlfile/202008210635_DetailReport.html
+     [xslt] Loading stylesheet /opt/apache-jmeter-5.3/extras/jmeter.results.shanhe.me.xsl
+     [xslt] Processing /home/vagrant/tools/script/jmetertest-master/result/jtlfile/TestReport_202008210635.jtl to /home/vagrant/tools/script/jmetertest-master/result/htmlfile/202008210635_SummaryReport.html
+     [xslt] Loading stylesheet /opt/apache-jmeter-5.3/extras/jmeter-results-detail-report_21.xsl
+
+BUILD SUCCESSFUL
+Total time: 5 seconds
+</code></pre>
+<pre><code>$ cd jmetertest-master/result/htmlfile
+-rw-r--r--. 1 root    root     5191 Aug 21 06:35 202008210635_SummaryReport.html
+-rw-r--r--. 1 root    root    16284 Aug 21 06:35 202008210635_DetailReport.html
+-rw-r--r--. 1 root    root     5191 Aug 21 06:28 202008210628_SummaryReport.html
+-rw-r--r--. 1 root    root    16284 Aug 21 06:28 202008210628_DetailReport.html
+...
+</code></pre>
+<p>测试报告</p>
+<p><img alt="Alt Image Text" src="../../images/chp13_1_5.png" title="body image" /></p>
+<p><img alt="Alt Image Text" src="../../images/chp13_1_6.png" title="body image" /></p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        <a href="../../chap12/2K8s_pipeline/" class="md-footer__link md-footer__link--prev" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              使用 Jenkins Pipeline 流水线部署 Kubernetes 应用
+            </div>
+          </div>
+        </a>
+      
+      
+        <a href="../2jenkins_jmeter/" class="md-footer__link md-footer__link--next" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              第二节 Jenkins、Ant、Jmeter 自动化测试
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2016-2020 Jacob Xi
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../assets/javascripts/workers/search.d351de03.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.34eae1b6.min.js"></script>
+      
+    
+  </body>
+</html>
