@@ -83,6 +83,7 @@ nav:
     - 'L3 环境管理': 'chap16/3Env_mgt.md'
     - 'L4 构建集成': 'chap16/4const_mgt.md'
     - 'L5 发布及监控': 'chap16/5Mon_mgt.md'
+    - 'L6 测试管理': 'chap16/6Test_mgt.md'
   - 'Extra 知识扩展':
     - 'GitHub+Travis+Mkdocs自动化构建文档库' : 'Mkdocs_github_travis.md'
  
