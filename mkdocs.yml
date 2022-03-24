@@ -86,6 +86,7 @@ nav:
     - 'L6 测试管理': 'chap16/6Test_mgt.md'
     - 'L7 持续交付平台化': 'chap16/7CD_pla.md'
     - 'L8 实践案例': 'chap16/8Real_exp.md'
+    - 'L9 持续交付理论总结及面试': 'chap16/9cicd_rev.md'
     
   - 'Extra 知识扩展':
     - 'GitHub+Travis+Mkdocs自动化构建文档库' : 'Mkdocs_github_travis.md'
