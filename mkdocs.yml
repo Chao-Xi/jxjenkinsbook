@@ -29,6 +29,7 @@ nav:
     - '第三节 Jenkins集成Ansibe实现自动化部署' : 'chap4/3chp4_tools3.md'
     - '第四节 Jenkins集成Ansibe实战手册 - BB Mobile（2018）' : 'chap4/4chp4_tools4.md'
   - '五、凭证管理':
+    - '0 如何在 Jenkins 中安全管理 Secrets': 'chap5/5jenkins_secrets.md'
     - '第一节 凭证管理' : 'chap5/1chap5_cred1.md'
     - '第二节 凭证管理使用HashiCorp Vault' : 'chap5/2chap5_vault.md'
     - '第二节(Extra) - Store Secrets using Hashicorp Vault with Docker' : 'chap5/3docker_valut.md'
