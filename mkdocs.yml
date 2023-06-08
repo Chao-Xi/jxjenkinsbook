@@ -12,6 +12,8 @@ nav:
     - '第一节 Jenkins 运维管理' : 'jk_chapter1.md'
     - '第二节 分布式构建与并行构建' : 'jk_chapter1_2.md'
     - '第三节 可视化构建试图' : 'jk_chapter1_3.md'
+    - '第四节 使用Active Choice Parameter参数化构建' : 'chap1/1active_parameter.md'
+    - '第五节 自动化使用python-jenkins管理Jenkins': 'chap1/2python-jenkins.md'
   - '二、Jenkins 流水线基础':
     - '第一节 编写 Jenkinsfile 运行流水线' : 'chap2/1chap2_Jenkinsfile.md'
     - '第二节 声明式流水线语法' : 'chap2/2chap2_declarative_pipeline.md'
@@ -20,6 +22,8 @@ nav:
     - '第五节 如何快速上手Jenkinsfile编写' : 'chap2/5chap2_quick_jenkinsfile.md'
     - '第六节 脚本式管道与声明式管道-四个实际差异' : 'chap2/6chap2_pipe_vs_dec.md'
     - '第七节 使用Jenkins Git参数实现分支标签动态选择' : 'chap2/7chap2_jenkins_git.md'
+    - '第八节 多分支类型管道- 基于Jenkinsfile自动创建Pipeline(2023)' : 'chap2/8Jenkinsfile_pipeline_multibranch.md'
+    - '第九节 实践-Jenkins 声明式管道中的动态并行阶段': 'chap2/9jenkins_parallel2023.md'
   - '三、Groovy 基础':
     - '第一节 Groovy 简明教程' : 'chap3/1chap3_groovy_basic.md'
     - '第二节 Groovy 基础' : 'chap3/2chap3_groovy_basic2.md'
@@ -53,6 +57,7 @@ nav:
     - '第二节 制品管理' : 'chap9/chap9_artifact1.md'
     - '第三节 Nexus 制品上传' : 'chap9/chap9_artifact2.md'
     - '第四节 Jenkins & Jfrog Artifactory' : 'chap9/chap9_artifact3.md'
+    - '第五节 Jenkins流水线将制品发布到Nexus存储库' : 'chap9/chap9_5nexus_2023.md'
   - '十、需求管理工具集成': 
     - '第一节 k8s 安装本地 Jira 服务' : 'chap10/1chap10_jira_install.md'
     - '第二节 Jenkins 配置端到端流水线（Jira和Gitlab的集成）' : 'chap10/2chap10_jira_gilab.md'
@@ -73,6 +78,8 @@ nav:
     - '第三节 Jenkins + K8S + Gitlab 构建 RLEASE 打包发布更新流水线到K8S集群': 'chap14/3Jen_k8s_pipeline.md'
     - '第四节 版本晋级及发布流水线' : 'chap14/4Jen_update_deploy_pip.md'
     - '第五节 前端后端项目发布流水线（Java+Nodejs)' : 'chap14/5back_front_pipeline.md'
+    - '第六节 构建Android项目流水线': 'chap14/6Android_pipeline.md'
+    - '第七节 基于Azure部署Jenkins服务并开发MERN应用的CI/CD构建管道': 'chap14/7Jenkins_azure_mern.md'
   - '十五、监控与API调用':
     - '第一节 使用 Prometheus 监控 Jenkins' : 'chap15/1Jenkins_Prometheus.md'
     - '第二节 Jenkins+InfluxDB+Grafana 收集构建数据' : 'chap15/2Jenkins_InfluxDB_Grafana.md'
@@ -88,8 +95,7 @@ nav:
     - 'L6 测试管理': 'chap16/6Test_mgt.md'
     - 'L7 持续交付平台化': 'chap16/7CD_pla.md'
     - 'L8 实践案例': 'chap16/8Real_exp.md'
-    - 'L9 持续交付理论总结及面试': 'chap16/9cicd_rev.md'
-    
+    - 'L9 持续交付理论总结及面试': 'chap16/9cicd_rev.md'   
   - 'Extra 知识扩展':
     - 'GitHub+Travis+Mkdocs自动化构建文档库' : 'Mkdocs_github_travis.md'
  
