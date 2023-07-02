@@ -24,6 +24,7 @@ nav:
     - '第七节 使用Jenkins Git参数实现分支标签动态选择' : 'chap2/7chap2_jenkins_git.md'
     - '第八节 多分支类型管道- 基于Jenkinsfile自动创建Pipeline(2023)' : 'chap2/8Jenkinsfile_pipeline_multibranch.md'
     - '第九节 实践-Jenkins 声明式管道中的动态并行阶段': 'chap2/9jenkins_parallel2023.md'
+    - '第十节 微服务模式下如何实现多模块并行构建发布': 'chap2/10mc_parallel.md'
   - '三、Groovy 基础':
     - '第一节 Groovy 简明教程' : 'chap3/1chap3_groovy_basic.md'
     - '第二节 Groovy 基础' : 'chap3/2chap3_groovy_basic2.md'
@@ -80,6 +81,7 @@ nav:
     - '第五节 前端后端项目发布流水线（Java+Nodejs)' : 'chap14/5back_front_pipeline.md'
     - '第六节 构建Android项目流水线': 'chap14/6Android_pipeline.md'
     - '第七节 基于Azure部署Jenkins服务并开发MERN应用的CI/CD构建管道': 'chap14/7Jenkins_azure_mern.md'
+    - '第八节 基础设施即代码 - 使用Terraform创建AWS EC2实例并部署Jenkins服务': 'chap14/2TMF_JENKINS.md'
   - '十五、监控与API调用':
     - '第一节 使用 Prometheus 监控 Jenkins' : 'chap15/1Jenkins_Prometheus.md'
     - '第二节 Jenkins+InfluxDB+Grafana 收集构建数据' : 'chap15/2Jenkins_InfluxDB_Grafana.md'

@@ -33,6 +33,10 @@
 
 **是一段JSON数据， 该job运行后编写Pipeline 解析JSON中的数据拿到所变更的服务模块信息。最后触发对应服务的CI作业进行构建**。
 
+### CI-Scheduler 作业
+
+此作业只需要开启webhook， 配置触发token（唯一性）。生成hookurl：http://jenkins.idevops.site/generic-webhook-trigger/invoke?token=microservicecicd-scheduler-CI
+
 ![Alt Image Text](../images/chap6_4_5.png "Body image")
 
 Jenkinsfile
@@ -133,13 +137,13 @@ pipeline {
 
 开启webhook，配置hookurl：http://jenkins.idevops.site/generic-webhook-trigger/invoke?token=microservicecicd-scheduler-CI
 
-![Alt Image Text](../images/chap6_4_7.png "Body image")
+![Alt Image Text](../images/chap6_4_6.png "Body image")
 
 CI流水线-CI作业
 
 每个微服务创建一个CI作业，具有三个字符串参数：分支名称、commitID、项目ID。
 
-![Alt Image Text](../images/chap6_4_6.png "Body image")
+![Alt Image Text](../images/chap6_4_7.png "Body image")
 
 Jenkinsfile
 
@@ -374,7 +378,7 @@ def UpdateRepoFile(projectId,filePath,fileContent, branchName){
 
 ![Alt Image Text](../images/chap6_4_11.png "Body image")
 
-![Alt Image Text](../images/chap6_4_12.png "Body image")
+
 
 **Jenkinsfile**
 
@@ -467,11 +471,11 @@ pipeline {
 
 开启webhook，配置hookurl：[http://jenkins.idevops.site/generic-webhook-trigger/invoke?token=microservicecicd-scheduler-CD](http://jenkins.idevops.site/generic-webhook-trigger/invoke?token=microservicecicd-scheduler-CD)
 
-![Alt Image Text](../images/chap6_4_13.png "Body image")
+![Alt Image Text](../images/chap6_4_12.png "Body image")
 
 CD流水线-CD作业
 
-![Alt Image Text](../images/chap6_4_14.png "Body image")
+![Alt Image Text](../images/chap6_4_13.png "Body image")
 
 Jenkinsfile
 
@@ -521,4 +525,4 @@ pipeline{
 }
 ```
 
-![Alt Image Text](../images/chap6_4_15.png "Body image")
+![Alt Image Text](../images/chap6_4_14.png "Body image")
