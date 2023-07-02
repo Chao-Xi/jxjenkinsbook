@@ -1,0 +1,4230 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Jacob's 手摸手Jenkins实用教程">
+      
+      
+        <meta name="author" content="Jacob Xi">
+      
+      
+      
+        <link rel="prev" href="../1chap2_Jenkinsfile/">
+      
+      
+        <link rel="next" href="../3chap2_script_pipeline/">
+      
+      <link rel="icon" href="../../images/logo.png">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.17">
+    
+    
+      
+        <title>第二节 声明式流水线语法 - Jacob Jenkins Books</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.26e3688c.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ecc896b0.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="Jacob Jenkins Books" class="md-header__button md-logo" aria-label="Jacob Jenkins Books" data-md-component="logo">
+      
+  <img src="../../images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Jacob Jenkins Books
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第二节 声明式流水线语法
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Chao-Xi/jxjenkinsbook.git" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    jxjenkinsbook
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Jacob Jenkins Books" class="md-nav__button md-logo" aria-label="Jacob Jenkins Books" data-md-component="logo">
+      
+  <img src="../../images/logo.png" alt="logo">
+
+    </a>
+    Jacob Jenkins Books
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Chao-Xi/jxjenkinsbook.git" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    jxjenkinsbook
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Welcome
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          一、Jenkins 运维管理
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          一、Jenkins 运维管理
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jk_chapter1/" class="md-nav__link">
+        第一节 Jenkins 运维管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jk_chapter1_2/" class="md-nav__link">
+        第二节 分布式构建与并行构建
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jk_chapter1_3/" class="md-nav__link">
+        第三节 可视化构建试图
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap1/1active_parameter/" class="md-nav__link">
+        第四节 使用Active Choice Parameter参数化构建
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap1/2python-jenkins/" class="md-nav__link">
+        第五节 自动化使用python-jenkins管理Jenkins
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          二、Jenkins 流水线基础
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          二、Jenkins 流水线基础
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1chap2_Jenkinsfile/" class="md-nav__link">
+        第一节 编写 Jenkinsfile 运行流水线
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          第二节 声明式流水线语法
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        第二节 声明式流水线语法
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    本节介绍
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-1-agent" class="md-nav__link">
+    1-1 agent(代理)
+  </a>
+  
+    <nav class="md-nav" aria-label="1-1 agent(代理)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-1-1-agent" class="md-nav__link">
+    1-1-1 agent部分详解
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-1-2-docker" class="md-nav__link">
+    1-1-2 将构建任务交给Docker
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-1-3-docker" class="md-nav__link">
+    1-1-3 配置Docker私有仓库
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-2-post" class="md-nav__link">
+    1-2 post
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-3-stages" class="md-nav__link">
+    1-3 stages(阶段)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-4-steps" class="md-nav__link">
+    1-4 steps(步骤)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-5" class="md-nav__link">
+    1-5 指令
+  </a>
+  
+    <nav class="md-nav" aria-label="1-5 指令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-5-1-environment" class="md-nav__link">
+    1-5-1 environment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-5-2-options" class="md-nav__link">
+    1-5-2 options
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-5-3-pipeline" class="md-nav__link">
+    1-5-3 参数化pipeline
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-5-4-pipeline" class="md-nav__link">
+    1-5-4 触发pipeline详解：
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-5-5-tool" class="md-nav__link">
+    1-5-5 tool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-5-6-input" class="md-nav__link">
+    1-5-6 input
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-5-7-when" class="md-nav__link">
+    1-5-7 when和多分支构建
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-5-8-examples" class="md-nav__link">
+    指令 1-5-8 Examples
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-5-9" class="md-nav__link">
+    1-5-9 并行构建
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-6-step" class="md-nav__link">
+    1-6 step步骤
+  </a>
+  
+    <nav class="md-nav" aria-label="1-6 step步骤">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-6-1-script" class="md-nav__link">
+    1-6-1 script
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-7-pipeline" class="md-nav__link">
+    1-7 pipeline内置基础步骤
+  </a>
+  
+    <nav class="md-nav" aria-label="1-7 pipeline内置基础步骤">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-7-1" class="md-nav__link">
+    1-7-1 文件目录相关步骤
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-7-2" class="md-nav__link">
+    1-7-2 制品相关步骤
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-7-3" class="md-nav__link">
+    1-7-3 命令相关步骤
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-7-4" class="md-nav__link">
+    1-7-4 其他步骤
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-7-5-pipeline" class="md-nav__link">
+    1-7-5 使用pipeline代码片段生成器学习
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-7-6-vs-codejenkinsfile" class="md-nav__link">
+    1-7-6 使用VS Code扩展校验Jenkinsfile
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-7-7-ant" class="md-nav__link">
+    1-7-7 Ant风格路径表达式简介
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-check-jenkins-dsl-viewer-page" class="md-nav__link">
+    How to check Jenkins DSL Viewer Page
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3chap2_script_pipeline/" class="md-nav__link">
+        第三节 脚本化Pipeline
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4chap2_sharedlib/" class="md-nav__link">
+        第四节 Pipeline 扩展——共享库
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5chap2_quick_jenkinsfile/" class="md-nav__link">
+        第五节 如何快速上手Jenkinsfile编写
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6chap2_pipe_vs_dec/" class="md-nav__link">
+        第六节 脚本式管道与声明式管道-四个实际差异
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7chap2_jenkins_git/" class="md-nav__link">
+        第七节 使用Jenkins Git参数实现分支标签动态选择
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../8Jenkinsfile_pipeline_multibranch/" class="md-nav__link">
+        第八节 多分支类型管道- 基于Jenkinsfile自动创建Pipeline(2023)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../9jenkins_parallel2023/" class="md-nav__link">
+        第九节 实践-Jenkins 声明式管道中的动态并行阶段
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10mc_parallel/" class="md-nav__link">
+        第十节 微服务模式下如何实现多模块并行构建发布
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          三、Groovy 基础
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          三、Groovy 基础
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap3/1chap3_groovy_basic/" class="md-nav__link">
+        第一节 Groovy 简明教程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap3/2chap3_groovy_basic2/" class="md-nav__link">
+        第二节 Groovy 基础
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          四、构建工具集成
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          四、构建工具集成
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap4/1chp4_tools1/" class="md-nav__link">
+        第一节 构建工具集成
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap4/2chp4_tools2/" class="md-nav__link">
+        第二节 集成 SaltStack 部署工具
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap4/3chp4_tools3/" class="md-nav__link">
+        第三节 Jenkins集成Ansibe实现自动化部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap4/4chp4_tools4/" class="md-nav__link">
+        第四节 Jenkins集成Ansibe实战手册 - BB Mobile（2018）
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          五、凭证管理
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          五、凭证管理
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap5/5jenkins_secrets/" class="md-nav__link">
+        0 如何在 Jenkins 中安全管理 Secrets
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap5/1chap5_cred1/" class="md-nav__link">
+        第一节 凭证管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap5/2chap5_vault/" class="md-nav__link">
+        第二节 凭证管理使用HashiCorp Vault
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap5/3docker_valut/" class="md-nav__link">
+        第二节(Extra) - Store Secrets using Hashicorp Vault with Docker
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap5/4docker_mask/" class="md-nav__link">
+        第三节 在Jenkins日志中隐藏敏感信息
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+          六、用户认证集成
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          六、用户认证集成
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap6/1chap6_ldap/" class="md-nav__link">
+        第一节 Ldap 用户认证集成
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap6/2chap6_gitlab/" class="md-nav__link">
+        第二节 Jenkins集成 Gitlab SSO 单点登录
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap6/3chap6_github/" class="md-nav__link">
+        第三节 Jenkins集成 Github SSO 单点登录
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+          七、Gitlab 版本控制系统集成
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          七、Gitlab 版本控制系统集成
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap7/1chap7_gitlab_connect/" class="md-nav__link">
+        第一节 Gitlab – Jenkins Integration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap7/2chap7_gitlab_pipeline/" class="md-nav__link">
+        第二节 Gitlab-Jenkins 版本控制
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap7/3chap7_gitlab_pipeline_extra/" class="md-nav__link">
+        第三节 Gitlab-Jenkins 版本控制（补充）
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap7/4gitops_cicd/" class="md-nav__link">
+        ​第四节 GitOps Gitlab-Jenkins 模式下微服务CI/CD实践
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+          八、代码质量平台集成
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          八、代码质量平台集成
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap8/1chap8_code_quality/" class="md-nav__link">
+        第一节 代码质量
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap8/2chap8_code_quality_sonarqube/" class="md-nav__link">
+        第二节 SonarQube：持续代码质量检查
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap8/3chap8_code_quality_allure/" class="md-nav__link">
+        第三节 Allure测试报告：更美观的测试报告
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap8/4chap8_code_quality_integration/" class="md-nav__link">
+        第四季 代码质量平台集成(SonarQube Final Edition)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+          九、制品库集成
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_10">
+          <span class="md-nav__icon md-icon"></span>
+          九、制品库集成
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap9/chap9_artifact0/" class="md-nav__link">
+        第一节 Sonatype Nexus 基本介绍与安装
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap9/chap9_artifact1/" class="md-nav__link">
+        第二节 制品管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap9/chap9_artifact2/" class="md-nav__link">
+        第三节 Nexus 制品上传
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap9/chap9_artifact3/" class="md-nav__link">
+        第四节 Jenkins & Jfrog Artifactory
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap9/chap9_5nexus_2023/" class="md-nav__link">
+        第五节 Jenkins流水线将制品发布到Nexus存储库
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+          十、需求管理工具集成
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_11">
+          <span class="md-nav__icon md-icon"></span>
+          十、需求管理工具集成
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap10/1chap10_jira_install/" class="md-nav__link">
+        第一节 k8s 安装本地 Jira 服务
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap10/2chap10_jira_gilab/" class="md-nav__link">
+        第二节 Jenkins 配置端到端流水线（Jira和Gitlab的集成）
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+          十一、Docker 集成
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_12">
+          <span class="md-nav__icon md-icon"></span>
+          十一、Docker 集成
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap11/1Docker_agents/" class="md-nav__link">
+        第一节 基于 Docker 配置构建资源池
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap11/2Docker_pipeline/" class="md-nav__link">
+        第二节 基于Docker的pipeline流水线
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap11/3Docker_registry/" class="md-nav__link">
+        第三节 构建应用镜像到镜像仓库管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap11/4Docker_groovy/" class="md-nav__link">
+        第四节 使用Groovy代码初始化Docker配置
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="0">
+          十二、K8S 平台集成
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_13">
+          <span class="md-nav__icon md-icon"></span>
+          十二、K8S 平台集成
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap12/1k8s_install/" class="md-nav__link">
+        K8S 平台集成(全)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap12/2K8s_pipeline/" class="md-nav__link">
+        使用 Jenkins Pipeline 流水线部署 Kubernetes 应用
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_14" id="__nav_14_label" tabindex="0">
+          十三、自动化接口测试
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_14">
+          <span class="md-nav__icon md-icon"></span>
+          十三、自动化接口测试
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap13/1jmeter/" class="md-nav__link">
+        第一节 Jmeter & Ant 自动化测试
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap13/2jenkins_jmeter/" class="md-nav__link">
+        第二节 Jenkins、Ant、Jmeter 自动化测试
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="0">
+          十四、流水线最佳实践
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_15">
+          <span class="md-nav__icon md-icon"></span>
+          十四、流水线最佳实践
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap14/1JIRA_JEN_K8S/" class="md-nav__link">
+        第一节 基于Jira端到端流水线的最佳实践
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap14/2JEN_K8S_API/" class="md-nav__link">
+        第二节 Jenkins K8S Gitlab 集成
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap14/3Jen_k8s_pipeline/" class="md-nav__link">
+        第三节 Jenkins + K8S + Gitlab 构建 RLEASE 打包发布更新流水线到K8S集群
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap14/4Jen_update_deploy_pip/" class="md-nav__link">
+        第四节 版本晋级及发布流水线
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap14/5back_front_pipeline/" class="md-nav__link">
+        第五节 前端后端项目发布流水线（Java+Nodejs)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap14/6Android_pipeline/" class="md-nav__link">
+        第六节 构建Android项目流水线
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap14/7Jenkins_azure_mern/" class="md-nav__link">
+        第七节 基于Azure部署Jenkins服务并开发MERN应用的CI/CD构建管道
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap14/2TMF_JENKINS/" class="md-nav__link">
+        第八节 基础设施即代码 - 使用Terraform创建AWS EC2实例并部署Jenkins服务
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_16" id="__nav_16_label" tabindex="0">
+          十五、监控与API调用
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_16_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_16">
+          <span class="md-nav__icon md-icon"></span>
+          十五、监控与API调用
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap15/1Jenkins_Prometheus/" class="md-nav__link">
+        第一节 使用 Prometheus 监控 Jenkins
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap15/2Jenkins_InfluxDB_Grafana/" class="md-nav__link">
+        第二节 Jenkins+InfluxDB+Grafana 收集构建数据
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap15/3Jenkins_python_API/" class="md-nav__link">
+        第三节 Jenkins Python API 实践
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap15/4Jenkins_REST_API/" class="md-nav__link">
+        第四节 Jenkins REST API 使用实践
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap15/5Jenkins_DSL/" class="md-nav__link">
+        第五节 Jenkins Core Api & Job DSL创建项目
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_17" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_17" id="__nav_17_label" tabindex="0">
+          十六、持续交付理论分析
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_17_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_17">
+          <span class="md-nav__icon md-icon"></span>
+          十六、持续交付理论分析
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap16/1cd_intro/" class="md-nav__link">
+        L1 量身定制你的持续交付体系
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap16/2config_mgt/" class="md-nav__link">
+        L2 配置管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap16/3Env_mgt/" class="md-nav__link">
+        L3 环境管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap16/4const_mgt/" class="md-nav__link">
+        L4 构建集成
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap16/5Mon_mgt/" class="md-nav__link">
+        L5 发布及监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap16/6Test_mgt/" class="md-nav__link">
+        L6 测试管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap16/7CD_pla/" class="md-nav__link">
+        L7 持续交付平台化
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap16/8Real_exp/" class="md-nav__link">
+        L8 实践案例
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap16/9cicd_rev/" class="md-nav__link">
+        L9 持续交付理论总结及面试
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_18" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_18" id="__nav_18_label" tabindex="0">
+          Extra 知识扩展
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_18_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_18">
+          <span class="md-nav__icon md-icon"></span>
+          Extra 知识扩展
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Mkdocs_github_travis/" class="md-nav__link">
+        GitHub+Travis+Mkdocs自动化构建文档库
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    本节介绍
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-1-agent" class="md-nav__link">
+    1-1 agent(代理)
+  </a>
+  
+    <nav class="md-nav" aria-label="1-1 agent(代理)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-1-1-agent" class="md-nav__link">
+    1-1-1 agent部分详解
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-1-2-docker" class="md-nav__link">
+    1-1-2 将构建任务交给Docker
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-1-3-docker" class="md-nav__link">
+    1-1-3 配置Docker私有仓库
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-2-post" class="md-nav__link">
+    1-2 post
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-3-stages" class="md-nav__link">
+    1-3 stages(阶段)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-4-steps" class="md-nav__link">
+    1-4 steps(步骤)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-5" class="md-nav__link">
+    1-5 指令
+  </a>
+  
+    <nav class="md-nav" aria-label="1-5 指令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-5-1-environment" class="md-nav__link">
+    1-5-1 environment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-5-2-options" class="md-nav__link">
+    1-5-2 options
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-5-3-pipeline" class="md-nav__link">
+    1-5-3 参数化pipeline
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-5-4-pipeline" class="md-nav__link">
+    1-5-4 触发pipeline详解：
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-5-5-tool" class="md-nav__link">
+    1-5-5 tool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-5-6-input" class="md-nav__link">
+    1-5-6 input
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-5-7-when" class="md-nav__link">
+    1-5-7 when和多分支构建
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-5-8-examples" class="md-nav__link">
+    指令 1-5-8 Examples
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-5-9" class="md-nav__link">
+    1-5-9 并行构建
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-6-step" class="md-nav__link">
+    1-6 step步骤
+  </a>
+  
+    <nav class="md-nav" aria-label="1-6 step步骤">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-6-1-script" class="md-nav__link">
+    1-6-1 script
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-7-pipeline" class="md-nav__link">
+    1-7 pipeline内置基础步骤
+  </a>
+  
+    <nav class="md-nav" aria-label="1-7 pipeline内置基础步骤">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-7-1" class="md-nav__link">
+    1-7-1 文件目录相关步骤
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-7-2" class="md-nav__link">
+    1-7-2 制品相关步骤
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-7-3" class="md-nav__link">
+    1-7-3 命令相关步骤
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-7-4" class="md-nav__link">
+    1-7-4 其他步骤
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-7-5-pipeline" class="md-nav__link">
+    1-7-5 使用pipeline代码片段生成器学习
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-7-6-vs-codejenkinsfile" class="md-nav__link">
+    1-7-6 使用VS Code扩展校验Jenkinsfile
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-7-7-ant" class="md-nav__link">
+    1-7-7 Ant风格路径表达式简介
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-check-jenkins-dsl-viewer-page" class="md-nav__link">
+    How to check Jenkins DSL Viewer Page
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="_1"><strong>第二节 声明式流水线语法</strong></h1>
+<h3 id="_2">本节介绍</h3>
+<p>声明式 <code>Pipeline</code> 是最近添加到 Jenkins 流水线的，它在流水线子系统之上提供了一种更简单，更有主见的语法。 所有的声明式<code>Pipeline</code>都必须包含一个 <code>pipeline</code>块中，比如：</p>
+<pre><code>pipeline {
+    //run
+}
+</code></pre>
+<p>在声明式 <code>Pipeline</code> 中的基本语句和表达式遵循 <code>Groovy</code>的语法。但是有以下例外：</p>
+<ul>
+<li>流水线顶层必须是一个块，特别是<code>pipelin{}</code>。</li>
+<li>不需要分号作为分割符，是按照行分割的。</li>
+<li>语句块只能由阶段、指令、步骤、赋值语句组成。例如: <code>input</code>被视为<code>input()</code>。</li>
+</ul>
+<h2 id="1-1-agent">1-1 agent(代理)</h2>
+<p>agent 指定了流水线的执行节点。</p>
+<p><strong>参数：</strong></p>
+<ul>
+<li><code>any</code> 在任何可用的节点上执行<code>pipeline</code>。</li>
+<li><strong><code>none</code> 没有指定<code>agent</code>的时候默认。</strong></li>
+<li><code>label</code> 在指定标签上的节点上运行<code>Pipeline</code>。</li>
+</ul>
+<p><code>node</code> 允许额外的选项。</p>
+<p>这两种是一样的</p>
+<pre><code>这两种是一样的
+agent { node { label 'labelname' }}
+agent { label ' labelname '}
+</code></pre>
+<h3 id="1-1-1-agent">1-1-1 agent部分详解</h3>
+<p><code>agent</code>部分描述的是整个<code>pipeline</code>或在特定阶段执行任务时所在的<code>agent</code>。换句话说，<code>Jenkins master</code>根据此<code>agent</code>部分决定将任务分配到哪个<code>agent</code>上执行。<code>agent</code>部分必须在<code>pipeline</code>块内的顶层定义，而<code>stage</code>块内的定义是可选的。 </p>
+<p><code>agent any</code>告诉<code>Jenkins master</code>：任何可用的<code>agent</code>都可以执行。 </p>
+<p><strong><code>agent</code>部分的定义可以放在阶段中，用于指定该<code>stage执</code>行时的<code>agent</code></strong></p>
+<pre><code>pipeline { 
+    agent any 
+    stages { 
+        stage('Build') { 
+            agent any 
+            steps { 
+                echo &quot;build&quot; 
+            } 
+        } 
+    } 
+}
+</code></pre>
+<p><strong>通过标签指定agent</strong></p>
+<p>当<code>pipeline</code>需要在<code>JDK8</code>环境下进行构建时，就需要通过标签来指定<code>agent</code>。代码如下： </p>
+<pre><code>pipeline 
+{ 
+    agent { 
+        label 'jdk8' 
+    } 
+    stages { 
+        stage('Build') { 
+            steps { 
+                echo &quot;build&quot; 
+            } 
+        } 
+    } 
+}
+</code></pre>
+<p>事实上，<code>agent｛label 'jdk8'｝</code>是以下定义方式的简略写法。 </p>
+<pre><code>agent｛
+    node {
+        label 'jdk8'
+    }
+｝
+</code></pre>
+<p>多<code>label</code>环境下同时执行，有<code>windows</code>和<code>jdk8</code>标签的<code>agent</code></p>
+<pre><code>agent{
+    label 'jdk8 &amp;&amp; windows' 
+}
+</code></pre>
+<p>上文中，在增加<code>agent</code>时，已配置好了该<code>agent</code>的默认工作目录路径，但是<code>agent</code>部分允许我们对工作目录进行自定义。 <code>node</code>除了<code>label</code>选项，还提供了另外一个选项<code>customWorkspace,</code>自定义工作目录，写法如下： </p>
+<pre><code>agent { 
+    node { 
+        label 'jdk8' 
+        customWorkspace '/var/lib/custom' 
+    } 
+} 
+</code></pre>
+<p><code>customWorkspace</code>选项除了写绝对一路径， 还可以写相对于默认工作目录路径的相对路径。</p>
+<p><strong><code>when</code>指令的<code>beforeAgent</code>选项</strong></p>
+<p>在默认情况下，阶段内所有的代码都将在指定的<code>Jenkins agent</code>上执行：<code>when</code>指令提供了一个<code>beforeAgent</code>选项，当它的值为<code>true</code>时， 只有符合<code>when</code>条件时才会进入该<code>Jenkins agent</code>，这样就可以避免没有必要的工作空间的分配， 也就不需要等待可用的<code>Jenkins agent</code>了。 </p>
+<p>在某些场景下，<code>beforeAgent</code>选项通常用于加速<code>pipeline</code>的执行。示例如下： </p>
+<pre><code>pipeline { 
+    agent none 
+    stages {
+         stage('Example Build') { 
+            steps { 
+            echo 'Hello World' 
+        }
+    } 
+    stage('Example Deploy') { 
+        agent { 
+            label &quot;some-label&quot; 
+        } 
+        when { 
+            beforeAgent true 
+            branch 'production' 
+            } 
+            steps { 
+                echo 'Deploying' 
+            } 
+        } 
+    }
+} 
+</code></pre>
+<p>只有分支为<code>production</code>时，才会进人<code>“Example Deploy”</code>阶段。这样就可以避免在<code>some-label</code>
+的<code>agent</code>中拉取代码，从而达到加速<code>pipeline</code>执行的目的。 </p>
+<h3 id="1-1-2-docker">1-1-2 将构建任务交给Docker</h3>
+<p>目前我们所有的构建都执行在机器上，接下来介绍如何让构建执行在<code>Docker</code> 容器中。</p>
+<p><code>Jenkins master</code>要将构建任务分配给<code>Docker</code>, 就必须在<code>Jenkins agent</code>上安装<code>Docker</code>。建议给 
+这些<code>agent</code>打上<code>docker</code>的标签。 </p>
+<pre><code>pipeline {
+    agent {
+        docker { image 'node:7-alpine' }
+    }
+    stages {
+        stage('Test') {
+            steps {
+                sh 'node --version'
+            }
+        }
+    }
+}
+</code></pre>
+<pre><code>[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Test)
+[Pipeline] sh
++ node --version
+v7.10.1
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+$ docker stop --time=1 1a245bfd1f49c695d450bd776ff6353b39be57db4c37af9a457e3a27baf9f5d7
+</code></pre>
+<p>与之前不同的，在<code>agent</code>部分我们将<code>node</code>换成了<code>docker</code>。下面分别解释<code>docker</code>的常用选项。</p>
+<ul>
+<li><code>label</code>（可选）：字符串类型，与<code>node</code>的<code>label</code>的作用一样。 </li>
+<li>image：字符串类型，指定构建时使用的<code>Docker</code>镜像。 </li>
+<li><code>args</code>（可选）：字符串类型，<code>Jenkins</code>执行<code>docker run</code>命令时所带的参数，如<code>args '-v /tmp:/tmp'</code>。</li>
+<li><code>aiwaysPull</code>（可选）：布尔类型，强制每次执行<code>docker pull</code>命令时都重新拉取镜像。 </li>
+</ul>
+<h3 id="1-1-3-docker">1-1-3 配置<code>Docker</code>私有仓库</h3>
+<p><code>Docker</code> 拉取镜像时，默认是从<code>Docker</code>官方中心仓库拉取的。那么如何实现从私有仓库拉取呢？</p>
+<p><code>Docker</code>插件为我们提供了界面操作，具体步骤如下： </p>
+<p>进人<code>Manage Jenkins</code> -&gt; <code>Configure System</code>页面，找到<code>“Declarative Pipeline(Docker)”</code>部分</p>
+<p><img alt="Alt Image Text" src="../../images/chp2_2_12.png" title="Body image" /> </p>
+<ul>
+<li><code>Docker Label</code>：当<code>pipeline</code>中的<code>agent</code> 部分没有指定<code>label</code>选项时，就会使用此配置</li>
+<li><code>Docker registry URL</code> : <code>Docker</code>私有仓库地址。 </li>
+<li><code>Registry credentials</code>：登录<code>Docker</code>私有仓库的凭证。 </li>
+</ul>
+<h2 id="1-2-post">1-2 post</h2>
+<p>定义一个或多个<code>steps</code> ，这些阶段根据流水线或阶段的完成情况而运行(取决于流水线中<code>post</code>部分的位置). <code>post</code> 支持以下 <code>post-condition</code> 块中的其中之一: <code>always</code>, <code>changed</code>, <code>failure,</code> <code>success</code>, <code>unstable</code>, 和<code>aborted</code>。这些条件块允许在 <code>post</code> 部分的步骤的执行取决于流水线或阶段的完成状态。</p>
+<ul>
+<li><code>always</code> 无论流水线或者阶段的完成状态。</li>
+<li><code>changed</code> 只有当流水线或者阶段完成状态与之前不同时。</li>
+<li><code>failure</code> 只有当流水线或者阶段状态为”failure”运行。</li>
+<li><code>success</code> 只有当流水线或者阶段状态为”success”运行。</li>
+<li><code>unstable</code> 只有当流水线或者阶段状态为”unstable”运行。例如：测试失败。</li>
+<li><code>aborted</code> 只有当流水线或者阶段状态为”aborted “运行。例如：手动取消。</li>
+<li><code>cleanup</code> 清理条件块。不论当前完成状态是什么，在其他所有条件块执行完成后都执行。 </li>
+</ul>
+<p><code>post</code>部分可以同时包含多种条件块。以下是<code>post</code>部分的完整示例。 </p>
+<pre><code>pipeline {
+agent any
+stages {
+    stage('Example') {
+        steps {
+            echo 'Hello World'
+        }
+        post {
+            always {
+                echo &quot;stage post always&quot;
+            }
+        }
+    }
+}
+post { 
+    always { 
+        echo 'I will always say Hello again!'o
+    }
+}
+}
+</code></pre>
+<h2 id="1-3-stages">1-3 stages(阶段)</h2>
+<p>包含一系列一个或多个<code>stage</code> 指令, 建议 <code>stages</code> 至少包含一个<code>stage</code> 指令用于连续交付过程的每个离散部分,比如构建, 测试, 和部署。</p>
+<pre><code>pipeline {
+    agent any
+    stages { 
+        stage('Example') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+    }
+}
+</code></pre>
+<h2 id="1-4-steps">1-4 steps(步骤)</h2>
+<p>step是每个阶段中要执行的每个步骤。</p>
+<pre><code>pipeline {
+    agent any
+    stages {
+        stage('Example') {
+            steps { 
+                echo 'Hello World'
+            }
+        }
+    }
+}
+</code></pre>
+<h2 id="1-5">1-5 指令</h2>
+<h3 id="1-5-1-environment">1-5-1 environment</h3>
+<p><code>environment</code> 指令指定一个键值对序列，该序列将被定义为所有步骤的环境变量，或者是特定于阶段的步骤，这取决于 <code>environment</code> 指令在流水线内的位置。</p>
+<p>该指令支持一个特殊的方法 <code>credentials()</code>，该方法可用于在<code>Jenkins</code>环境中通过标识符访问预定义的凭证。对于类型为 <code>“Secret Text”</code>的凭证,<code>credentials()</code> 将确保指定的环境变量包含秘密文本内容。对于类型为 <code>“SStandard username and password”</code>的凭证, 指定的环境变量指定为 <code>username:password</code>，并且两个额外的环境变量将被自动定义 :分别为 <code>MYVARNAME_USR</code>和 <code>MYVARNAME_PSW</code> 。</p>
+<pre><code>pipeline {
+    agent any
+    environment { 
+        CC = 'jxi'
+    }
+    stages {
+        stage('Example') {
+            environment { 
+                AN_ACCESS_KEY = credentials('my-prefined-secret-text') 
+            }
+            steps {
+                sh 'printenv'
+            }
+        }
+    }
+}
+</code></pre>
+<p>环境变量可以被有作是<code>pipeline</code>与<code>Jenkins</code>交互的媒介。比如，刚以任<code>pipeline</code>中通过<code>BUILD NUMBER</code>变量知道构建任务的当前构建次数。环境变量可以分为Jenkins内置变量和自定义变量。</p>
+<p><strong>Jenkins内置变量</strong></p>
+<p>在<code>pipeline</code>执行时，<code>Jenkins</code>通过一个名为<code>env</code>的全局变量，将<code>Jenkins</code>内置环境变量暴露出来。其使用方法有多种，示例如下： </p>
+<pre><code>pipeline { 
+    agent any 
+    stages { 
+        stage('Example') { 
+            steps {
+                 echo &quot;Running ${env.BUILD_NUMBER1} on ${env.JENKINS_URL}&quot;  //方法 一
+                 echo &quot;Running $env.BUILD_NUMBER on $env.JENKINS_URL&quot; //方法 二
+                 echo &quot;Running ${BUILD_NUMBER} on ${JENKINS_URL}&quot; //方法 三
+            }
+        }
+    }
+}
+</code></pre>
+<p>默认<code>env</code>的属性可以直接在<code>pipeline</code>中引用。所以以上方法都是合法的。<strong>但是不推荐方法三因为出现变量冲突时非常难查在问题</strong> </p>
+<p>那么。<code>env</code>变从那有哪此可用属性呢？通过访问的<code>&lt;Jenkins master的地址&gt;/pipeline-syntax/globalenv</code>来获取完整列表在列表中。当一个变量声明为<code>”For a multibranch project"</code>时, 代表只有多分支项目才会有此变量 </p>
+<p>下面我们简单介绍几个在实陈工作中经常用到的变量 </p>
+<ul>
+<li><code>BUILD_NUMBER</code>:构建号，累加的数字。在打包时它可作为制品名称的一部分比如<code>server-2.jar</code> </li>
+<li><code>BRANCH_NAME</code>:多分支<code>pipeline</code>项目支持。当需要根据不同的分支做不同的事情时就会用到， 比如通过代码将代码将<code>release</code>分支发布到生产环境中、<code>master</code>分支发布到测试环境中 </li>
+<li><code>BUILD_URL</code>:当前构建页面的<code>URL</code>。如果构建失败则需要将失败的构止链接放到邮件通知中，这个链接就可以是<code>BUILD_URL</code> </li>
+<li><code>GIT_BRANCH</code>:通过<code>git</code>拉取的源码构建的项目才会有此变最 </li>
+</ul>
+<p><strong>在使用<code>env</code>变量时， 需要注意不同类型的项目，<code>env</code>变量从所包含的变量及其值是不一样的。 比如普通<code>pipeline</code>务中的<code>GIT_BRANCH</code>变量的值为<code>origin/master</code>,而在多分支<code>pipeline</code>任务中<code>GIT_BRANCH</code>变量的值为<code>master</code></strong></p>
+<blockquote>
+<p>小技巧：在调试<code>pipeline</code>时可以在开始阶段加一句：<code>sh 'printenv'</code>时变量的属性值打印出来。这样可以帮助我们避免不少问题 </p>
+</blockquote>
+<p><strong>自定义<code>piepline</code>环境变量</strong></p>
+<p>当<code>piepline</code>变得复杂时, 我们就会有定义自己的环境变量的需求。声明式<code>piepline</code>提供了<code>environment</code>指令方便自定义变是。比如 </p>
+<pre><code>pipeline { 
+    agent any 
+    environment {
+        CC = 'clang'
+    } 
+ stages { 
+        stage('Example') { 
+            environment {
+                DEBUG_FLAGS = '-g'
+            }
+            steps { 
+                echo &quot;${CC} ${DEBUG_FLAGS}&quot; 
+                sh 'printenv' 
+            } 
+        } 
+    } 
+} 
+</code></pre>
+<pre><code>printenv
+JENKINS_NODE_COOKIE=591de548-b216-498b-8221-26ae09ca063d
+XDG_SESSION_ID=4
+BUILD_URL=http://192.168.33.11:8080/job/Chapter2-6env/2/
+HOSTNAME=jabox
+TERM=xterm-256color
+SHELL=/bin/bash
+HUDSON_SERVER_COOKIE=ec6f20ac1eab6177
+HISTSIZE=1000
+STAGE_NAME=Example
+SSH_CLIENT=172.16.72.2 51333 22
+BUILD_TAG=jenkins-Chapter2-6env-2
+SSH_TTY=/dev/pts/1
+...
+LANG=en_US.UTF-8
+JOB_NAME=Chapter2-6env
+BUILD_DISPLAY_NAME=#2
+BUILD_ID=2
+JENKINS_URL=http://192.168.33.11:8080/
+HISTCONTROL=ignoredups
+JOB_BASE_NAME=Chapter2-6env
+HOME=/home/vagrant
+SHLVL=3
+EXECUTOR_NUMBER=3
+</code></pre>
+<p>另外，<code>environment</code>指令可以在<code>pipeline</code>中定义，代表变量作用域为整个<code>pipeline</code>；也可以在<code>Stage</code>中定义，代表变量只在该阶段有效。 </p>
+<p>但是这些变量都不是跨<code>pipeline</code>的，比如<code>pipeline a</code>访问不到<code>pipeline b</code>的变量。在<code>pipeline</code>之间共享变量可以通过参数化<code>pipeline</code>来实现。</p>
+<p>在实际工作中，还会遇到一个环境变量引用另一个环境变量的情况。在 <code>environment</code>中可以这样定义： </p>
+<pre><code>environment ( 
+    _server_name = 'mail—server' 
+    _version = &quot;${BUILD_NUMBER}&quot; 
+    _artifact_name = &quot;${_server_name}—S{_VERSION}.jar&quot; 
+</code></pre>
+<p>值得注意的是如果在<code>environment</code>中定义的变量与<code>env</code>中的变量重名那么被重名的变量的值会被攫盖掉。比如在<code>environment</code>中定义<code>PATH</code>变量(<code>PATH</code>也是<code>env</code>中的一个变量）。</p>
+<pre><code>environment ( 
+    PATH=&quot;invalid path&quot;
+}
+</code></pre>
+<p>执行<code>sh</code>时，就会报错</p>
+<p><strong>自定义全局环境变量</strong></p>
+<p><code>env</code>中的变欣都是<code>Jenkins</code>内置的或者是与具体<code>plpeline</code>相关的。有时候我们需要定义一些全局的跨<code>plpeline</code>的自定义变量</p>
+<p>进入<code>Manage Jenkins -&gt; Configure System -&gt; Global properties</code>页，勾选<code>"Environment variables"</code></p>
+<p><img alt="Alt Image Text" src="../../images/chp2_2_13.png" title="Body image" /> </p>
+<p>自定义全局环境变童会被加人<code>env</code>属性列表中，所以使用自定义全局环境变量与使用<code>Jenkins</code>内置变量的方法无异：<code>${env. whomai}</code></p>
+<pre><code>echo &quot;whomai: ${env.whoami}&quot;
+</code></pre>
+<pre><code>whomai: admin_jacob
+</code></pre>
+<h3 id="1-5-2-options">1-5-2 options</h3>
+<p><code>options</code> 指令允许从流水线内部配置特定于流水线的选项。 流水线提供了许多这样的选项, 比如<code>buildDiscarder</code>,但也可以由插件提供, 比如 <code>timestamps</code>。</p>
+<ul>
+<li><code>buildDiscarder</code>: 为最近的流水线运行的特定数量保存组件和控制台输出。</li>
+<li><code>disableConcurrentBuilds</code>: 不允许同时执行流水线。 可被用来防止同时访问共享资源等。</li>
+<li><code>overrideIndexTriggers:</code> 允许覆盖分支索引触发器的默认处理。</li>
+<li><code>skipDefaultCheckout</code>: 在<code>agent</code> 指令中，跳过从源代码控制中检出代码的默认情况。</li>
+<li><code>skipStagesAfterUnstable</code>: 一旦构建状态变得<code>UNSTABLE</code>，跳过该阶段。</li>
+<li><code>checkoutToSubdirectory</code>: 在工作空间的子目录中自动地执行源代码控制检出。</li>
+<li><code>timeout:</code> 设置流水线运行的超时时间, 在此之后，<code>Jenkins</code>将中止流水线。</li>
+<li>
+<p><code>retry</code>: 在失败时, 重新尝试整个流水线的指定次数。</p>
+</li>
+<li>
+<p><code>timestamps</code> 预测所有由流水线生成的控制台输出，与该流水线发出的时间一致。</p>
+</li>
+</ul>
+<pre><code>//指定一个小时的全局执行超时, 在此之后，Jenkins将中止流水线运行。
+pipeline {
+agent any
+options {
+    timeout(time: 1, unit: 'HOURS') 
+}
+stages {
+    stage('Example') {
+        steps {
+            echo 'Hello World'
+        }
+    }
+}
+}
+</code></pre>
+<p><strong><code>buildDiscarder</code></strong>：</p>
+<p>保存最近历史构建记录的数量。当<code>piepline</code>执行完成后，会在硬盘上保存制品和构建执行日志，如果长时间不清理会占用大量空间，设置此选项后会自动清理。此选项只能在<code>piepline</code>下的<code>Options</code>中使用。示例如下： </p>
+<pre><code>options {
+    buildDiscarder(logRatator(numToKeepStr: '10'))
+}
+</code></pre>
+<p><strong><code>checkoutToSubdirectory</code></strong>: </p>
+<p><code>Jenkins</code>从版本控制库拉取源码时，默认检出到工作空间的根目录中，此选项可以指定检出到工作空间的子目录中。示例如下： </p>
+<pre><code>options {
+    checkoutToSubdirectory('subdir')
+}
+</code></pre>
+<p><strong><code>disableConcurrentBuilds</code></strong>：</p>
+<p>同一个<code>pipeline</code>, <code>Jenkins</code>默认是可以同时执行多次的，此选项是为了禁止<code>pipeline</code>同时执行。 在某些<code>pipeline</code>存在抢占资源或调用冲突的场景下，此选项非常有用。 </p>
+<pre><code>options {
+    disableConcurrentBuilds()
+}
+</code></pre>
+<p><strong><code>newContainerPerStage</code>：</strong></p>
+<p>当<code>agent</code>为<code>docker</code>或<code>dockerfile</code>时，指定在同一个<code>Jenkins</code>节点上，每个<code>stage</code>都分别运行在一个新的容器中，而不是所有<code>stage</code>都运行在同一个容器中。 </p>
+<pre><code>options {
+    newContainerPerStage()
+}
+</code></pre>
+<p><strong><code>retry</code>：</strong></p>
+<p>当发生失败时进行重试，可以指定整个<code>pipeline</code>的重试次数。需要注意的是，这个次数是指总次数，包括第<code>1</code>次失败。以下例子总共会执行<code>4</code>次。当使用<code>retry</code>选项时， <code>options</code>可以被放在<code>stage</code>块中。 </p>
+<pre><code>pipeline {
+    agent any
+    options {
+        retry(4)    
+    }
+
+    stages{
+    stage('build'){
+        steps{
+            echo 'ok'
+            error(&quot;emmm...&quot;)
+            }
+        }   
+    }
+}
+</code></pre>
+<ul>
+<li><strong><code>timeout</code></strong>:</li>
+</ul>
+<p>如果<code>piepline</code>执行时间过长了，超出了我们设置的<code>timeout</code>时间， Jenkins 将终止<code>pipeline</code>. 以下例子中以小时为单位，还可以以<code>SECONDS(秒）</code>、<code>MINUTES(分钟)</code>为单位。当使用timeout选项时，options可以被放在<code>stage</code>块中</p>
+<pre><code>options {
+    timeout(time: 10, unit&quot;: 'HOURS'
+}
+</code></pre>
+<p>设置此选项后， 强迫团队去处理执行时间过长的<code>pipeline</code>,从而优化<code>pipeline</code>的反馈周期。通常将<code>timeout</code>设置为10分钟就可以了</p>
+<h3 id="1-5-3-pipeline">1-5-3 参数化pipeline</h3>
+<p>参数化<code>pipeline</code>是指可以通过传参来决定 <code>pipeline</code>的行为。参数化让写<code>pipeline</code>就像写函数， 而函数意为着可重用，更抽象。所以，通常使用参数化<code>pipeline</code>来实现一些通用的pipeline</p>
+<p>为流水线运行时设置项目相关的参数</p>
+<ul>
+<li><code>string</code> 字符串类型的参数, 例如:</li>
+</ul>
+<pre><code>parameters { string(name: 'DEPLOY_ENV', defaultValue: 'staging', description: '') }
+</code></pre>
+<ul>
+<li><code>booleanParam</code> 方法用来定义一个布尔类型的参数<ul>
+<li><code>defaultValue</code> 默认值</li>
+<li><code>description</code>: 参数描述信息</li>
+<li><code>name</code>: 参数名</li>
+</ul>
+</li>
+</ul>
+<pre><code>parameters { booleanParam(name: 'DEBUG_BUILD', defaultValue: true, description: '') }
+</code></pre>
+<ul>
+<li><code>text</code> 多行文本类型，换行使用<code>\n</code> </li>
+</ul>
+<pre><code>parameters {
+    text(name, 'DEPLOY_TEXT, defaultValue: 'One\nTwo\nThree\n', description: '') 
+}
+</code></pre>
+<ul>
+<li><code>choice</code> 选择参数类型，使用<code>\n</code>来分隔多个选项。 </li>
+</ul>
+<pre><code>parameters {
+    choice(name: 'CHOICES', choices: 'dev\ntest\nstaging', description: 'Please chose your env') 
+}
+</code></pre>
+<ul>
+<li>
+<p><code>file</code>，文件类型，用户可上传文件。</p>
+</li>
+<li>
+<p><code>password</code>，密码类型。  </p>
+</li>
+</ul>
+<pre><code>parameters { 
+    password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'A secret password'
+}
+</code></pre>
+<ul>
+<li><strong>多参数</strong></li>
+</ul>
+<p>参数化的<code>pipeline</code>不可能只支持接收一个参数,以下就是为pipeline同时定义多个参数的例子 </p>
+<pre><code>parameters { 
+    booleanParam(name: 'DEBUG_BUILD', defaultValue: true, description: '') 
+    password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'A secret password') 
+    string(name: 'DEPLOY_ENV', defaultValue: 'staging', description: '') 
+}
+</code></pre>
+<ul>
+<li>示例</li>
+</ul>
+<pre><code>pipeline {
+agent any
+parameters {
+    string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+}
+stages {
+    stage('Example') {
+        steps {
+            echo &quot;Hello ${params.PERSON}&quot;
+        }
+    }
+}
+}
+</code></pre>
+<h3 id="1-5-4-pipeline">1-5-4 触发<code>pipeline</code>详解：</h3>
+<p><strong>1.构建触发器</strong></p>
+<ul>
+<li><code>cron</code> 计划任务定期执行构建。</li>
+</ul>
+<pre><code>triggers { cron('H */4 * * 1-5') }
+</code></pre>
+<ul>
+<li><code>pollSCM</code> 与<code>cron</code>定义类似，但是由<code>jenkins</code>定期检测源码变化。</li>
+</ul>
+<pre><code>triggers { pollSCM('H */4 * * 1-5') }
+</code></pre>
+<ul>
+<li><code>upstream</code> 接受逗号分隔的工作字符串和阈值。 当字符串中的任何作业以最小阈值结束时，流水线被重新触发。</li>
+</ul>
+<pre><code>triggers { upstream(upstreamProjects: 'job1,job2', threshold: hudson.model.Result.SUCCESS) }
+</code></pre>
+<ul>
+<li>示例</li>
+</ul>
+<pre><code>pipeline {
+agent any
+triggers {
+    cron('H */4 * * 1-5')
+}
+stages {
+    stage('Example') {
+        steps {
+            echo 'Hello World'
+        }
+    }
+}
+}
+</code></pre>
+<p><strong>2.时间触发</strong></p>
+<p>时间触发是指定义一个时间，时间到了就触发<code>pipeline</code>执行。 在<code>Jenkins Pipeline</code>中使用<code>trigger</code>指令来定义时间触发。</p>
+<p><code>trigger</code>指令只能被定义在<code>pipeline</code>块下, <code>Jenkins</code>内置支待<code>cron</code>、 <code>pollSCM</code>、<code>upstream</code>三种方式几他方式可以通过插件来实现。 </p>
+<ul>
+<li><strong>定时执行: cron</strong></li>
+</ul>
+<p>定时执行就像<code>cronjob</code>,一到时间点就执行。它的使用场景通常是执行一些周期性的<code>job</code>,如每夜构建</p>
+<pre><code>pipeline { 
+    agent any 
+    triggers { 
+        cron('0 0 * * *') 
+    }
+    stages { 
+        stage('Nightly build') { 
+            steps { 
+                echo &quot;Build every night&quot;
+            }
+        }
+    }
+}
+</code></pre>
+<p><code>Jenkins trigger cron</code>语法采用的是<code>UNIX cron</code>语法（有些细微的区别）。</p>
+<p>一条<code>cron</code>包含5个字段，使用空格或<code>Tab分</code>隔，格式为：<code>MINUTE</code>, <code>HOUR</code>, <code>DOM</code>, <code>MONTH</code>, <code>DOW</code>。</p>
+<p>每个字段的含义为：</p>
+<ul>
+<li><code>MINUTE</code>：一小时内的分钟，取值范围为<code>0～59</code></li>
+<li><code>HOUR</code>：一天内的小时，取值范围为<code>0~23</code> </li>
+<li><code>DOM</code>：一个月的某一天，取值范围为<code>1-31</code> </li>
+<li><code>MONTH</code>：月份，取值范围为<code>1~12</code>。</li>
+<li><code>DOW</code>：星期几，取值范围为<code>0~7</code>。 <code>0</code>和<code>7</code>代表星期天。 </li>
+</ul>
+<p>还可以使用以下特殊字符，一次生指定多个值</p>
+<ul>
+<li><code>＊</code>：匹配所有的值 </li>
+<li><code>M-N</code>：匹配M到N之间的值。 </li>
+<li><code>M-N/X</code> or <code>*/x</code>：指定在<code>M</code>到<code>N</code>范围内，以<code>N</code>值为步长。</li>
+<li><code>A,B,....Z</code>：使用逗号枚举多个值 </li>
+</ul>
+<p>在一些大型组织中，会同时存在大量的同一时刻执行的定时任务，比如<code>N</code>个半夜零点（<code>0 0 * * *</code>中）执行的任务。这样会产生负载不均衡。</p>
+<p>在<code>Jenkins trigger cron</code>语法中使用<code>"H"</code>字符来解决这一问题，<code>H</code>代表<code>hash</code>。对于没必要准确到零点<code>0</code>分执行的任务，<code>cron</code>可以这样写：<code>H 0 * * *</code> , 代表在零点<code>0</code>分至零点<code>59</code>分之间任何一个时间点执行。 </p>
+<p>需要注意的是，<code>H</code>应用在<code>DOM（一个月的某一天）</code>字段时会有不准确的清况，因为10月有31天，而2月却是28天。 </p>
+<p><code>Jenkins trigger cron</code>还设计了一些人性化的别名：<code>@yearly</code>、 <code>@annually</code>、 <code>@monthly</code>、 <code>@weekly</code>、 <code>@daily</code>、<code>＠ midnight</code>和<code>＠hourly</code>。例如，<code>@hourly</code>与<code>H * * * *</code>相同，代表一小时内的任何时间 <code>@midnight</code>实际上代表在半夜<code>12:00</code>到凌晨<code>2:59</code>之间的某个时间。其他别名很少有应用场景。 </p>
+<ul>
+<li><strong>轮询代码仓库：pollSCM</strong></li>
+</ul>
+<p>轮询代码仓库是指定期到代码仓库询问代码是否有变化，如果有变化就执行。有读者会问: 那多久轮询一次？笔者的回答是：越频繁越好。因为构建的间隔时间越长，在一次构建内就可能 会包含多次代码提交。当构建失败时，你无法马上知道是哪一次代码提交导致了构建失败。</p>
+<pre><code>pipeline { 
+    agent any 
+    triggers { 
+        // check every minute 
+        pollSCM(`H/1 * * * *`) 
+    } 
+}
+</code></pre>
+<p><strong>3.事件触发</strong> </p>
+<p>事件触发就是发生了某个事件就触发<code>pipeline</code>执行。这个事件可以是你能想到的任何事件。 比如手动在界面上触发、其他<code>job</code>主动触发、<code>HTTP API Webhook</code>触发等 </p>
+<p><strong>由上游任务触发：upstream</strong></p>
+<p>当<code>B</code>任务的执行依赖<code>A</code>任务的执行结果时，<code>A</code>就被称为<code>B</code>的上游任务。在<code>Jenkins 2.22</code>及以 上版本中，<code>trigger</code>指令开始支持<code>upstream</code>类型的触发条件。<code>upstream</code>的作用就是能让<code>B plpeline</code>自行决定依赖哪些上游任务。示例如下 </p>
+<pre><code>// jobl fil job2 #6kII45- 
+
+triggers { 
+    upstream(upstreamProjects: 'job1,job2', threshold: hudson.model.Result.SUCCESS)
+}
+</code></pre>
+<p>当<code>upstreamProjects</code>参数接收多个任务时，使用, 分隔。<code>threshold</code>参数是指上游任务的执行结果是什么值时触发。<code>hudson.model.Result</code>是一个枚举包括以下值： </p>
+<ul>
+<li><code>ABORTED</code>：任务被手动中止。 </li>
+<li><code>FAILURE</code>：构建失败。 </li>
+<li><code>SUCCESS</code>：构建成功。 </li>
+<li><code>UNSTABLE</code>：存在一些错误，但不至于构建失败。 </li>
+<li><code>NOT BUILT</code>：在多阶段构建时，前面阶段的问题导致后面阶段无法执行。 </li>
+</ul>
+<p>注意：需要手动触发一次任务，让<code>Jenkins</code>加载<code>pipeline</code>后，<code>trigger</code>指令才会生效。 </p>
+<p><strong>由另一个<code>pipeline</code>传参并触发</strong> </p>
+<p>既然存在参数化的<code>pipeline</code>, 那么就表示可以在一个<code>pipeline</code>中"调用"另一个<code>pipeline</code>。 <code>Jenkins pipeline</code>中可以使用<code>build</code>步掇实现此功能。<code>build</code>步骤是<code>pipeline</code>插件的一个组件所以不需要另外安装插件可以直接使用</p>
+<p><code>build</code>步骤其实也是一种触发<code>pipeline</code>执行的方式它与<code>triggers</code>指令中的<code>upstream</code>方式有两个区别： </p>
+<ul>
+<li>(1) <code>build</code>步骤是由上游<code>pipeline</code>使用的，而<code>upstream</code>方式是由下游<code>pipeline</code>使用的。</li>
+<li>(2) <code>build</code>步骤是可以带参数的，而<code>upstream</code>方式只是被动触发，并且没有带参数。 </li>
+</ul>
+<pre><code>steps { 
+    build( 
+        job:&quot;parameters-example&quot;, 
+        parameters: [ 
+            booleanParam(name: 'userFlag', value: true) 
+        ]
+    )
+}
+</code></pre>
+<p>我们来看看<code>build</code>步骤的基本的两个参数。</p>
+<ul>
+<li><code>job</code>（必填）：目标<code>Jenkins</code>任务的名称。 </li>
+<li><code>parameters</code>(可选）数组类型，传入目标<code>pipeline</code>的参数列表。传参方法与定参方法类似。 </li>
+</ul>
+<pre><code>parameters: [ 
+    booleanParam(name: 'DEBUG_BUILD', value: true), 
+    password(name: 'PASSWORD', value: 'prodSECRET'), 
+    string(name: 'DEPLOY_ENV', value: 'prod'), 
+    text(name: 'DEPLOY_TEXT', value: 'a\nb\nc\n'), 
+    string(name: 'CHOICES', value: 'dev') 
+]
+</code></pre>
+<p>我们注意到<code>choice</code>类型的参数没有对应的传参方法，而是使用<code>string</code>传参方法代替的。 </p>
+<p>除此之外，<code>build</code>步骤还支持其他三个参数 </p>
+<ul>
+<li><code>propagate</code>（可选）：布尔类型，如果值为<code>true</code>，则只有当下游<code>pipeline</code>的最终构建状态为 <code>SUCCESS</code>时，上游<code>pipeline</code>才算成功；如果值为<code>false</code>，则不论下游<code>pipeline</code>的最终构建状态是什么，上游<code>pipeline</code>都忽略。默认值为<code>true</code> </li>
+<li><code>quietPeriod</code>（可选）：整型，触发下游<code>pipeline</code>后，下游<code>pipeline</code>等待多久执行。如果不设置此参数，则等待时长由下游<code>pipeline</code>确定。单位为秒。 </li>
+<li><code>wait</code>(可选）：布尔类型，是否等待下游<code>pipeline</code>执行完成。默认值为<code>true</code> </li>
+</ul>
+<p>如果你使用了<code>folder</code>插件（<code>https://plugins.jenkins.io/clondbees-folder</code>)，那么就需要注意<code>build</code> 步骤的<code>job</code>参数的写法了。 </p>
+<p>使用<code>Folder</code>插件，可以让我们像管理文件夹下的文件一样来管理<code>Jenkins</code>项目。 我们的<code>Jenkins</code> 项目可以创建在这些文件夹下。如果日标pipeline与源pipeline在同一个目录下则叮以直接使 用名称；如果不在同一个目录下，则需要指定相对路径，如<code>sister-folder/downstream</code>,或者指定绝对路径，如<code>top-level-folder/nested-folder/dowsstream</code>。</p>
+<p><strong>获取上游<code>pipeline</code>的信息</strong></p>
+<p>遗憾的是，上游<code>pipeline</code>触发下游<code>pipeline</code>时，并没有自动带上自身的信息。所以，当下游 <code>pipeline</code>需要使用上游<code>pipeline</code>的信息时，上游<code>pipeline</code>信息就要以参数的方式传给下游<code>pipeline</code>。 比如在上游<code>pipeline</code>中调用下游<code>pipeline</code>时，可以采用以下做法。 </p>
+<pre><code>build job: 'all-in-one-deploy' , parameters: [ 
+    string(name: 'DEPLOY_ENV', value: '${deploy_env}&quot;), 
+    string(name: 'triggerJobName', value: &quot;${env.JOB_NAME}&quot;),
+    string(name: 'triggerJobBuildNumber', value: ${env.BUILD_NUMBER}&quot;) 
+] 
+</code></pre>
+<p><strong>4. 使用<code>Conditonal BuildStep</code>插件处理复杂的判断逻辑:</strong> </p>
+<p>这样写起来很不优雅<code>Conditional BuildStep</code>插件,可以让我们像使用<code>when</code>指令样进行条件判断以下代码就是安装<code>Conditional BuildStep</code>插件的写法</p>
+<pre><code>pipeline {
+    agent any 
+    parameters {
+        choice(name: 'CHOICES', choices: 'dev\ntest\nstaging', description: 'Please choose your env') 
+    }
+
+    stages { 
+        stage(&quot;deploy test&quot;) { 
+            when { 
+                expression { return params.CHOICES == 'test' }
+            }
+            steps { 
+                echo &quot;deploy to test&quot;
+            }
+        } 
+        stage(&quot;deploy staging&quot;) { 
+            when { 
+                expression { return params.CHOICES == 'staging' }
+            }
+            steps { 
+                echo &quot;deploy to staging&quot; 
+            }
+        }
+    }
+}
+</code></pre>
+<pre><code>[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (deploy test)
+Stage &quot;deploy test&quot; skipped due to when conditional
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (deploy staging)
+[Pipeline] echo
+deploy to staging
+</code></pre>
+<p>现实中，我们会面对更复杂的判断条件。而<code>expression</code>表达式本质上就是一个<code>Groovy</code>代 码块，大大提高了表达式的灵活胜。以下是比较常用的例子。</p>
+<ul>
+<li>或逻辑 </li>
+</ul>
+<pre><code>when { 
+    // A or B 
+    expression {  return A || B } 
+} 
+</code></pre>
+<ul>
+<li>与逻辑 </li>
+</ul>
+<pre><code>when { 
+    // A or B 
+    expression {  return A &amp;&amp; B } 
+} 
+</code></pre>
+<ul>
+<li>从文件中取值</li>
+</ul>
+<pre><code>when { 
+    expression { return readFile('pom.xml' ).contains('mycomponent') } 
+}
+</code></pre>
+<ul>
+<li>正则表达式</li>
+</ul>
+<pre><code>when { 
+    expression { return token ==~ /(?i)(Y|YES|T|TRUE|ON|RUN)/}
+}
+</code></pre>
+<p><strong>5. 使用<code>Generic Webhook Trigger</code>插件实现触发</strong></p>
+<p>安<code>装Generic Webhook Trigger</code>插件（下文使用<code>GWT</code>简称）后，<code>Jenkins</code>会暴露一个API: <code>&lt;JENKINS_URL&gt;/generic-webhook-trigger/invoke</code>，即由<code>GWT</code>插件来处理此<code>API</code>的请求。 如何处理呢？<code>GWT</code>插件接收到<code>JSON</code>或<code>XML</code>的<code>HTTP POST</code>请求后，根据我们配置的规则决定触发哪个<code>Jenkins</code>项目。基本原理就这么简单。下面我们先感受一下，然后再详细介绍<code>GWT</code>各参数的含义。 </p>
+<p>现在，我们创建一个普通的<code>pipeline项</code>目。代码如下： </p>
+<pre><code>pipeline { 
+    agent any 
+    triggers { 
+        GenericTrigger(
+            genericVariables: [ 
+                [key: 'ref', value: '$.ref']
+            ],
+            token: 'secret',
+            causeString: 'Triggered on $ref',
+            printContributedVariables: true,
+            printPostContent: true
+        )
+    }
+    stages { 
+        stage('Some step')  { 
+            steps { 
+            sh &quot;echo $ref&quot;
+            sh &quot;printenv&quot;
+        }
+    }
+  }
+} 
+</code></pre>
+<p>注意：在创建完成后，需要手动运行一次，这样<code>pipeline</code>的触发条件才会生效。 然后我们发起一次<code>HTTP POST</code>请求.</p>
+<pre><code>curl -X POST -H &quot;Content-Type: application/json&quot; -d '{&quot;ref&quot;: &quot;refs/heads/master&quot;}' -vs http://192.168.33.11:8080/generic-webhook-trigger/invoke?token=secret
+</code></pre>
+<pre><code>...
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html;charset=utf-8&quot;/&gt;
+&lt;title&gt;Error 403 No valid crumb was included in the request&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;&lt;h2&gt;HTTP ERROR 403 No valid crumb was included in the request&lt;/h2&gt;
+&lt;table&gt;
+&lt;tr&gt;&lt;th&gt;URI:&lt;/th&gt;&lt;td&gt;/jenkins/generic-webhook-trigger/invoke&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;STATUS:&lt;/th&gt;&lt;td&gt;403&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;MESSAGE:&lt;/th&gt;&lt;td&gt;No valid crumb was included in the request&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;SERVLET:&lt;/th&gt;&lt;td&gt;Stapler&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+&lt;hr&gt;&lt;a href=&quot;http://eclipse.org/jetty&quot;&gt;Powered by Jetty:// 9.4.27.v20200227&lt;/a&gt;&lt;hr/&gt;.
+...
+</code></pre>
+<p>我们需要<code>disbale CSRF</code>,  open <code>"Manage Jenkins" / "Script Console"</code></p>
+<pre><code>import jenkins.model.Jenkins
+def instance = Jenkins.instance
+instance.setCrumbIssuer(null)
+</code></pre>
+<blockquote>
+<p>It should be enabled afterwards again by setting to the Default CrumbIssuer again </p>
+</blockquote>
+<pre><code>import hudson.security.csrf.DefaultCrumbIssuer
+import jenkins.model.Jenkins
+
+def instance = Jenkins.instance
+instance.setCrumbIssuer(new DefaultCrumbIssuer(true))
+instance.save()
+</code></pre>
+<pre><code>curl -X POST -H &quot;Content-Type: application/json&quot; -d '{&quot;ref&quot;: &quot;refs/heads/master&quot;}' -vs http://192.168.33.11:8080/generic-webhook-trigger/invoke?token=secret
+</code></pre>
+<p>日志如下</p>
+<pre><code>Triggered on refs/heads/master
+Running in Durability level: MAX_SURVIVABILITY
+[Pipeline] Start of Pipeline
+GenericWebhookEnvironmentContributor
+ Received:
+
+{&quot;ref&quot;: &quot;refs/heads/master&quot;}
+
+
+Contributing variables:
+
+    ref = refs/heads/master
+
+
+[Pipeline] node
+Running on Jenkins in /var/jenkins_home/workspace/Chapter2-8webhook
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Some step)
+[Pipeline] sh
++ echo refs/heads/master
+refs/heads/master
+[Pipeline] sh
++ printenv
+JAVA_URL_VERSION=8u242b08
+...
+</code></pre>
+<p><code>Generi Trigger</code>触发条件由<code>GWT</code>插件提供。此触发条件可以说是<code>GWT</code>的所有内容。 </p>
+<p>笔者将<code>GenericTrigger</code>触发条件分为<code>5</code>部分，这样更易于理解各参数的作用。</p>
+<ul>
+<li>从<code>HTTP POST</code>请求中提取参数值。</li>
+<li><code>token</code>,<code>GWT</code>插件用于标识<code>Jenkins</code>项目的唯一性。 </li>
+<li>根据请求参数值判断是否触发<code>Jenkins</code>项目的执行。 </li>
+<li>日志打印控制。 </li>
+<li>
+<p><code>Webhook</code>响应控制。 </p>
+</li>
+<li>
+<p><strong>从<code>Webhook</code>请求中捉取参数值</strong></p>
+</li>
+</ul>
+<p>一个<code>HTTP POST</code>请求可以从三个维度提取参数即<code>POST body</code>、<code>URL</code>参数和<code>header</code>。<code>GWT</code> 插件提供了三个参数分别对这下个维度的数据进行提取 </p>
+<p>1.<code>genericVariables</code>:提取<code>POST body</code>中的参数。 </p>
+<pre><code>genericVariables: [ 
+    [key: 'ref', value: '$.ref', 
+    [key: 'before', 
+    value: '$before', 
+    expressionType: 'JSONPath', 
+    regexprFiter: ' ',
+    defaultValue: ' '
+    ]
+]
+</code></pre>
+<ul>
+<li><code>value</code>: <code>JSONPath</code>表达式或者<code>XPath</code>表达式取决于<code>expressionType</code>参数值，用于从<code>POST body</code> 中提取值</li>
+<li><code>key</code>：从<code>POST body</code>中提取出的值的新变量，可用于<code>pipeline</code>其他步骤。 </li>
+<li><code>expressionType:</code> 可选 <code>value</code>的表达式类型，默认为<code>JSONPath</code>。当请求为<code>XML</code>内容时，必须指定<code>XPath</code>值。 </li>
+<li><code>defaultValue</code>：可选，当提取不到值，且<code>defaultValue</code>不为空时，则使用<code>defaultValue</code>作为返回值 </li>
+<li><code>regexpFilter</code>：可选，过滤表达式，对提取出来的仇进行过滤。<code>regexpFilter</code>做的事情其实就是 <code>string.replaceAll(regexpFilter," ");</code>。<code>string</code>是从<code>HTTP</code>请求中提取出来的值。 </li>
+</ul>
+<p>2.<code>genericRequestVariables</code>：从<code>URL</code>参数中提取值。 </p>
+<pre><code>genericRequestVariables: [ 
+    [key: 'requestWithNumber', regexpFilter: '[^0-9]'], 
+    [key: 'requestWithString', regexpFilter: ''] 
+] 
+</code></pre>
+<p>3.<code>genericHeaderVariables</code>：从<code>HTTP header</code>中提取值。 </p>
+<pre><code>genericHeaderVariables: [ 
+    [key: headerWithNumber', regexpFilter: '[^0-9]'], 
+    [key: 'rheaderWithString', regexpFilter: ' '] 
+] 
+</code></pre>
+<p><code>genericHeaderVariables</code>的用法与<code>genericRequestVariables</code>一样，区另是它是从<code>HTTP header</code>中提取值的。 </p>
+<p>触发具体某个<code>Jenkins</code>项目</p>
+<p>我们看到<code>GenericTrigger</code>方法有一个<code>token</code>参数。 </p>
+<pre><code>triggers { 
+    GenericTrigger( 
+        token: 'secret',
+    )
+}
+</code></pre>
+<p><code>token</code>参数的作用是标识一个<code>pipeline</code>,在<code>Jenkins</code>中的唯一性（当然，没有人阻止你让所有的 <code>pipeline</code>使用同一个token)。为什么需要这个参数呢？这要从<code>GWT</code>插件的原理说起 </p>
+<p>当<code>Jenkins</code>接收到<code>genenic-webhook-trigger/invoke</code>接口的请求时，会将请求代理给<code>GWT</code> 插件处理。</p>
+<p><code>GWT</code>插件内部会从<code>Jenkins</code>实例对象中取出所有的参数化<code>Jenkins</code>项目，包括<code>pipeline</code>, 然后进行遍历。如果在参数化项目中<code>GenericTrigger</code>配置的<code>token</code>的值与<code>Webhook</code>请求时的<code>token</code> 的值一致，则触发此参数化项日。 </p>
+<p>如果多个参数化项目的<code>token</code>值一样，则他们都会被触发。 </p>
+<blockquote>
+<p>小技巧：<code>pipeline</code>的<code>token</code>可以被设置为<code>Jenkins</code>的项目名。比如： </p>
+</blockquote>
+<pre><code>triggers { 
+    GenericTrigger( 
+    // ... 
+    token: env.JOB_NAME, 
+    // ...
+    )
+} 
+</code></pre>
+<p><strong>根据请求参数值判断是否触发<code>Jenkins</code>项目执行 </strong></p>
+<p><code>GWT</code>并不只是根据<code>token</code>值来判断是否触发，还可以根据我们提取出的值进行判断。如下： </p>
+<pre><code>GenericTrigger( 
+    genericVariables: [ 
+        [key: 'refValue', value: '$.ref']
+    ], 
+    token: env.JOB_NAME, 
+
+    regexpFilterText: '$refValue', 
+    regegpFilterExpresston: 'refs/heads/(master|dev)' 
+</code></pre>
+<ul>
+<li><code>regexpFi!terText:</code>需要进行匹配的<code>key</code>例子中，我们使用从<code>POST body</code>中提取出的<code>refValue</code> 变量值。 </li>
+<li><code>regexpFilterExpression</code>：正则表达式。 </li>
+</ul>
+<p>如果<code>regexpFilterText</code>参数的值符合<code>regexpFilterExpressnon</code>参数的正则表达式，则触发执行。 </p>
+<p><strong>控制打印内容</strong></p>
+<p>打印日志有助于调试。GWT插件提供了三个参数。 </p>
+<ul>
+<li><code>printPostContent</code>：布尔值， 将<code>Webhook</code>请求信息打印到日志上。</li>
+<li><code>printContributedVariables</code>: 布尔值，将提取后的变量名及变量值打印出来。，</li>
+<li><code>causeString</code>：字符串类型，触发原因，可以直接引用提取后的变量， <code>causeString</code>：<code>Triggered on $msg</code>。 </li>
+</ul>
+<p><strong>控制响应</strong> </p>
+<ul>
+<li><code>silentResponse</code>：布尔类型，在正常情况下，当<code>Webhook</code>请求成功后，<code>GWT</code>插件会返回<code>HTTP 200</code>状态码和触发结果给调用方。但是当<code>silentResponse</code>设置为<code>true</code>时，就只返回<code>HTTP 200</code> 状态码,不返回触发结果。 </li>
+</ul>
+<h3 id="1-5-5-tool">1-5-5 tool</h3>
+<p>获取通过自动安装或手动放置工具的环境变量。支持<code>maven/jdk/gradle</code>。工具的名称必须在<code>系统设置-&gt;全局工具配置中定义</code>。</p>
+<p>示例:</p>
+<pre><code>pipeline {
+    agent any
+    tools {
+        maven 'apache-maven-3.0.1' 
+    }
+    stages {
+        stage('Example') {
+            steps {
+                sh 'mvn --version'
+            }
+        }
+    }
+}
+</code></pre>
+<p>Or </p>
+<p><strong>Global Tool Configuration -&gt; Maven</strong></p>
+<p><img alt="Alt Image Text" src="../../images/chp2_2_1.png" title="Body image" /></p>
+<p>在<code>Agent</code>上面安装最新的<code>maven</code></p>
+<pre><code>https://linuxize.com/post/how-to-install-apache-maven-on-centos-7/
+wget https://www-us.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz -P /tmp
+sudo tar xf /tmp/apache-maven-3.6.3-bin.tar.gz -C /opt
+sudo ln -s /opt/apache-maven-3.6.3 /opt/maven
+sudo vim /etc/profile.d/maven.sh
+
+export JAVA_HOME=/usr/lib/jvm/jre-openjdk
+export M2_HOME=/opt/maven
+export MAVEN_HOME=/opt/maven
+export PATH=${M2_HOME}/bin:${PATH}
+
+sudo chmod +x /etc/profile.d/maven.sh
+
+source /etc/profile.d/maven.sh
+</code></pre>
+<pre><code>$ mvn -version
+Apache Maven 3.6.3 (cecedd343002696d0abb50b32b541b8a6ba2883f)
+Maven home: /opt/maven
+Java version: 1.8.0_252, vendor: Oracle Corporation, runtime: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.252.b09-2.el7_8.x86_64/jre
+Default locale: en_US, platform encoding: UTF-8
+OS name: &quot;linux&quot;, version: &quot;3.10.0-957.12.2.el7.x86_64&quot;, arch: &quot;amd64&quot;, family: &quot;unix&quot;
+
+$ whereis mvn
+mvn: /opt/apache-maven-3.6.3/bin/mvn.cmd /opt/apache-maven-3.6.3/bin/mvn
+</code></pre>
+<pre><code>stage('tools') {
+        steps {
+
+            mvnHome = tool &quot;m2&quot;
+            println(mvnHome)
+
+            sh &quot;${mvnHome}/bin/mvn --version&quot;
+        }
+    }
+</code></pre>
+<p><img alt="Alt Image Text" src="../../images/chp2_2_2.png" title="Body image" /></p>
+<h3 id="1-5-6-input">1-5-6 input</h3>
+<p>执行<code>input</code>步骤会暂停<code>pipeline</code>，直到用户输入参数。这是一种特殊的参数化<code>pipeline</code>的方法。我们可以利用<code>Input</code>步骤实现以下两种场景： </p>
+<ul>
+<li>(1)实现简易的审批流程。例如，<code>pipeline</code>暂停在部署前的阶段，由负责人点击确认后，才能部署 </li>
+<li>(2)实现手动测试阶段。在<code>pipeline</code>中增加一个手动测试阶段，该阶段中只有一个<code>input</code>步骤，当手动测试通过后，测试人员才可以通过这个<code>Input</code>步骤。 </li>
+</ul>
+<pre><code>pipeline { 
+    agent any 
+    stages { 
+        stage('deploy') { 
+            steps { 
+                input message: &quot;Deploy or terminate&quot; 
+            } 
+        }
+    }
+}
+</code></pre>
+<p><img alt="Alt Image Text" src="../../images/chp2_2_14.png" title="Body image" /></p>
+<pre><code>[Pipeline] input
+Deploy or terminate
+Proceed or Abort
+[Pipeline] }
+[Pipeline] // stage
+</code></pre>
+<p><strong>Input 步骤的复杂用法</strong></p>
+<pre><code>def approvalMap 
+
+pipeline { 
+    agent any 
+    stages { 
+        stage('pre deploy') { 
+            steps { 
+                script { 
+                    approvalMap = input( 
+                        message: 'Ready to deploy to which env?' ,
+                        ok: 'ok', 
+                        parameters: [ 
+                            choice(choices: 'dev\ntest\nprod', description: 'Deploy to which Env? ', name: 'ENV'),
+                            string(defaultValue: '', description: '', name: 'myparam') 
+                        ], 
+                        submitter: 'admin,admin2,releaseGroup', 
+                        submitterParameter: 'APPROVER' 
+                    )
+                }
+            }
+        }
+        stage('deploy') { 
+            steps { 
+                echo &quot;APPROVER is ${approvalMap['APPROVER']}&quot; 
+                echo &quot;Deploy to the Env: ${approvalMap['ENV']}&quot;
+                echo &quot;Self defined param: ${approvalMap['myparam']}&quot; 
+                }
+            }
+        }
+}
+</code></pre>
+<blockquote>
+<p>approvaiMap 还可以防在<strong>environment</strong>中，更加优雅</p>
+</blockquote>
+<pre><code>environment {
+    approvalMap = ' '
+}
+</code></pre>
+<p>我们在<code>pipeline</code>外定义了一个变量<code>approvalMap</code>：这是因为定义在阶段内的变最的作用域只在这个阶段中，而<code>input</code>步骤的返回值需要跨阶段使用，听以需要将其定义在<code>pipeline</code>外：这样变量<code>approvaiMap</code>的作用域就是整个<code>pipeline</code>了。 </p>
+<p>同时，由于在<code>pipeline</code>中直接使用了<code>Groovy</code>语言赋值表达式．所以需要将<code>approvalMap=input(...)</code>放到<code>script</code>块中。 </p>
+<p><code>input</code>步骤的返回值类型取决于要返回的值的个数。如果只有一个值，返回值类型就是这个值的类型；如果有多个值，则返回值类型是<code>Map</code>类型。本例返回的<code>approvalMap</code>就是一个<code>map</code>, <code>Map</code>的<code>key</code>就是每个参数的<code>name</code>属性，比如<code>ENV</code>、<code>myparam</code>都是<code>key</code> </p>
+<p>除了可以在返回的<code>map</code>中放手动输入的值，还可以放其他数据，比如<code>submitterParameter: 'APPROVER</code>，代表将<code>key APPROVER</code>放到返回的<code>map</code>中。 下面我们分别介绍<code>input</code>步骤的参数。</p>
+<ul>
+<li><code>message</code> 呈现给用户的提示信息。</li>
+<li><code>id</code> 可选，默认为<code>stage</code>名称。</li>
+<li><code>ok</code> 默认表单上的<code>ok</code>文本。</li>
+<li><code>submitter</code>可选的,以逗号<code>","</code>分隔的用户列表或允许提交的外部组名。默认允许任何用户。</li>
+<li><code>submitterParameter</code> 环境变量的可选名称。如果存在，用<code>submitter</code>名称设置。</li>
+<li><code>parameters</code> 提示提交者提供的一个可选的参数列表。</li>
+</ul>
+<p>示例：</p>
+<pre><code>pipeline {
+    agent any
+    stages {
+        stage('Example') {
+            input {
+                message &quot;Should we continue?&quot;
+                ok &quot;Yes, we should.&quot;
+                submitter &quot;alice,bob&quot;
+                parameters {
+                    string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+                }
+            }
+            steps {
+                echo &quot;Hello, ${PERSON}, nice to meet you.&quot;
+            }
+        }
+    }
+}
+</code></pre>
+<p><strong>设置手动输入步骤超时后，<code>pipeline</code>自动中止</strong> </p>
+<p><code>input</code>步骤可以与<code>timeout</code>步骤实现超时自动中止<code>pipeline</code>，防止无限等待。以下<code>pipeline</code>一小时后不处理就自动中止。 </p>
+<pre><code>pipeline { 
+    agent any 
+    stages { 
+        stage('deploy') { 
+            steps { 
+                timeout(time: 1, unit:'HOURS') { 
+                    input message: &quot;Deploy or terimate&quot; 
+                } 
+            }
+        }
+    }
+}
+</code></pre>
+<h3 id="1-5-7-when">1-5-7 <code>when</code>和多分支构建</h3>
+<p><strong>根据分支部署到不同的环境</strong></p>
+<p><code>git</code>分支可以用于对代码进行物理隔离。对分支的管理有很多方法，比如主干开发，发布分支以及<code>Gitflow</code>法等。我们不讨论它们的好坏。 </p>
+<p>但不论使用哪种分支管理方法，都可能会涉及一个问题：如何根据不同的分支做不同的事情，比如根据不同的分支部署到不同的环境。类似这样的事情可以使用<code>if-else</code>来实现。 </p>
+<pre><code>stage(&quot;deploy to test&quot;){ 
+    steps{ 
+        script { if (env.GIT_BRANCH == 'master') { 
+                echo &quot;deploy to test env&quot; 
+            } 
+        } 
+    } 
+} 
+stage(&quot;deploy to prod&quot;){ 
+    steps{ 
+        script { 
+            if (env.GIT_BRANCH == 'release') { 
+                echo &quot;deploy to prod&quot; 
+                } 
+            } 
+        } 
+} 
+</code></pre>
+<p>但是这样的代码不够优雅，而且不是声明式的。使用<code>when</code>指令可以让<code>pipeline</code>看起来更优雅。 </p>
+<pre><code>stage(&quot;deploy to test&quot;){ 
+    when { 
+        branch 'master' 
+    } 
+        steps{ 
+        echo &quot;deploy to test&quot; 
+    } 
+} 
+
+stage(&quot;deploy to prod&quot;){ 
+    when { 
+        branch 'release' 
+    } 
+    steps{ 
+        echo &quot;deploy to prod&quot; 
+    } 
+} 
+</code></pre>
+<p><code>when</code> 指令允许流水线根据给定的条件决定是否应该执行阶段。 <code>when</code> 指令必须包含至少一个条件。 如果<code>when</code> 指令包含多个条件, 所有的子条件必须返回<code>True</code>，阶段才能执行。 这与子条件在 <code>allOf</code> 条件下嵌套的情况相同。</p>
+<p><strong>内置条件</strong></p>
+<ul>
+<li><code>changelog</code>：如果版本控制库的<code>changelog</code>符合正则表达式, 则执行 </li>
+</ul>
+<pre><code>when {
+    changelog '.*^\\[DEPENDENCY\\].+$'
+}
+</code></pre>
+<ul>
+<li><code>changeset</code>：如果版本控制库的变更集合中包含一个或多个文件符合给定的<code>Ant</code>风格路径表达式，则执行 </li>
+</ul>
+<pre><code>when {
+    changeset &quot;**/*.js&quot;
+}
+</code></pre>
+<ul>
+<li><code>equals</code>：如果期望值与给定的值相同则执行 </li>
+</ul>
+<pre><code>when { 
+    equals expected: 2, actual: currentBuild.number 
+}
+</code></pre>
+<ul>
+<li><code>branch</code>: 当正在构建的分支与模式给定的分支匹配时，执行这个阶段,这只适用于多分支流水线例如:</li>
+</ul>
+<pre><code>when { branch 'master' }
+</code></pre>
+<ul>
+<li><code>environment</code> 当指定的环境变量是给定的值时，执行这个步骤,例如:</li>
+</ul>
+<pre><code>when { environment name: 'DEPLOY_TO', value: 'production' }
+</code></pre>
+<ul>
+<li><code>expression</code> 当指定的<code>Groovy</code>表达式评估为<code>true</code>时，执行这个阶段, 例如:</li>
+</ul>
+<pre><code>when { expression { return params.DEBUG_BUILD } }
+</code></pre>
+<pre><code>when { 
+    expression  { 
+        return env.BRANCH_NAME != 'master'; 
+    }
+}
+</code></pre>
+<p>当表达式返回的是字符串时，它必须转换成布尔类型或<code>null</code>;否则，所有的字符串都被当作<code>true</code>处理。 </p>
+<ul>
+<li><code>buildingTag</code>：如果<code>pipeline</code>所执行的代码被打了<code>tag</code>则执行 </li>
+</ul>
+<pre><code>when { 
+    buildingTag() 
+} 
+</code></pre>
+<ul>
+<li><code>not</code> 当嵌套条件是错误时，执行这个阶段,必须包含一个条件，例如:</li>
+</ul>
+<pre><code>when { not { branch 'master' } }
+</code></pre>
+<ul>
+<li><code>allOf</code> 当所有的嵌套条件都正确时，执行这个阶段,必须包含至少一个条件，例如:</li>
+</ul>
+<pre><code>when { 
+    allOf {
+         branch 'master'; 
+         environment name: 'DEPLOY_TO', value: 'production' 
+    } 
+}
+</code></pre>
+<ul>
+<li><code>anyOf</code> 当至少有一个嵌套条件为真时，执行这个阶段,必须包含至少一个条件，例如:</li>
+</ul>
+<pre><code>when { anyOf { branch 'master'; branch 'staging' } }
+</code></pre>
+<ul>
+<li><code>tag</code>：如果<code>pipeline</code>所执行的代码被打了<code>tag</code>，且<code>tag名</code>称符合规则，则执行 </li>
+</ul>
+<pre><code>when { 
+    tag &quot;release-*&quot; 
+} 
+</code></pre>
+<p>如果<code>tag</code>的参数为空，即<code>tag()</code>，则表示不论<code>tag</code>名称是什么都执行，与<code>buildingTag</code>的效果相同。 </p>
+<p><code>tag</code>条件支持<code>comparator</code>参数，支持的值如下。 </p>
+<p><code>EQUALS</code>：简单的文本比较。 </p>
+<pre><code>when { 
+    tag pattern: &quot;release-3.1&quot;, comparator: &quot;EQUALS&quot;
+} 
+</code></pre>
+<p><code>GLOB</code>（默认值）:<code>Ant</code>风格路径表达式。由于是默认值，所以使用时一般省略。完整写法如下： </p>
+<pre><code>when { 
+    tag pattern: &quot;release—*&quot;, comparator: &quot;GLOB&quot;
+}
+</code></pre>
+<p><code>PEGEXP</code>：正则表达式。使用方法如下 </p>
+<pre><code>when { 
+    tag pattern: &quot;release —\\d+&quot;, comparator: &quot;REGEXP&quot; 
+}
+</code></pre>
+<p><strong>示例：</strong></p>
+<pre><code>pipeline {
+    agent any
+    stages {
+        stage('Example Build') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+        stage('Example Deploy') {
+            when {
+                branch 'production'
+            }
+            steps {
+                echo 'Deploying'
+            }
+        }
+    }
+}
+</code></pre>
+<pre><code>pipeline {
+    agent any
+    stages {
+        stage('Example Build') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+        stage('Example Deploy') {
+            when {
+                branch 'production'
+                environment name: 'DEPLOY_TO', value: 'production'
+            }
+            steps {
+                echo 'Deploying'
+            }
+        }
+    }
+}
+</code></pre>
+<pre><code>pipeline {
+    agent any
+    stages {
+        stage('Example Build') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+        stage('Example Deploy') {
+            when {
+                allOf {
+                    branch 'production'
+                    environment name: 'DEPLOY_TO', value: 'production'
+                }
+            }
+            steps {
+                echo 'Deploying'
+            }
+        }
+    }
+}
+</code></pre>
+<pre><code>pipeline {
+    agent any
+    stages {
+        stage('Example Build') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+        stage('Example Deploy') {
+            when {
+                branch 'production'
+                anyOf {
+                    environment name: 'DEPLOY_TO', value: 'production'
+                    environment name: 'DEPLOY_TO', value: 'staging'
+                }
+            }
+            steps {
+                echo 'Deploying'
+            }
+        }
+    }
+}
+</code></pre>
+<pre><code>pipeline {
+    agent any
+    stages {
+        stage('Example Build') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+        stage('Example Deploy') {
+            when {
+                expression { BRANCH_NAME ==~ /(production|staging)/ }
+                anyOf {
+                    environment name: 'DEPLOY_TO', value: 'production'
+                    environment name: 'DEPLOY_TO', value: 'staging'
+                }
+            }
+            steps {
+                echo 'Deploying'
+            }
+        }
+    }
+}
+</code></pre>
+<pre><code>pipeline {
+    agent none
+    stages {
+        stage('Example Build') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+        stage('Example Deploy') {
+            agent {
+                label &quot;some-label&quot;
+            }
+            when {
+                beforeAgent true
+                branch 'production'
+            }
+            steps {
+                echo 'Deploying'
+            }
+        }
+    }
+}
+</code></pre>
+<p><strong><code>Generic Webhook Trigger</code>插件在多分支<code>pipeline</code></strong></p>
+<p>在多分支<code>pipeline</code>场景下，我们希望触发某个分支的构建执行，<code>GenericTrigger</code>可以这么传参： </p>
+<pre><code>triggers { 
+    GenericTrigger( 
+        genericVariables: [ 
+            [key: 'ref', value: '$.ref'] 
+        ], 
+
+        token: env.JOB_NAME, 
+        regexpFilterText: '$ref', 
+        regexpFilterExpression: 'refs/heads/' + env.BRANCH_NAME
+        } 
+}
+</code></pre>
+<h3 id="1-5-8-examples">指令 1-5-8 Examples</h3>
+<pre><code>pipeline {
+    agent { node { label &quot;hostmachine&quot;   //指定运行节点的标签或者名称
+            }
+    }
+parameters {
+    string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+}
+stages {
+    stage('parameter') {
+        when { environment name: 'PERSON', value: 'jacob' }
+        steps {
+            echo &quot;Hello ${params.PERSON}&quot;
+        }
+    }
+
+    stage('tools') {
+        steps {
+            script{
+                mvnHome = tool &quot;m2&quot;
+                println(mvnHome)
+
+                sh &quot;${mvnHome}/bin/mvn --version&quot;
+            }
+        }
+    }
+
+    stage('Input') {
+            input {
+                message &quot;Should we continue?&quot;
+                ok &quot;Yes, we should.&quot;
+                submitter &quot;Jacob&quot;
+                parameters {
+                    string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+                }
+            }
+            steps {
+                echo &quot;Hello, ${PERSON}, nice to meet you.&quot;
+            }
+        }
+}
+}
+</code></pre>
+<p><img alt="Alt Image Text" src="../../images/chp2_2_3.png" title="Body image" /> <strong>which is not <code>jacob</code></strong></p>
+<p><code>when { environment name: 'PERSON', value: 'jacob' }</code>  跳过此<strong>Stage</strong></p>
+<p><img alt="Alt Image Text" src="../../images/chp2_2_4.png" title="Body image" /> </p>
+<h3 id="1-5-9">1-5-9 并行构建</h3>
+<p>声明式流水线的阶段可以在他们内部声明多隔嵌套阶段, 它们将并行执行。 注意，一个阶段必须只有一个 <code>steps</code> 或<code>parallel</code>的阶段。 嵌套阶段本身不能包含 进一步的 <code>parallel</code> 阶段, 但是其他的阶段的行为与任何其他 <code>stageparallel</code> 的阶段不能包含<code>agent</code> 或 <code>tools</code> 阶段, 因为他们没有相关 <code>steps</code>。</p>
+<p>另外, 通过添加 <code>failFast true</code>到包含<code>parallel</code>的 <code>stage</code>中， 当其中一个进程失败时，你可以强制所有的 <code>parallel</code> 阶段都被终止。</p>
+<p><strong>示例:</strong></p>
+<pre><code>pipeline {
+    agent any
+    stages {
+        stage('Non-Parallel Stage') {
+            steps {
+                echo 'This stage will be executed first.'
+            }
+        }
+        stage('Parallel Stage') {
+            when {
+                branch 'master'
+            }
+            failFast true
+            parallel {
+                stage('Branch A') {
+                    agent {
+                        label &quot;for-branch-a&quot;
+                    }
+                    steps {
+                        echo &quot;On Branch A&quot;
+                    }
+                }
+                stage('Branch B') {
+                    agent {
+                        label &quot;for-branch-b&quot;
+                    }
+                    steps {
+                        echo &quot;On Branch B&quot;
+                    }
+                }
+            }
+        }
+    }
+}
+</code></pre>
+<p><code>Jenkins pipeline</code>插件支持这种并行构建，并月一使用起来也非常简单。 </p>
+<pre><code>pipeline{ 
+    agent none 
+    stages{ 
+        stage('Run Tests'){ 
+            failFast true 
+            parallel{ 
+                stage('Test On Chrome'){ 
+                    agent{ label &quot;chrome&quot; } 
+                    steps{ 
+                        echo &quot;Chrome U工测试&quot;
+                    } 
+                } 
+                stage('Test On Firefox'){ 
+                    agent{ label &quot;firefox&quot; } 
+                    steps{ 
+                        echo &quot;Firefox UI测试&quot; 
+                        } 
+                } 
+                stage('Test On IE'){ 
+                    agent{ label &quot;ie&quot; } 
+                    steps{ 
+                        echo &quot;IE UI 测试“ 
+                    } 
+                } 
+            } //end of parallel 
+        } //end of run tests 
+    } //end of stages 
+} //end of pipeline 
+</code></pre>
+<p>在<code>stage</code>部分包含一个<code>Run Tests</code>阶段，在这个阶段下包含一个<code>parallel</code>块，在<code>parallel</code>块下又包含了多个阶段。位于<code>parallel</code>块下的阶段都将并行执行，而且并行阶段还可以被分到不同的<code>Jenkins agent</code>上执行。 </p>
+<p>因为parallel本身不包含任何步骤，所以在<code>parallel</code>块下本身不允许包含<code>agent</code>和<code>tools</code>.</p>
+<p>在默认情况下，<code>Jenkins pipeline</code>要等待<code>parallel</code>块下所有的阶段都执行完成，才能确定结果。<strong>如果希望所有并行阶段中的某个阶段失败后，就让其他正在执行的阶段都中止，那么只需要在与<code>parallel</code>块同级的位置加人<code>failFast true</code>就可以了。</strong> </p>
+<p><strong>在不同的分支上应用并行构建</strong></p>
+<pre><code>pipeline { 
+    agent any 
+    stages { 
+        stage('Parallel Stage') { 
+            failFast true 
+            parallel { 
+                stage('Branch master') { 
+                    when { branch 'master' } 
+                    agent any 
+                    steps { 
+                        echo &quot;On Branch master&quot; 
+                    } 
+                }
+                stage('Branch dev') {
+                    when { branch 'staging' }
+                    agent any
+                    stages {
+                        stage('嵌套staging 1'){
+                            steps{
+                                echo &quot;staging 1&quot;
+                            }
+                        }
+                        stage('嵌套staging 2'){
+                            steps{
+                                echo &quot;staging 2&quot;
+                            }
+                        }
+                    }
+                } // end of staging
+            } // end of parallel
+        }
+    }
+} //end of pipepline 
+</code></pre>
+<p>我们注意到在并行阶段<code>Branch staging</code>下又出现了一个stage部分。 是的，阶段是可以嵌套的。</p>
+<p><strong>并行步骤</strong></p>
+<p>前面我们介绍的是阶段级别的并行执行<code>Jenkins pipeline</code>还支持步骤级别的并行执行。这也是<code>Jenkins Pipeline</code>最早支持的并行方式 </p>
+<pre><code>stage('parallel build') { 
+    steps { 
+        parallel {
+            jdk8: {
+                echo &quot;jdk8 build&quot; 
+            },
+            jdk9: {
+                echo &quot;jdk9 build&quot; 
+            }
+        }
+    }
+}
+</code></pre>
+<h2 id="1-6-step">1-6 step步骤</h2>
+<h3 id="1-6-1-script">1-6-1 script</h3>
+<p><code>script</code> 步骤需要 <code>[scripted-pipeline]</code>块并在声明式流水线中执行。对于大多数用例来说,应该声明式流水线中的“脚本”步骤是不必要的，但是它可以提供一个有用的”逃生出口”。<strong>非平凡的规模和/或复杂性的script块应该被转移到 共享库 。</strong></p>
+<p><strong>示例：比如分别在不同的浏览器上跑测试</strong></p>
+<pre><code>pipeline {
+    agent any
+    stages {
+        stage('Example') {
+            steps {
+                echo 'Hello World'
+
+                script {
+                    def browsers = ['chrome', 'firefox']
+                    for (int i = 0; i &lt; browsers.size(); ++i) {
+                        echo &quot;Testing the ${browsers[i]} browser&quot;
+                    }
+                }
+            }
+        }
+    }
+}
+</code></pre>
+<h2 id="1-7-pipeline">1-7 pipeline内置基础步骤</h2>
+<h3 id="1-7-1">1-7-1 文件目录相关步骤</h3>
+<p><strong><code>deleteDir</code>:删除当前目录</strong> </p>
+<p><code>deleteDir</code>是一个无参步骤，删除的是当前工作目录。通常它与<code>dir</code>步骤一起使用，用于删 
+除指定目录下的内容。 </p>
+<p><strong><code>dir</code>：切换到目录</strong></p>
+<p>默认<code>pipeline</code>工作在工作空间目录下，dir步骤可以让我们切换到其他目录。使用方法如下： </p>
+<pre><code>dir(&quot;/var/logs&quot;){
+    deleteDir()
+}
+</code></pre>
+<p><strong>fileExists：判断文件是否存在</strong></p>
+<p><code>fileExists('/tmp/a.jar'）</code> 判断<code>/tmp/a.jar</code>文件是否存在。如果参数是相对路径，则判断在相对当前工作目录下，该文件是否存在。结果返回布尔类型。 </p>
+<p><strong>isUnix：判断是否为类UNIX系统</strong></p>
+<p>如果当前<code>pipeline</code>运行在一个类<code>UNIX</code>系统上，则返回<code>true</code></p>
+<p><strong>pwd：确认当前目录</strong></p>
+<p><code>pwd</code>与<code>Linux</code>的<code>pwd</code>命令一样，返回当前所在目录：它有一个布尔类型的可选参数：<code>tmp</code>，如 
+果参数值为<code>true</code>，则返回与当前工作空间关联的临时目录。 </p>
+<p><strong>writeFile：将内容写入指定文件中</strong></p>
+<p><code>writeFile</code>支持的参数有： </p>
+<ul>
+<li><code>file</code>：文件路径，可以是绝对路径，也可以是相对路径。 </li>
+<li><code>text</code>: 要写人的文件内容。 </li>
+<li><code>encoding</code>（可选）：目标文件的编码。 如果留空，则使用操作系统默认的编码。如果写的是 <code>Base64</code>的数据，则可以使用<code>Base64</code> 编码。 </li>
+</ul>
+<p><strong><code>readFile</code>：读取文件内容</strong> </p>
+<p>读取指定文件的内容，以文本返回。<code>readFile</code>支持的参数有：</p>
+<ul>
+<li><code>file</code>：路径，可以是绝对路径，也可以是相对路径：</li>
+<li><code>encoding</code>（可选）：读取文件时使用的编码。 </li>
+</ul>
+<p>示例如下： </p>
+<pre><code>script{ 
+    // &quot;amVua2lucyBib29r&quot; 是 &quot;jenkins book&quot; 进行Base64编码后的值
+    writeFile(file:&quot;base64File&quot;, text: &quot;amVua2lucyBib29r&quot;, encoding: &quot;Base64&quot;) 
+    def content = readFile(file: 'base64File', encoding: 'UTF—8' ) 
+    echo &quot;${content}&quot; 
+    // 打印结果: jenkins book 
+}
+</code></pre>
+<h3 id="1-7-2">1-7-2 制品相关步骤</h3>
+<p><strong>stash：保存临时文件</strong></p>
+<p><code>stash</code>步骤可以将一些文件保存起来，以便被同一次构建的其他步骤或阶段使用。如果整个 <code>pipeline</code>的所有阶段在同一台机器上执行，则<code>stash</code>步骤是多余的。所以，通常需要<code>stash</code>的文件都是要跨<code>Jenkins node</code>使用的。 </p>
+<p><code>stash</code>步骤会将文件存储在<code>tar</code>文件中，对于大文件的<code>stash</code>操作将会消耗<code>Jenkins master</code>的计算资源。<code>Jenkins</code>官方文档推荐，当文件大小为<strong><code>5~1OOMB</code>时</strong>，应该考虑使用其他替代方案。 </p>
+<p><code>stash</code>步骤的参数列表如下： </p>
+<ul>
+<li><code>name</code>：字符串类型，保存文件的集合的唯一标识。 </li>
+<li><code>allowEmpty</code>：布尔类型，允许<code>stash</code>内容为空。 </li>
+<li><code>excludes</code>：字符串类型，将哪些文件排除。如果排除多个文件，则使用逗号分隔。留空代表 不排除任何文件。 </li>
+<li><code>includes</code>：字符串类型，<code>stash</code>哪些文件，留空代表当前文件夹下的所有文件。</li>
+<li><code>useDefaultExciudes</code>：布尔类型，如果为<code>true</code>，则代表使用<code>Ant</code>风格路径默认排除文件列表。 </li>
+</ul>
+<p>除了<code>name参</code>数，其他参数都是可选的。<code>excludes</code>和<code>includes</code>使用的是<code>Ant</code>风格路径表达式。 </p>
+<p><strong><code>unstash</code>：取出之前<code>stash</code>的文件</strong></p>
+<p><code>unstash</code>步骤只有一个<code>name</code>参数，即<code>stash</code>时的唯一标识。通常<code>stash</code>与<code>unstash</code>步骤同时使用。以下是完整示例。 </p>
+<pre><code>pipeline { 
+    agent none 
+    stages {
+        stage('stash') { 
+            agent { label &quot;master&quot; } 
+            steps { 
+                writeFile file: &quot;a.txt&quot;,text: &quot;$BUILO_NUMBER&quot; 
+                stash(name &quot;abc&quot;, includes: &quot;a.txt&quot;)
+                }
+            }   
+        stage('unstash') { 
+            agent { label &quot;node2&quot; }
+            steps {
+                script{ 
+                    unstash(&quot;abc&quot;) 
+                    def content = readFile(&quot;a.txt&quot;) 
+                    echo &quot;${content}&quot; 
+                }
+            }
+        }
+    }
+}
+</code></pre>
+<p><code>stash</code>步骤在<code>master</code>节点上执行，而<code>unstash</code>步骤在 <code>node2</code>节点上执行</p>
+<h3 id="1-7-3">1-7-3 命令相关步骤</h3>
+<p>与命令相关的步骤其实是<code>Pipeline: Nodes and processes</code>插件提供的步骤。 由于它是<code>Pipeline</code> 插件的一个组件，所以基本不需要单独安装。 </p>
+<p><strong>sh：执行shell命令</strong> </p>
+<p><code>sh</code>步骤支持的参数有：</p>
+<ul>
+<li><code>script</code>：将要执行的<code>shell</code>脚本，通常在类<code>UNIX</code>系统上可以是多行脚本。</li>
+<li><code>encoding</code>：脚本执行后输出日志的编码，默认值为脚本运行听在系统的编码。</li>
+<li><code>return Status</code>：布尔类型， 默认脚本返回的是状态码， 如果是一个非零的状态码，则会引发 <code>pipeline</code>执行失败。如果<code>returnStatus</code>参数为<code>true</code>,则不论状态码是什么,<code>pipeline</code>的执行都不会受影响。 </li>
+<li><code>return Stdout</code>：布尔类型，如果为<code>true</code>，则任务的标准输出将作为步骤的返回值，而不是打印到构建日志中（如果有错误，则依然会打印到日志中）。 </li>
+</ul>
+<p>除了<code>script</code>参数，其他参数都是可选的。 </p>
+<p><code>returnStatus</code>与<code>returnStdout</code>参数一般不会同时使用，因为返回值只能有一个。如果同时使用、 则只有<code>returnStatus</code>参数生效。</p>
+<p><strong>bat、powershell步骤</strong></p>
+<p><code>bat</code>步骤执行的是<code>Windows</code>的批处理命令。<code>powershell</code>步骤执行的是<code>PowerShell</code>脚本，支持<code>3+</code>版本。这两个步骤支持的参数与<code>sh</code>步骤的一样，这里就不重复介绍了。 </p>
+<h3 id="1-7-4">1-7-4 其他步骤</h3>
+<p><strong><code>error</code>：主动报错，中止当前<code>pipeline</code></strong></p>
+<p><code>error</code>步骤的执行类似于抛出一个异常。它只有一个必需参数：<code>message</code>。通常省略参数： <code>error("there's an error"）</code>。 </p>
+<p><strong>tool：使用预定义的工具</strong> </p>
+<p>如果在<code>Global Tool Configuration</code>（全局工具配置）中配置了工具，如图所示，比如 
+配置了<code>Docker</code>，那么可以通过<code>tool</code>步骤得到工具路径。 </p>
+<p><img alt="Alt Image Text" src="../../images/chp2_2_5.png" title="Body image" /> </p>
+<pre><code>stage('Docker') {
+            steps { 
+                script{ 
+                    def t = tool name: 'docker', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
+                    echo &quot;${t}&quot; // 打印 /var/lib/docker 
+                } 
+            }
+        }
+</code></pre>
+<pre><code>...
+/var/lib/docker
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+</code></pre>
+<p><strong>tool步骤支持的参数有：</strong> </p>
+<ul>
+<li>name：工具名称。 </li>
+<li>type（可选）：工具类型，指该工具安装类的全路径类名。 </li>
+</ul>
+<p>每个插件的<code>type</code>值都不一样，而且绝大多数插件的文档根本不写<code>type</code>值。除了到该插件的源码中查找，还有一种方法可以让我们快速找到<code>type</code>值，就是前往<code>Jenkins pipeline</code>代码片段生成器中生成该<code>tool</code>步骤的代码即可，</p>
+<p><img alt="Alt Image Text" src="../../images/chp2_2_6.png" title="Body image" /> </p>
+<p><strong><code>timeout</code>：代码块超时时间</strong> </p>
+<p>为<code>timeout</code>步骤闭包内运行的代码设置超时时间限制。一如果超时，将抛出一个<code>org.jenkinsci.plugins.workflow. steps.FlowlnterruptedException</code>异常。<code>timeout</code>步骤支持如下参数：</p>
+<ul>
+<li><code>time</code>：整型, 超时时间。 </li>
+<li><code>unit</code>（可选）：时间单位，支持的值有<code>NANOSECONDS</code>、 <code>MICROSECONDS</code>、<code>MILLISECONDS</code>、 <code>SECONDS</code>、<code>MINUTES</code>（默认）、<code>HOURS</code>、<code>DAYS</code>。 </li>
+<li><code>activity</code>（可选）：布尔类型，如果值为<code>true</code>，则只有当日志没有活动后，才真正算作超时 </li>
+</ul>
+<p><strong><code>waitUntil</code>：等待条件满足</strong></p>
+<p>不断重复<code>waitUntil</code>块内的代码，直到条件为<code>true</code>. <code>waitUntil</code>不负责处理块内代码的异常，直到异常时直接向外抛出。<code>waitUntil</code>步骤最好与<code>timeout</code>步骤共同使用，避免死循环。示例如下： </p>
+<pre><code>timeout(50) { 
+    waitUntil { 
+        script { 
+            def r = sh script: 'curl http://exmaple', returnStatus: true 
+            return (r == 0) 
+        } 
+    } 
+} 
+</code></pre>
+<p><strong>retry：重复执行块 </strong></p>
+<p>执行<code>N</code>次闭包内的脚本。如果其中某次执行抛出异常，则只中止本次执行，并不会中止整个<code>retry</code>的执行。同时，在执行<code>retry</code>的过程中，用户是无法中止<code>pipeline</code>的。 </p>
+<pre><code>steps{ 
+    retry(20){ 
+        script{ 
+        sh script: 'curl http://exmaple', returnStatus: true
+        } 
+    } 
+} 
+</code></pre>
+<p><strong><code>sleep</code>：让<code>pipeline</code>休眠一段时间</strong> </p>
+<p><code>sleep</code>步骤可用于简单地暂停<code>pipeline</code>，其支持的参数有：</p>
+<ul>
+<li><code>time</code>：整型，休眠时间。</li>
+<li><code>unit</code>（可选）:时间单位，支持的值有<code>NANOSECONDS</code>、<code>MICROSECONDS</code>、 <code>MILLISECONDS</code>、 <code>SECONDS</code>（默认）、<code>MINUTES</code>、<code>HOURS</code>、<code>DAYS</code> </li>
+</ul>
+<p>示例如下： </p>
+<pre><code>sleep(120) // 休眠120s
+sleep(time:'2', unit:&quot;MINUTES&quot;) // 休眠2分钟 
+</code></pre>
+<h3 id="1-7-5-pipeline">1-7-5 使用pipeline代码片段生成器学习</h3>
+<p>对于初学<code>Jenkins pipeline</code>的新人来说，如何开始写<code>pipeline</code>是一个坎儿。好在<code>Jenkins</code>提供了 </p>
+<p>一个<code>pipeline</code>代码片段生成器，通过界面操作就可以生成代码。 </p>
+<p>进入<code>pipeline</code>项目后，单击左边的<code>“Pipeline Syntax”</code>菜单项（只有<code>pipeline</code>项目有）图3-6所示。 </p>
+<p>进入<code>“Pipeline Syntax"</code>页面后，在右边的“Sample Step”下拉框中选择需要生成代码的步骤，并根据提示填入参数，然后单击<code>“Generate Pipeline Script”</code>按钮，就可以生成代码了，如 </p>
+<p><img alt="Alt Image Text" src="../../images/chp2_2_7.png" title="Body image" /> </p>
+<h3 id="1-7-6-vs-codejenkinsfile">1-7-6 使用<code>VS Code</code>扩展校验<code>Jenkinsfile</code></h3>
+<p>不像Java语言有各种开发工具支持，<code>Jenkinsfile</code> 从诞生以来就没有很好的工具支持, 无奈只能使用<code>VSCode</code>文本编辑器<code>＋Groovy</code>语法高亮进行开发。对语法的校验全凭自己对<code>Jenkinsfile</code>的了解</p>
+<p>2018年11月初，Jenkins官方博客介绍了一个<code>VS Code</code>扩展：<code>Jenkins Pipeline Linter Connector,</code> 实现了对<code>Jenkinsfile</code>的语法校验。 </p>
+<p>在<code>VS Code</code>应用市场搜索<code>“Jenkins Pipeline Linter Connector”</code>并安装，然后对一该扩展进行设置，</p>
+<p><img alt="Alt Image Text" src="../../images/chp2_2_8.png" title="Body image" /> </p>
+<p>然后，进人<code>Jenkins</code>的<code>Manage Jenkins</code>-&gt;<code>Manage Configure Global Security</code>页，确认<code>Jenkins</code>
+启用了<code>“CSRF Protection"</code></p>
+<p><img alt="Alt Image Text" src="../../images/chp2_2_9.png" title="Body image" /> </p>
+<p>接下来，打开一个<code>Jenkinsfile</code>文件，调用扩展命令， </p>
+<p>vscode <code>shift + command + p</code></p>
+<p><img alt="Alt Image Text" src="../../images/chp2_2_10.png" title="Body image" /> </p>
+<p>最后在OUTPUT中可以看利校验结果 </p>
+<p><img alt="Alt Image Text" src="../../images/chp2_2_11.png" title="Body image" /> </p>
+<p>使用<code>Workspace Cleanup</code>插件理空间 </p>
+<p>通常， 当<code>pipeline</code>执行完成后，不会自动清理空间如果需要（通常需要）清理工作空间，则可以通过<code>Workspace Cleanup</code>插件实现 </p>
+<ul>
+<li>安装<code>Workspace Cleanup</code>插件</li>
+<li>在<code>pipeline</code>的<code>post</code>部分加入插件步骤</li>
+</ul>
+<pre><code>post {
+    always {
+        cleanWs()
+    }
+}
+</code></pre>
+<h3 id="1-7-7-ant">1-7-7 Ant风格路径表达式简介</h3>
+<p><code>Ant</code>是比<code>Maven</code>更老的<code>Java</code>构建工具。<code>Ant</code>发明了一种描述文件路径的表达式，大家都习惯称其为<code>Ant</code>风格路径表达式。 <code>Jenkins pipeline</code>的很多步骤的参数也会使用此表达式。 </p>
+<p><code>Ant</code>路径表达式包括3种通配符。</p>
+<ul>
+<li><code>？</code>：匹配任何单字符。 </li>
+<li><code>*</code>：匹配<code>0</code>个或者任意数量的字符。 </li>
+<li><code>**</code>：匹配0个或者更多的目录。 </li>
+</ul>
+<p>我们通过以下例子来学习。</p>
+<ul>
+<li><code>**/cvs/*</code>：匹配<code>cvs</code>文件夹下的所有文件，<code>cvs</code>文件夹可以在任何层级。</li>
+</ul>
+<p>以下路径会被匹配到： </p>
+<pre><code>CVS/Repository 
+org/apache/CVS/Entries 
+org/apache/jakarta/tools/ant/CVS/Entries 
+</code></pre>
+<p>以下<code>foo/bar</code>部分不会被匹配到</p>
+<pre><code>org/apache/CVS/foo/bar/Entries 
+</code></pre>
+<ul>
+<li><code>org/apache/jakarta/**</code>：匹配<code>org/apache/jakarta</code>路径下的所有文件。 </li>
+</ul>
+<p>以下路径会被匹配到： </p>
+<pre><code>org/apache/jakarta/tools/ant/docs/index.html 
+org/apache/jakarta/test.xml 
+</code></pre>
+<p>以下路径不会被匹配到： </p>
+<pre><code>org/apache/xyz.java
+</code></pre>
+<ul>
+<li><code>org/apache/**/CVS/*</code>：匹配<code>org/apache</code>路径下的<code>cvs</code>文件夹下的所有文件。<code>cvs</code>文件夹可以在任何层级。 </li>
+</ul>
+<p>以下路径会被匹配到： </p>
+<pre><code>org/apache/CVS/Entries 
+org/apache/jakarta/tools/ant/CVS/Entries 
+</code></pre>
+<p>以下路径不会被匹配到： </p>
+<pre><code>org/apache/CVS/foo/bar/Entries 
+</code></pre>
+<ul>
+<li><code>**/test/**</code>: 匹配所有路径中含有<code>test</code>的路径</li>
+</ul>
+<h2 id="how-to-check-jenkins-dsl-viewer-page">How to check Jenkins DSL Viewer Page</h2>
+<p>Input the url of Viewer Page</p>
+<pre><code>htpp://jenkins_url/plugin/job-dsl/api-viewer/index.html
+</code></pre>
+<p>For example:</p>
+<pre><code>http://192.168.33.11:8080/plugin/job-dsl/api-viewer/index.html
+</code></pre>
+<p><img alt="Alt Image Text" src="../../images/chp2_2_15.png" title="Body image" /> </p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2016-2020 Jacob Xi
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.b425cdc4.min.js"></script>
+      
+    
+  </body>
+</html>

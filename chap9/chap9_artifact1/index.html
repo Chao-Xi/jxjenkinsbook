@@ -1,0 +1,2613 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Jacob's 手摸手Jenkins实用教程">
+      
+      
+        <meta name="author" content="Jacob Xi">
+      
+      
+      
+        <link rel="prev" href="../chap9_artifact0/">
+      
+      
+        <link rel="next" href="../chap9_artifact2/">
+      
+      <link rel="icon" href="../../images/logo.png">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.17">
+    
+    
+      
+        <title>第二节 制品管理 - Jacob Jenkins Books</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.26e3688c.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ecc896b0.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="Jacob Jenkins Books" class="md-header__button md-logo" aria-label="Jacob Jenkins Books" data-md-component="logo">
+      
+  <img src="../../images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Jacob Jenkins Books
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第二节 制品管理
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Chao-Xi/jxjenkinsbook.git" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    jxjenkinsbook
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Jacob Jenkins Books" class="md-nav__button md-logo" aria-label="Jacob Jenkins Books" data-md-component="logo">
+      
+  <img src="../../images/logo.png" alt="logo">
+
+    </a>
+    Jacob Jenkins Books
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Chao-Xi/jxjenkinsbook.git" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    jxjenkinsbook
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Welcome
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          一、Jenkins 运维管理
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          一、Jenkins 运维管理
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jk_chapter1/" class="md-nav__link">
+        第一节 Jenkins 运维管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jk_chapter1_2/" class="md-nav__link">
+        第二节 分布式构建与并行构建
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jk_chapter1_3/" class="md-nav__link">
+        第三节 可视化构建试图
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap1/1active_parameter/" class="md-nav__link">
+        第四节 使用Active Choice Parameter参数化构建
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap1/2python-jenkins/" class="md-nav__link">
+        第五节 自动化使用python-jenkins管理Jenkins
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          二、Jenkins 流水线基础
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          二、Jenkins 流水线基础
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap2/1chap2_Jenkinsfile/" class="md-nav__link">
+        第一节 编写 Jenkinsfile 运行流水线
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap2/2chap2_declarative_pipeline/" class="md-nav__link">
+        第二节 声明式流水线语法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap2/3chap2_script_pipeline/" class="md-nav__link">
+        第三节 脚本化Pipeline
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap2/4chap2_sharedlib/" class="md-nav__link">
+        第四节 Pipeline 扩展——共享库
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap2/5chap2_quick_jenkinsfile/" class="md-nav__link">
+        第五节 如何快速上手Jenkinsfile编写
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap2/6chap2_pipe_vs_dec/" class="md-nav__link">
+        第六节 脚本式管道与声明式管道-四个实际差异
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap2/7chap2_jenkins_git/" class="md-nav__link">
+        第七节 使用Jenkins Git参数实现分支标签动态选择
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap2/8Jenkinsfile_pipeline_multibranch/" class="md-nav__link">
+        第八节 多分支类型管道- 基于Jenkinsfile自动创建Pipeline(2023)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap2/9jenkins_parallel2023/" class="md-nav__link">
+        第九节 实践-Jenkins 声明式管道中的动态并行阶段
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap2/10mc_parallel/" class="md-nav__link">
+        第十节 微服务模式下如何实现多模块并行构建发布
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          三、Groovy 基础
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          三、Groovy 基础
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap3/1chap3_groovy_basic/" class="md-nav__link">
+        第一节 Groovy 简明教程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap3/2chap3_groovy_basic2/" class="md-nav__link">
+        第二节 Groovy 基础
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          四、构建工具集成
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          四、构建工具集成
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap4/1chp4_tools1/" class="md-nav__link">
+        第一节 构建工具集成
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap4/2chp4_tools2/" class="md-nav__link">
+        第二节 集成 SaltStack 部署工具
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap4/3chp4_tools3/" class="md-nav__link">
+        第三节 Jenkins集成Ansibe实现自动化部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap4/4chp4_tools4/" class="md-nav__link">
+        第四节 Jenkins集成Ansibe实战手册 - BB Mobile（2018）
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          五、凭证管理
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          五、凭证管理
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap5/5jenkins_secrets/" class="md-nav__link">
+        0 如何在 Jenkins 中安全管理 Secrets
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap5/1chap5_cred1/" class="md-nav__link">
+        第一节 凭证管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap5/2chap5_vault/" class="md-nav__link">
+        第二节 凭证管理使用HashiCorp Vault
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap5/3docker_valut/" class="md-nav__link">
+        第二节(Extra) - Store Secrets using Hashicorp Vault with Docker
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap5/4docker_mask/" class="md-nav__link">
+        第三节 在Jenkins日志中隐藏敏感信息
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+          六、用户认证集成
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          六、用户认证集成
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap6/1chap6_ldap/" class="md-nav__link">
+        第一节 Ldap 用户认证集成
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap6/2chap6_gitlab/" class="md-nav__link">
+        第二节 Jenkins集成 Gitlab SSO 单点登录
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap6/3chap6_github/" class="md-nav__link">
+        第三节 Jenkins集成 Github SSO 单点登录
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+          七、Gitlab 版本控制系统集成
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          七、Gitlab 版本控制系统集成
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap7/1chap7_gitlab_connect/" class="md-nav__link">
+        第一节 Gitlab – Jenkins Integration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap7/2chap7_gitlab_pipeline/" class="md-nav__link">
+        第二节 Gitlab-Jenkins 版本控制
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap7/3chap7_gitlab_pipeline_extra/" class="md-nav__link">
+        第三节 Gitlab-Jenkins 版本控制（补充）
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap7/4gitops_cicd/" class="md-nav__link">
+        ​第四节 GitOps Gitlab-Jenkins 模式下微服务CI/CD实践
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+          八、代码质量平台集成
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          八、代码质量平台集成
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap8/1chap8_code_quality/" class="md-nav__link">
+        第一节 代码质量
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap8/2chap8_code_quality_sonarqube/" class="md-nav__link">
+        第二节 SonarQube：持续代码质量检查
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap8/3chap8_code_quality_allure/" class="md-nav__link">
+        第三节 Allure测试报告：更美观的测试报告
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap8/4chap8_code_quality_integration/" class="md-nav__link">
+        第四季 代码质量平台集成(SonarQube Final Edition)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+          九、制品库集成
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_10">
+          <span class="md-nav__icon md-icon"></span>
+          九、制品库集成
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chap9_artifact0/" class="md-nav__link">
+        第一节 Sonatype Nexus 基本介绍与安装
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          第二节 制品管理
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        第二节 制品管理
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1、 制品是什么
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2、制品管理仓库
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3、过渡到制品库
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4java" class="md-nav__link">
+    4、管理Java栈制品
+  </a>
+  
+    <nav class="md-nav" aria-label="4、管理Java栈制品">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#4-1-mavennexus" class="md-nav__link">
+    4-1 使用Maven发布制品到Nexus中
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-2-nexus" class="md-nav__link">
+    4-2 使用Nexus插件发布制品
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5nexusdocker" class="md-nav__link">
+    5、使用Nexus管理Docker镜像
+  </a>
+  
+    <nav class="md-nav" aria-label="5、使用Nexus管理Docker镜像">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-nexusdocker" class="md-nav__link">
+    5.1 Nexus：创建Docker私有仓库
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    6、管理原始制品
+  </a>
+  
+    <nav class="md-nav" aria-label="6、管理原始制品">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#6-1-raw" class="md-nav__link">
+    6-1 创建raw仓库
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-2" class="md-nav__link">
+    6-2 上传制品获取制品
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7pipeline" class="md-nav__link">
+    7、从其他pipeline中拷贝制品
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    8、版本号管理
+  </a>
+  
+    <nav class="md-nav" aria-label="8、版本号管理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81" class="md-nav__link">
+    8.1 语义化版本
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-version-number" class="md-nav__link">
+    8.2 方便生成版本号的Version Number插件
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chap9_artifact2/" class="md-nav__link">
+        第三节 Nexus 制品上传
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chap9_artifact3/" class="md-nav__link">
+        第四节 Jenkins & Jfrog Artifactory
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chap9_5nexus_2023/" class="md-nav__link">
+        第五节 Jenkins流水线将制品发布到Nexus存储库
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+          十、需求管理工具集成
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_11">
+          <span class="md-nav__icon md-icon"></span>
+          十、需求管理工具集成
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap10/1chap10_jira_install/" class="md-nav__link">
+        第一节 k8s 安装本地 Jira 服务
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap10/2chap10_jira_gilab/" class="md-nav__link">
+        第二节 Jenkins 配置端到端流水线（Jira和Gitlab的集成）
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+          十一、Docker 集成
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_12">
+          <span class="md-nav__icon md-icon"></span>
+          十一、Docker 集成
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap11/1Docker_agents/" class="md-nav__link">
+        第一节 基于 Docker 配置构建资源池
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap11/2Docker_pipeline/" class="md-nav__link">
+        第二节 基于Docker的pipeline流水线
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap11/3Docker_registry/" class="md-nav__link">
+        第三节 构建应用镜像到镜像仓库管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap11/4Docker_groovy/" class="md-nav__link">
+        第四节 使用Groovy代码初始化Docker配置
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="0">
+          十二、K8S 平台集成
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_13">
+          <span class="md-nav__icon md-icon"></span>
+          十二、K8S 平台集成
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap12/1k8s_install/" class="md-nav__link">
+        K8S 平台集成(全)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap12/2K8s_pipeline/" class="md-nav__link">
+        使用 Jenkins Pipeline 流水线部署 Kubernetes 应用
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_14" id="__nav_14_label" tabindex="0">
+          十三、自动化接口测试
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_14">
+          <span class="md-nav__icon md-icon"></span>
+          十三、自动化接口测试
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap13/1jmeter/" class="md-nav__link">
+        第一节 Jmeter & Ant 自动化测试
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap13/2jenkins_jmeter/" class="md-nav__link">
+        第二节 Jenkins、Ant、Jmeter 自动化测试
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="0">
+          十四、流水线最佳实践
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_15">
+          <span class="md-nav__icon md-icon"></span>
+          十四、流水线最佳实践
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap14/1JIRA_JEN_K8S/" class="md-nav__link">
+        第一节 基于Jira端到端流水线的最佳实践
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap14/2JEN_K8S_API/" class="md-nav__link">
+        第二节 Jenkins K8S Gitlab 集成
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap14/3Jen_k8s_pipeline/" class="md-nav__link">
+        第三节 Jenkins + K8S + Gitlab 构建 RLEASE 打包发布更新流水线到K8S集群
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap14/4Jen_update_deploy_pip/" class="md-nav__link">
+        第四节 版本晋级及发布流水线
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap14/5back_front_pipeline/" class="md-nav__link">
+        第五节 前端后端项目发布流水线（Java+Nodejs)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap14/6Android_pipeline/" class="md-nav__link">
+        第六节 构建Android项目流水线
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap14/7Jenkins_azure_mern/" class="md-nav__link">
+        第七节 基于Azure部署Jenkins服务并开发MERN应用的CI/CD构建管道
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap14/2TMF_JENKINS/" class="md-nav__link">
+        第八节 基础设施即代码 - 使用Terraform创建AWS EC2实例并部署Jenkins服务
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_16" id="__nav_16_label" tabindex="0">
+          十五、监控与API调用
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_16_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_16">
+          <span class="md-nav__icon md-icon"></span>
+          十五、监控与API调用
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap15/1Jenkins_Prometheus/" class="md-nav__link">
+        第一节 使用 Prometheus 监控 Jenkins
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap15/2Jenkins_InfluxDB_Grafana/" class="md-nav__link">
+        第二节 Jenkins+InfluxDB+Grafana 收集构建数据
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap15/3Jenkins_python_API/" class="md-nav__link">
+        第三节 Jenkins Python API 实践
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap15/4Jenkins_REST_API/" class="md-nav__link">
+        第四节 Jenkins REST API 使用实践
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap15/5Jenkins_DSL/" class="md-nav__link">
+        第五节 Jenkins Core Api & Job DSL创建项目
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_17" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_17" id="__nav_17_label" tabindex="0">
+          十六、持续交付理论分析
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_17_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_17">
+          <span class="md-nav__icon md-icon"></span>
+          十六、持续交付理论分析
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap16/1cd_intro/" class="md-nav__link">
+        L1 量身定制你的持续交付体系
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap16/2config_mgt/" class="md-nav__link">
+        L2 配置管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap16/3Env_mgt/" class="md-nav__link">
+        L3 环境管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap16/4const_mgt/" class="md-nav__link">
+        L4 构建集成
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap16/5Mon_mgt/" class="md-nav__link">
+        L5 发布及监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap16/6Test_mgt/" class="md-nav__link">
+        L6 测试管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap16/7CD_pla/" class="md-nav__link">
+        L7 持续交付平台化
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap16/8Real_exp/" class="md-nav__link">
+        L8 实践案例
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chap16/9cicd_rev/" class="md-nav__link">
+        L9 持续交付理论总结及面试
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_18" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_18" id="__nav_18_label" tabindex="0">
+          Extra 知识扩展
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_18_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_18">
+          <span class="md-nav__icon md-icon"></span>
+          Extra 知识扩展
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Mkdocs_github_travis/" class="md-nav__link">
+        GitHub+Travis+Mkdocs自动化构建文档库
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1、 制品是什么
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2、制品管理仓库
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3、过渡到制品库
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4java" class="md-nav__link">
+    4、管理Java栈制品
+  </a>
+  
+    <nav class="md-nav" aria-label="4、管理Java栈制品">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#4-1-mavennexus" class="md-nav__link">
+    4-1 使用Maven发布制品到Nexus中
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-2-nexus" class="md-nav__link">
+    4-2 使用Nexus插件发布制品
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5nexusdocker" class="md-nav__link">
+    5、使用Nexus管理Docker镜像
+  </a>
+  
+    <nav class="md-nav" aria-label="5、使用Nexus管理Docker镜像">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-nexusdocker" class="md-nav__link">
+    5.1 Nexus：创建Docker私有仓库
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    6、管理原始制品
+  </a>
+  
+    <nav class="md-nav" aria-label="6、管理原始制品">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#6-1-raw" class="md-nav__link">
+    6-1 创建raw仓库
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-2" class="md-nav__link">
+    6-2 上传制品获取制品
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7pipeline" class="md-nav__link">
+    7、从其他pipeline中拷贝制品
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    8、版本号管理
+  </a>
+  
+    <nav class="md-nav" aria-label="8、版本号管理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81" class="md-nav__link">
+    8.1 语义化版本
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-version-number" class="md-nav__link">
+    8.2 方便生成版本号的Version Number插件
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="_1"><strong>第二节 制品管理</strong></h1>
+<h2 id="1">1、 制品是什么</h2>
+<p>所谓制品，到底是什么呢？</p>
+<p>An artifact is one of many kinds of tangible by-products produced during the development</p>
+<p>换句话说，制品是软件开发过程中产生的多种有形副产品之一。另外，直译artifact，是人工制品的意思。所以，广义的制品还包括用例、UML图、设计文档等</p>
+<p>而狭义的制品就可以简单地理解为二进制包。虽然有些代码是不需要编译就可以执行的，但是我们还是习惯于将这些可执行文件的集合称为二进制包。 </p>
+<p>本章讨论的是狭义的制品。行业内有时也将制品称为产出物或工件。 </p>
+<h2 id="2">2、制品管理仓库</h2>
+<p>最简单的制品管理仓库就是将制品统一放在一个系统目录结构下。但是很少有人这样做，更多的做法是使用现成的制品库。 </p>
+<p>制品管理涉及两件事情：</p>
+<ul>
+<li>一是如何将制品放到制品库中。</li>
+<li>二是如何从制品库中取出制品。</li>
+</ul>
+<p>由于每种制品的使用方式不一样，因此下面我们分别进行介绍。 目前现成眨制品库有：Nexus、Artifactory。</p>
+<h2 id="3">3、过渡到制品库</h2>
+<p>从手工打包到自动化打包，再将打好的包放到制品库中。这看似简单，但是要在团队中从无 到有地落地其实是一个很漫长的过程，特别是对于存在很多遗留项目的团队。每个团队都应该按 照自己当前情况进行调整，有时统一的解决方案不一定适合你。 </p>
+<p>曾经，笔者所在团队已经将部分项目的编译和单元测试放到<code>Jenkins</code>上执行，然而并没有人力及能力搭建<code>Nexus</code>。但是又期望能将自动打包好的<code>JAR</code>包放到各个环境中使用，以马上从持续集成中获益，怎么办？ 这时，<code>archiveArtifacts</code>步骤（https://www.jenkins.io/doc/pipeline/steps/core/）就派上用场了。它能对制品进行归档，然后你就可以从<code>Jenkins</code>页面上下载制品了</p>
+<pre><code>#!groovy
+@Library('jenkinslib@master') _
+
+def build = new org.devops.buildtools()
+def sonar = new org.devops.sonarqube()
+
+pipeline {
+    agent { node { label &quot;hostmachine&quot; }}
+    parameters {
+        string(name: 'srcUrl', defaultValue: 'http://192.168.33.1:30088/root/demo-maven-service.git', description: '') 
+        choice(name: 'branchName', choices: 'master\nstage\ndev', description: 'Please chose your branch')
+        choice(name: 'buildType', choices: 'mvn', description: 'build tool')
+        choice(name: 'buildShell', choices: 'clean package -DskipTest\n--version', description: 'build tool')
+    }
+    stages{
+        stage('Checkout') {
+            steps {
+                script {
+                    checkout([$class: 'GitSCM', branches: [[name: &quot;${branchName}&quot;]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'gitlab-admin-user', url: &quot;${srcUrl}&quot;]]])
+                } 
+            }
+        }
+
+        stage('Build') {
+            steps {
+                script {
+                    build.Build(buildType,buildShell)
+                } 
+            }
+        }
+    }
+        post{
+            always{
+                archiveArtifacts artifacts: 'target/**/*.jar', fingerprint: true
+            }
+        }    
+ }
+</code></pre>
+<pre><code>-------------------------------------------------------
+Running com.mycompany.app.AppTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.094 sec
+
+Results :
+
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] 
+[INFO] --- maven-jar-plugin:3.0.2:jar (default-jar) @ my-app ---
+[INFO] Building jar: /home/vagrant/workspace/workspace/chap9_1/target/my-app-1.1-SNAPSHOT.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  6.910 s
+[INFO] Finished at: 2020-08-02T18:18:44Z
+[INFO] ------------------------------------------------------------------------
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] archiveArtifacts
+Archiving artifacts
+Recording fingerprints
+</code></pre>
+<p>接下来，我们详细介绍几个常用的<code>archiveArtifacts</code>的参数用法</p>
+<ul>
+<li><code>artifacts</code>（必填）：字符串类型，需要归档的文件路径，使用的是<code>Ant</code>风格路径表达式。 </li>
+<li><code>fingerprint</code>(可选）：布尔类型，是否对归档的文件进行签名。 </li>
+<li><code>excludes</code>（可选）：字符串类型，需要排除的文件路径，使用的也是<code>Ant</code>风格路径表达式。</li>
+<li><code>caseSensitive</code>（可选）：布尔类型，对路径大小写是否敏感。 </li>
+<li><code>ontylfSuccessful</code>（可选）：布尔类型，只在构建成功时进行归档。 </li>
+</ul>
+<p>值得提的是，<code>archiveArtifacts</code>。步骤并不只用于归档<code>JAR</code>包，事实上，它能归档所有类型的制品 团队初期可以考虑使用这种方式管理简单的制品。 </p>
+<p><strong>console output</strong></p>
+<p><img alt="Alt Image Text" src="../../images/chp9_1_1.png" title="Body image" /></p>
+<h2 id="4java">4、管理Java栈制品</h2>
+<p>目前<code>Java</code>栈的构建工具以<code>Maven</code>及<code>Gradle</code>为主且<code>Maven</code>的用户最广泛。接下来我们使 用Maven作为主要工具来讲解制品管理。 </p>
+<h3 id="4-1-mavennexus">4-1 使用Maven发布制品到<code>Nexus</code>中</h3>
+<p>当<code>Nexus</code>搭建好后就可以使用<code>Maven Dep!oy</code>插件上传<code>JAR</code>或<code>WAR</code>包到<code>Nexus</code>中了<code>Deploy</code> 插件是<code>Apache Maven</code>团队提供的官方插件，能将<code>JAR</code>包及<code>POM</code>文件发布到<code>Nexus</code>中口目前该插件的最新版本是<code>3.25.1</code>。在<code>POM</code>文件中这样定义： </p>
+<pre><code>&lt;plugins&gt; 
+    &lt;plugin&gt; 
+        &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt; 
+        &lt;artifactId&gt;maven—deploy—plugin&lt;/artifactld&gt; 
+        &lt;versSon&gt;3.25.1&lt;/version&gt; 
+    &lt;plugin&gt; 
+&lt;/plugins&gt; 
+</code></pre>
+<p>如果不需要自定义<code>Deploy</code>插件配置，则不需要在<code>POM</code>文件中定义。 </p>
+<p>使用Deploy插件发布需要以下几个步骤 </p>
+<ul>
+<li>(1）配置发布地址。在Maven项目的POM文件中加人： </li>
+</ul>
+<pre><code>&lt;distributionManagement&gt; 
+    &lt;snapshotRepository&gt; 
+        &lt;id&gt;nexus-snapshot&lt;/id&gt; 
+        &lt;name&gt;nexus snapshot&lt;/name&gt; 
+        &lt;url&gt;http://&lt;Nexus的地址&gt;/repository/maven—snapshot&lt;/url&gt; 
+    &lt;/snapshotRepository&gt; 
+    &lt;repository&gt; 
+        &lt;id&gt;nexus-release&lt;/id&gt; 
+        &lt;name&gt;my nexus relesse&lt;/name&gt; 
+        &lt;url&gt;http://&lt;Nexus的地址&gt;/repository/maven—releasese&lt;/url&gt; 
+    &lt;/repository&gt; 
+&lt;/distributionManagement&gt; 
+</code></pre>
+<p>完成此步骤后我们就可以通过执行<code>mvn clean deploy</code>进行发布了。</p>
+<p><code>Deploy</code>插件会根据<code>Maven</code>项目中定义的<code>version</code>值决定是使用<code>nexus-seapshot</code>仓库还是<code>nexus-release</code>仓库。</p>
+<p>当<code>version</code>值是以<code>-SNAPSHOT</code>后缀结尾时，则发布到<code>nexus-seapshot</code>仓库 </p>
+<ul>
+<li>(2)配置访问<code>Nexus</code>的用户名和密码。在<code>Nexus</code>中，我们配置了只有授权的用户名和密码才 能发布制品。这时需要在<code>Maven</code>的<code>settings.xml</code>中加人配置： </li>
+</ul>
+<pre><code>&lt;servers&gt; 
+    &lt;server&gt; 
+        &lt;id&gt;nexus—snapshot&lt;/id&gt; 
+        &lt;username&gt;admin&lt;/username&gt; 
+        &lt;password&gt;admin&lt;/password&gt; 
+    &lt;/server&gt; 
+    &lt;server&gt; 
+        &lt;id&gt;nexus—relesse&lt;/id&gt; 
+        &lt;username&gt;admin&lt;/username&gt; 
+        &lt;password&gt;admin&lt;/password&gt; 
+    &lt;/server&gt; 
+&lt;/servers&gt; 
+</code></pre>
+<h3 id="4-2-nexus">4-2 使用<code>Nexus</code>插件发布制品</h3>
+<p>除了可以通过<code>Maven</code>发布<code>JAR</code>包，还可以使用<code>Nexus Platform</code>来插件实现。最新版本的<code>Nexus Platform</code>(<code>3.9.20200722-164144.e3a1be0</code>）已经同时支持<code>Nexus 2.x</code>和<code>Nexus 3.x</code>，只是它的文档更新不及时，大家都不知道它支持3.x版本了。 </p>
+<p>在安装好<code>Nexus Platform</code>插件后，根据以下步骤来使用。 </p>
+<ul>
+<li>(1）进入<code>Manage Jenkins - Configure System - Sonatype Nexus</code>页，设置<code>Nexus 3.x</code>的服务地址</li>
+</ul>
+<p><img alt="Alt Image Text" src="../../images/chp9_1_2.png" title="Body image" /></p>
+<ul>
+<li>neuxs3</li>
+<li>http://192.168.33.1:32000/</li>
+</ul>
+<p>需要注意的是: </p>
+<ul>
+<li>在<code>Credentials</code>选项处增加了一个具有发布制品到<code>Nexus</code>中的权限的用户名和密码凭证 </li>
+<li><code>Server ID</code>字段的值设置完成后单击,在<code>Jenkinsfile</code>中会引用 </li>
+</ul>
+<p><code>Test connection</code>按钮测试设置是否正确 </p>
+<p><img alt="Alt Image Text" src="../../images/chp9_1_3.png" title="Body image" /></p>
+<ul>
+<li>(2）在<code>Jenkinsfile</code>中加入<code>nexusPublisher</code>步骤。 </li>
+</ul>
+<pre><code>stage('Build') {
+            steps {
+                script {
+                    build.Build(buildType,buildShell)
+                } 
+                nexusPublisher( 
+                        nexusInstanceId: 'nexus3', 
+                        nexusRepositoryId: 'maven—releases', 
+                        packages: [ 
+                            [ 
+                            $class: 'MavenPackage',
+                            mavenAssetList: [
+                                [ classifier: '',
+                                    extension: '',
+                                    filePath: './target/my-app-1.1-SNAPSHOT.jar' 
+                                ]
+                            ], //end of mavenAssetList
+                        mavenCoordinate: [ 
+                            artifactId: 'my-app', 
+                            groupId: 'com.mycompany.app', 
+                            packaging: 'jar', version: '1.1-SNAPSHOT' ] 
+                        ] // end of packages 
+                    ])
+            }
+        }
+</code></pre>
+<p>下面简单介绍一下<code>nexusPublisher</code>的参数。 </p>
+<ul>
+<li><code>nexusInstanceId</code>：在<code>Jenkins</code>中配<code>置Nexus 3.x</code>时的<code>Server ID</code> </li>
+<li><code>nexusRepositoryId</code>：发布到<code>Nexus</code>服务器的哪个仓库。 </li>
+<li><code>mavenCoordinate</code>: Maven包的坐标，<code>packaging</code>值与<code>Maven</code>中的<code>packaging</code>值一致，可以是 <code>jar</code>、<code>war</code>、<code>pom</code>、<code>hpi</code>等。 </li>
+<li><code>mavenAssetList</code>：要发布的文件，如果是<code>pom.xml</code>，则<code>extension</code>必须填<code>“xml"</code>。 </li>
+</ul>
+<p>在实际工作中，笔者并不常使用此插件。原因如下： </p>
+<ul>
+<li>每个<code>Maven</code>项目都可能不同，必须为每个<code>Maven</code>项目写<code>nexusPublisher</code>方法。 </li>
+<li>对于多模块的<code>Maven</code>项目，<code>nexusPublisher</code>的参数写起来十分锣唆。 </li>
+</ul>
+<p>但是介绍这个插件还是有必要的，一是大家可以根据实际情况进行选择；二是可以了解<code>Jenkins</code>与<code>Nexus</code>的集成程度。 </p>
+<h2 id="5nexusdocker">5、使用Nexus管理Docker镜像</h2>
+<p>本节假设<code>Jenkins</code>机器上已经安装了<code>Docker CE</code>。检查在<code>Jenkins</code>上能否运行<code>Docker</code>的方法是：在<code>Jenkinsfile</code>中加人<code>sh "docker PS"</code>，语句，如果没有报错，就说明可以运行Docker</p>
+<h3 id="51-nexusdocker">5.1 Nexus：创建<code>Docker</code>私有仓库</h3>
+<p>首先进人Nexus的仓库列表页：<code>Administration -&gt; Repository -&gt; Repositories</code></p>
+<p><img alt="Alt Image Text" src="../../images/chp9_1_4.png" title="Body image" /></p>
+<p>单击<code>“docker(hosted)"</code>，进人Docker：私有仓库创建页， </p>
+<p><img alt="Alt Image Text" src="../../images/chp9_1_5.png" title="Body image" /></p>
+<ul>
+<li>http://192.168.33.1:32000/repository/dockerrepo/</li>
+<li>dockerrepo</li>
+</ul>
+<pre><code>pipeline { 
+    agent any 
+    environment { 
+        registry = &quot;http://192.168.33.1:32500&quot; 
+        registryCredential = 'dockernexus' 
+    } 
+    stages { 
+        stage('Build') { 
+            steps { 
+                withDockerRegistry([ 
+                credentialsId: &quot;${registryCredential}&quot;, 
+                url: &quot;${registry}&quot; ]) { 
+
+                sh &quot;docker build . -t ${registry}/hello:v2&quot;
+                sh &quot;docker push ${registry}/hello:v2&quot; 
+                } 
+            } 
+        } 
+    } 
+} 
+</code></pre>
+<h2 id="6">6、管理原始制品</h2>
+<p><code>Nexus</code> 提供了对<code>raw</code>仓库的支持。<code>raw</code>仓库可以被理解为一个文件系统，我们可以在该仓库中创建目录。 </p>
+<h3 id="6-1-raw">6-1 创建<code>raw</code>仓库</h3>
+<p>进入<code>Administration -&gt; Repository -&gt; Repositories</code>页。 </p>
+<p>单击<code>“raw(hosted)"</code>，进人<code>raw</code>仓库创建页。 </p>
+<p><img alt="Alt Image Text" src="../../images/chp9_1_6.png" title="Body image" /></p>
+<p>输入仓库名称<code>raw-example</code>，单击<code>“Create rcpository”</code>按钮，确认后创建成功。 </p>
+<p><img alt="Alt Image Text" src="../../images/chp9_1_7.png" title="Body image" /></p>
+<p>该仓库的地址是：<code>＜你的Nexus地址&gt;/repository/raw-example/</code>。</p>
+<h3 id="6-2">6-2 上传制品获取制品</h3>
+<p>使用<code>HTTP</code>客户端就可以将制品上传到raw仓库中。我们使用<code>Linux curl</code>命令。几体步骤如下 </p>
+<ul>
+<li>(1)在<code>Jenkins</code>上添加<code>Userame with password</code>凭证</li>
+<li>(2)在<code>Jenkinsfile</code>中加人上传制品的步骤  </li>
+</ul>
+<pre><code>pipeline { 
+    agent { node { label &quot;hostmachine&quot; }}
+    environment { 
+        nexusRawUsernamePassword = credentials('nexus') 
+    } 
+    stages { 
+        stage('Build') 
+        { 
+            steps { 
+                sh &quot;curl --user '${nexusRawUsernamePassword}' -T ../../readme.md http://192.168.33.1:32000/repository/raw-example/${BUILD_NUMBER}/readme.md&quot; 
+            } 
+        } 
+    }
+} 
+</code></pre>
+<p>为简单起见，我们直接使用构建号作为目录名称来区分每次上传的制品。curl命令的格式为： </p>
+<pre><code>curl --user '&lt;username:password&gt;' --upload-file &lt;待上传制品的路径&gt; &lt;将制品保存到Nexus上的全路径&gt; 
+</code></pre>
+<p><img alt="Alt Image Text" src="../../images/chp9_1_8.png" title="Body image" /></p>
+<p><img alt="Alt Image Text" src="../../images/chp9_1_9.png" title="Body image" /></p>
+<p>将制品保存到Nexus上的全路径：如果目录不存在，<code>Nexus</code>将会自动创建。 </p>
+<ul>
+<li>(3)在Nexus中，我们看到<code>readme.md</code>文件已经上传成功， </li>
+</ul>
+<p>在<code>Jenkins pipeline</code>中获取原始制品时，我们同样使用<code>curl</code>命令。 </p>
+<pre><code>sh &quot;curl --user '${nexusRawUsernamePassword}' -o readme.md http://192.168.33.1:32000/repository/raw-example/2/readme.md&quot; 
+</code></pre>
+<p><img alt="Alt Image Text" src="../../images/chp9_1_10.png" title="Body image" /></p>
+<h2 id="7pipeline">7、从其他pipeline中拷贝制品</h2>
+<p>在某些场景下，我们需要从另一个<code>pipeline</code>中拷贝制品。<code>Copy Artifact</code>插可以帮助我们实现。具体代码如下： </p>
+<pre><code>steps { 
+    copyArtifacts( 
+        projectName: &quot;core&quot;, 
+        selector: lastSuccessful(true) 
+    ) 
+} 
+</code></pre>
+<ul>
+<li>从<code>core</code>项目中拿到最后一次构建成功的制品。 </li>
+</ul>
+<p>接下来，我们详细介绍<code>copyArtifacts</code>步骤的参数。</p>
+<ul>
+<li><code>projectname</code>：字符串类型，<code>Jenkins job</code>或<code>pipeline</code>名称。 </li>
+<li><code>selector</code>: <code>BuildSelector</code>类型，从另一个<code>pipeline</code>中拷贝制品的选择器，默认拷贝最后一个制品。 </li>
+<li><code>parameters</code>：字符串类型，使用逗号分隔的键值对字符串（<code>name1=value1</code> ,<code>name2=value2</code>)，用于过滤从哪些构建中拷贝制 </li>
+<li><code>filter</code>：字符串类型，<code>Ant</code>风格路径表达式，用于过滤需要拷贝的文件。 </li>
+<li><code>excludes</code>：字符串类型，<code>Ant</code>风格路径表达式，用于排除不需要拷贝的文件。 </li>
+<li><code>target</code>：字符串类型，拷贝制品的目标路径，默认为当前<code>pipeline</code>的工作目录。 </li>
+<li><code>optional</code>：布尔类型，如果为<code>true</code>，则拷贝失败，但不影响本次构建结果。 </li>
+<li><code>fingerprintArtifacts</code>：布尔类型，是否对制品进行签名，默认值为<code>true</code> </li>
+<li><code>resultVariableSuffix</code>：上例中，无法得知我们到底拿的是core项目的哪次构建的制品。<code>CopyArtifact</code>插件的设计是将其构建次数放到一个环境变量中。这个环境变量名就是在 <code>COPYARTIFACT_BUILD_NUMBER_</code>后拼上<code>resultVariabiLeSuffix</code>，比如<code>resultVariableSuffix</code>值为<code>corejob</code>，那么就在<code>pipeline</code>中通过变量<code>COPYARTIFACT_BUILD_NUMBER_corejob</code>拿到源<code>pipeline</code>的构建次数了。</li>
+</ul>
+<p>除<code>projectname</code>参数是必填的外，其他参数都是可选的。 </p>
+<p>下而介绍几种常用的获取选择器的方法。 </p>
+<ul>
+<li><code>lastSuccesSful</code>：最后一次构建成功的制品。方法签名为<code>lastSuccessful(boolean stable</code>)。<code>stable</code>为<code>true</code>表示只取构建成功的制品，为<code>false</code>表示只要构建结果比<code>UNSTABLE</code>好就行。 </li>
+<li><code>specific</code>：指定某一次构建的制品。方法签名为<code>specific(String bulidNumber)</code>。 <code>buildNumber</code>表示指定取第<code>n</code>次构建的制品。 </li>
+<li><code>lastCompleted</code>：最后一次完成构建的制品，不论构建的最终状态如何。方法签名为 <code>lastCompleted()</code>。 </li>
+<li><code>latestSavedBuild</code>：最后一次被标记为<code>keep forever</code>的构建的制品。方法签名为<code>latestSavedBuild()</code>。</li>
+</ul>
+<h2 id="8">8、版本号管理</h2>
+<p>谈到制品，就必须谈到版本号的管理。版本号的制定并没有所谓的行业标准。比如谷歌浏览 器当前版本号为<code>70.0.3538.110;</code> Ubuntu操作系统当前版本号为<code>18.10;</code>由美国计算机教授高德纳 (<code>Donald Ervin Knut</code>h)编写的功能强大的排版软件TEX系统的版本号不断趋近于<code>π</code>，类似于这样：<code>3.1415926</code>。 </p>
+<h3 id="81">8.1 语义化版本</h3>
+<p>GitHub提出了一种具有指导意义、统一的版本号表示规则，称为<code>Semantic Versioning</code>（语义化版本表示）。这也被人们称为三段式版本号。有了这套规则，用户一看版本号，就大概能猜到 一个软件两个版本之间的可能变化。 </p>
+<p>语义化版本格式为：主版本号、次版本号、修汀号。</p>
+<p>版本号递增规则如下：</p>
+<ul>
+<li>主版本号：当作了不兼容的API修改时。 </li>
+<li>次版本号：当作了向下兼容的功能性新增时。 </li>
+<li>修订号：当作了向下兼容的问题修正时。 </li>
+</ul>
+<p>先行版本号及版本编译元数据可以加到主版本号、次版本号、修订号”的后面，作为延伸。 以下是常用的修饰词。 </p>
+<ul>
+<li>alpha: 内部版本。 </li>
+<li>beta: 测试版本。</li>
+<li>rc: 即将作为正式版本发布。</li>
+<li>lts: 长期维护。 </li>
+</ul>
+<h3 id="82-version-number">8.2 方便生成版本号的<code>Version Number</code>插件</h3>
+<p><code>VersionNumber</code> (https://plugins.jenkins.io/versionnumber/）是一款用于生成版本号的插件，它 
+提供了<code>VersionNumber</code>步骤。具体使用方法如下： </p>
+<pre><code>script { 
+    def version = VersionNumber versionPrefix: ${JOB_NAME}-&quot;, versionNumberString: 'v1.1.1.${BUILDS_ALL_TIME}' 
+    echo &quot;${version}&quot; 
+}
+</code></pre>
+<p>注意：<code>BUILDS_ALL_TIME</code>只是占位符，并不是<code>Jenkins</code>或<code>Version Number</code>插件提供的环境变量。 </p>
+<p><code>VersionNumber</code>步骤支持以下参数。 </p>
+<ul>
+<li><code>versionNumberString</code>：字符串类型，版本号格式，用于生成版本号。只能使用单引号，以防格式中的占位符被转义。版本号格式支持多种占位符，稍后介绍。 </li>
+<li><code>versionPrefix</code>：字符串类型，版本号的前缀。 </li>
+<li><code>projectStartDate</code>：字符串类型，项目开始时间，格式为<code>yyyy-MM-dd</code>，用于计算项目开始后的月数和年数。 </li>
+<li><code>worstResultForIncrement</code>：字符串类型，如果本次构建状态比上一次构建状态更糟糕，则 <code>BUILDS_TODAY</code>、<code>BUILDS_THIS_WEEK</code>、<code>BUILDS_THIS_MONTH</code>、<code>BUILDS_THIS_YEAR</code> 占位符的值不会增加。<code>worstResultForIncrement</code>可以设置的值有<code>SUCCESS</code>、<code>UNSTABLE</code>、 <code>FAILURE</code>、<code>ABORTED</code>、<code>NOT_BUILT</code>（默认）。此参数较少使用。 </li>
+</ul>
+<p><code>versionNumberString</code>参数使用占位符生成版本号。部分占位符本身支持参数化。接下来分别介绍它们。 </p>
+<ul>
+<li><code>BUILD_DATE_FORMATTED</code>：格式化的构建日期，支持参数化，如<code>${BUILD_DATE_FORMATTED,"yyyy-MM-dd"}</code>。</li>
+<li><code>BUILD_DAY</code>：构建日期，支持<code>x</code>和<code>xx</code>参数。比如是12月2日，<code>${BUILD_DAY｝</code>将返回2, <code>${BUILD_DAY,X}</code>将返回2,<code>${BUILD_DAY,XX}</code>将返回03。 </li>
+<li><code>BUILD_WEEK</code>：今年构建的星期数，支持<code>x</code>和<code>xx</code>参数。 </li>
+<li><code>BUILD_MONTH</code>：今年构建的月数，支持<code>x</code>和<code>xx</code>参数。 </li>
+<li><code>BUILD_YEAR</code>：今年构建的年份。</li>
+</ul>
+<p>比如构建的时间为<code>2018-12-02</code>，那么<code>BUILD_DAY</code>的值为<code>2</code>, <code>BUILD_WEEK</code>的值为<code>49</code>,<code>BUILD_MONTH</code>的值为<code>12</code>, <code>BUILD_YEAR</code>的值为<code>2018</code>。 </p>
+<p>接下来是一组和构建数相关的占位符：<code>BUILDS_TODAY</code>、 <code>BUILDS_THIS_WEEK</code> 
+、<code>BUILDS_THIS_MONTH</code>、 <code>BUILDS_THIS_YEAR</code>，它们分别表示当天、本星期、本月、本年完成的构建数。<code>BUILDS_ALL_TIME</code>表示自从项目开始后完成的总构建数。</p>
+<p><code>MONTHS_S工NCE_PROJECT_START</code>和<code>YEARS_SINCE_PROJECT_START</code>分别表示自项目开始日期起已过去的日历月数和年数。 </p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2016-2020 Jacob Xi
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.b425cdc4.min.js"></script>
+      
+    
+  </body>
+</html>
